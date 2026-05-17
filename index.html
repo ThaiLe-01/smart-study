@@ -14,6 +14,100 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Smart Study">
     <link rel="apple-touch-icon" href="smart.png">
+
+    <!-- ===== FIREBASE SDK ===== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmztIxHQbnBjAhCBpN8PSSYcm2ldaPwgQ",
+            authDomain: "smart-study-backend.firebaseapp.com",
+            projectId: "smart-study-backend",
+            storageBucket: "smart-study-backend.firebasestorage.app",
+            messagingSenderId: "499174155891",
+            appId: "1:499174155891:web:1045e4a78215c6d6b36c06",
+            measurementId: "G-K7VBTDQS6D"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ID thiết bị — dùng để tránh ghi đè chính mình khi nhận sync
+        const DEVICE_ID = localStorage.getItem('deviceId') || (() => {
+            const id = 'dev_' + Math.random().toString(36).slice(2, 10);
+            localStorage.setItem('deviceId', id);
+            return id;
+        })();
+
+        // ===== GHI lên Firebase =====
+        window.syncToCloud = async function(data) {
+            try {
+                await setDoc(doc(db, 'users', 'shared'), {
+                    ...data,
+                    updatedAt: Date.now(),
+                    updatedBy: DEVICE_ID
+                });
+                showSyncStatus('✅ Đã đồng bộ lên cloud');
+            } catch(e) {
+                showSyncStatus('⚠️ Lỗi đồng bộ: ' + e.message);
+            }
+        };
+
+        // ===== ĐỌC từ Firebase khi mở app =====
+        window.loadFromCloud = async function() {
+            try {
+                showSyncStatus('🔄 Đang tải dữ liệu cloud...');
+                const snap = await getDoc(doc(db, 'users', 'shared'));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    if (data.cards)     { localStorage.setItem('cards_v4',    JSON.stringify(data.cards));    }
+                    if (data.history)   { localStorage.setItem('history_v4',  JSON.stringify(data.history));  }
+                    if (data.dailyData) { localStorage.setItem('dailyData_v4',JSON.stringify(data.dailyData));}
+                    if (data.statsData) { localStorage.setItem('statsData_v1',JSON.stringify(data.statsData));}
+                    showSyncStatus('✅ Đã tải dữ liệu từ cloud');
+                    // Reload để áp dụng dữ liệu mới
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    showSyncStatus('ℹ️ Chưa có dữ liệu trên cloud');
+                }
+            } catch(e) {
+                showSyncStatus('⚠️ Không thể tải cloud: ' + e.message);
+            }
+        };
+
+        // ===== LẮNG NGHE thay đổi realtime từ thiết bị khác =====
+        onSnapshot(doc(db, 'users', 'shared'), (snap) => {
+            if (!snap.exists()) return;
+            const data = snap.data();
+            // Chỉ áp dụng nếu thay đổi đến từ thiết bị KHÁC
+            if (data.updatedBy === DEVICE_ID) return;
+            if (data.cards)     localStorage.setItem('cards_v4',    JSON.stringify(data.cards));
+            if (data.history)   localStorage.setItem('history_v4',  JSON.stringify(data.history));
+            if (data.dailyData) localStorage.setItem('dailyData_v4',JSON.stringify(data.dailyData));
+            if (data.statsData) localStorage.setItem('statsData_v1',JSON.stringify(data.statsData));
+            showSyncStatus('🔄 Dữ liệu được cập nhật từ thiết bị khác — nhấn để tải lại', true);
+        });
+
+        // Tải dữ liệu cloud khi mở app lần đầu
+        window.addEventListener('load', () => {
+            // Chỉ tải cloud nếu chưa có dữ liệu local hoặc user bấm nút
+            // (Không auto-reload để tránh mất unsaved data)
+            setTimeout(() => {
+                if (typeof window.loadFromCloud === 'function') {
+                    // Kiểm tra nếu local trống thì tự tải
+                    const localCards = localStorage.getItem('cards_v4');
+                    if (!localCards || JSON.parse(localCards).length === 0) {
+                        window.loadFromCloud();
+                    } else {
+                        showSyncStatus('☁️ Cloud sẵn sàng');
+                    }
+                }
+            }, 1000);
+        });
+    </script>
+    <!-- ===== END FIREBASE ===== -->
+
     <style>
         :root {
             --bg-body: #f0f2f5;
@@ -179,7 +273,18 @@
         .voice-list-scroll { max-height: 260px; overflow-y: auto; }
         /* ===== END VOICE SELECTOR ===== */
 
-        /* ===== SHUFFLE BUTTON ===== */
+        /* ===== SYNC STATUS BAR ===== */
+        #sync-bar {
+            position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%);
+            background: #323232; color: white; padding: 8px 18px;
+            border-radius: 20px; font-size: 13px; z-index: 300;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: none; align-items: center; gap: 8px;
+            max-width: 90vw; cursor: default;
+            transition: opacity 0.3s;
+        }
+        #sync-bar.clickable { cursor: pointer; background: #1877f2; }
+        /* ===== END SYNC STATUS BAR ===== */
         .shuffle-btn {
             padding: 8px 16px;
             background: transparent;
@@ -1713,6 +1818,7 @@
         <button class="tool-btn" onclick="exportData()" title="Xuất dữ liệu">📤</button>
         <button class="tool-btn" onclick="document.getElementById('import-file').click()" title="Nhập dữ liệu">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
+        <button class="tool-btn" onclick="window.loadFromCloud && window.loadFromCloud()" title="Tải dữ liệu từ cloud">☁️</button>
         <input type="file" id="import-file" style="display:none" onchange="importData(event)">
     </div>
 
@@ -2168,6 +2274,7 @@
 
     <!-- ===== MOBILE BOTTOM NAV ===== -->
     <nav class="mobile-nav"></nav>
+    <div id="sync-bar"></div>
     <!-- ===== END MOBILE BOTTOM NAV ===== -->
 
     <script>
@@ -2300,7 +2407,34 @@
             localStorage.setItem('cards_v4', JSON.stringify(cards));
             localStorage.setItem('history_v4', JSON.stringify(history));
             localStorage.setItem('dailyData_v4', JSON.stringify(dailyData));
+            // Đồng bộ lên Firebase sau mỗi lần lưu
+            if (typeof window.syncToCloud === 'function') {
+                window.syncToCloud({
+                    cards,
+                    history,
+                    dailyData,
+                    statsData: JSON.parse(localStorage.getItem('statsData_v1') || '{}')
+                });
+            }
         }
+
+        // ===== SYNC STATUS HELPER =====
+        let _syncTimer = null;
+        function showSyncStatus(msg, clickable = false) {
+            const bar = document.getElementById('sync-bar');
+            if (!bar) return;
+            bar.textContent = msg;
+            bar.style.display = 'flex';
+            bar.className = clickable ? 'clickable' : '';
+            if (clickable) {
+                bar.onclick = () => location.reload();
+            } else {
+                bar.onclick = null;
+                clearTimeout(_syncTimer);
+                _syncTimer = setTimeout(() => { bar.style.display = 'none'; }, 3000);
+            }
+        }
+        // ===== END SYNC STATUS HELPER =====
 
         // ===== SHUFFLE LOGIC =====
         function toggleShuffle() {
