@@ -2215,24 +2215,24 @@
         </div>
 
         <!-- Summary cards row -->
-        <div id="stats-summary-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;"></div>
+        <div id="stats-summary-row" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px;"></div>
 
         <!-- Chart 1: Total practice score per day -->
-        <div style="margin-bottom:28px;">
+        <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">🏆 Điểm tổng luyện tập theo ngày <span style="font-size:12px;font-weight:normal;color:#888;">(Trắc nghiệm + Luyện gõ + Luyện nghe · 1 câu đúng = 1 điểm)</span></div>
-            <canvas id="chart-score" height="160" style="width:100%;display:block;"></canvas>
+            <canvas id="chart-score" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
         </div>
 
         <!-- Chart 2: Words per day -->
-        <div style="margin-bottom:28px;">
+        <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">📚 Số từ học mỗi ngày</div>
-            <canvas id="chart-words" height="160" style="width:100%;display:block;"></canvas>
+            <canvas id="chart-words" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
         </div>
 
         <!-- Chart 3: Study time -->
-        <div style="margin-bottom:28px;">
+        <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">⏱️ Thời gian học (phút)</div>
-            <canvas id="chart-time" height="160" style="width:100%;display:block;"></canvas>
+            <canvas id="chart-time" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
         </div>
 
         <!-- Most demoted words -->
@@ -5701,8 +5701,8 @@
             });
             const scoreData = keys.map(k => pointsByDay[k] > 0 ? pointsByDay[k] : null);
 
-            // Dùng rAF để đảm bảo canvas đã có layout width (quan trọng trên mobile)
-            requestAnimationFrame(() => {
+            // Double rAF: đảm bảo layout xong hoàn toàn trước khi đo width (quan trọng trên mobile)
+            requestAnimationFrame(() => requestAnimationFrame(() => {
                 drawLineChart('chart-score', labels, scoreData, {
                     color: '#1877f2', fillColor: 'rgba(24,119,242,0.1)',
                     unit: ' đ', nullGap: true
@@ -5715,7 +5715,7 @@
                 // ── Chart 3: Study time ──
                 const timeData = keys.map(k => statsData.timeByDay[k] || 0);
                 drawBarChart('chart-time', labels, timeData, { color: '#6f42c1', unit: ' phút' });
-            });
+            }));
 
             // ── Demote list ──
             renderDemoteList();
@@ -5765,10 +5765,14 @@
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const dpr = window.devicePixelRatio || 1;
-            // Lấy width đúng trên mobile: dùng getBoundingClientRect, fallback parentElement, rồi 700
-            const W = Math.floor(canvas.getBoundingClientRect().width) ||
-                      canvas.parentElement?.clientWidth ||
-                      canvas.offsetWidth || 700;
+            // Lấy width đúng trên mobile kể cả khi section đang ẩn
+            const container = canvas.parentElement;
+            const W = Math.floor(
+                (container && container.clientWidth > 0 ? container.clientWidth : 0) ||
+                canvas.getBoundingClientRect().width ||
+                canvas.offsetWidth ||
+                (window.innerWidth - 80) // fallback: màn hình trừ padding
+            );
             const H = parseInt(canvas.getAttribute('height')) || 160;
             canvas.width = W * dpr; canvas.height = H * dpr;
             canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
@@ -5851,9 +5855,13 @@
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const dpr = window.devicePixelRatio || 1;
-            const W = Math.floor(canvas.getBoundingClientRect().width) ||
-                      canvas.parentElement?.clientWidth ||
-                      canvas.offsetWidth || 700;
+            const container = canvas.parentElement;
+            const W = Math.floor(
+                (container && container.clientWidth > 0 ? container.clientWidth : 0) ||
+                canvas.getBoundingClientRect().width ||
+                canvas.offsetWidth ||
+                (window.innerWidth - 80)
+            );
             const H = parseInt(canvas.getAttribute('height')) || 160;
             canvas.width = W * dpr; canvas.height = H * dpr;
             canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
