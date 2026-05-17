@@ -4,7 +4,7 @@ const CACHE_NAME = 'smart-study-v1';
 
 // Các file sẽ được lưu vào bộ nhớ để dùng offline
 const ASSETS = [
-  './smart_study.html',
+  './index.html',
   './manifest.json',
   './smart.png'
 ];
