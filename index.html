@@ -42,7 +42,6 @@
 
         // ===== HÀM THU THẬP TOÀN BỘ DỮ LIỆU LOCAL =====
         function collectAllLocalData() {
-            // Thu thập tất cả weekly_summary_ và weekly_goal_ (dynamic keys)
             const weeklySummaries = {}, weeklyGoals = {};
             for (let i = 0; i < localStorage.length; i++) {
                 const k = localStorage.key(i);
@@ -50,7 +49,6 @@
                 if (k && k.startsWith('weekly_goal_'))    weeklyGoals[k.replace('weekly_goal_', '')]         = localStorage.getItem(k);
             }
             return {
-                // Dữ liệu chính
                 cards:          JSON.parse(localStorage.getItem('cards_v4')       || '[]'),
                 history:        JSON.parse(localStorage.getItem('history_v4')     || '[]'),
                 dailyData:      JSON.parse(localStorage.getItem('dailyData_v4')   || '{}'),
@@ -58,10 +56,8 @@
                 todos:          JSON.parse(localStorage.getItem('todos_v1')       || '[]'),
                 quizQueue:      JSON.parse(localStorage.getItem('quizQueue_v4')   || '[]'),
                 typingQueue:    JSON.parse(localStorage.getItem('typingQueue_v4') || '[]'),
-                // Lịch / tuần
                 weeklySummaries,
                 weeklyGoals,
-                // Cài đặt
                 settings: {
                     darkMode:       localStorage.getItem('darkMode')       || 'false',
                     autoSpeak:      localStorage.getItem('autoSpeak')      || 'false',
@@ -81,7 +77,6 @@
             if (data.todos)       localStorage.setItem('todos_v1',        JSON.stringify(data.todos));
             if (data.quizQueue)   localStorage.setItem('quizQueue_v4',   JSON.stringify(data.quizQueue));
             if (data.typingQueue) localStorage.setItem('typingQueue_v4', JSON.stringify(data.typingQueue));
-            // Weekly dynamic keys
             if (data.weeklySummaries) {
                 Object.entries(data.weeklySummaries).forEach(([date, val]) => {
                     localStorage.setItem('weekly_summary_' + date, val);
@@ -92,7 +87,6 @@
                     localStorage.setItem('weekly_goal_' + date, val);
                 });
             }
-            // Settings
             if (data.settings) {
                 const s = data.settings;
                 if (s.darkMode       != null) localStorage.setItem('darkMode',       s.darkMode);
@@ -103,18 +97,20 @@
             }
         }
 
-        // ===== GHI LÊN FIREBASE (debounce 1.5s tránh spam) =====
+        // ===== GHI LÊN FIREBASE (debounce 1.5s) =====
         let _syncTimer2 = null;
-        window.syncToCloud = async function(overrideData) {
+        window.syncToCloud = async function() {
             clearTimeout(_syncTimer2);
             _syncTimer2 = setTimeout(async () => {
                 try {
-                    const payload = overrideData || collectAllLocalData();
+                    const payload = collectAllLocalData();
                     await setDoc(doc(db, 'users', 'shared'), {
                         ...payload,
                         updatedAt: Date.now(),
                         updatedBy: DEVICE_ID
                     });
+                    const ts = Date.now();
+                    localStorage.setItem('lastSyncedAt', String(ts));
                     showSyncStatus('✅ Đã đồng bộ lên cloud');
                 } catch(e) {
                     showSyncStatus('⚠️ Lỗi đồng bộ: ' + e.message);
@@ -122,31 +118,33 @@
             }, 1500);
         };
 
-        // ===== ĐẨY TOÀN BỘ DỮ LIỆU LOCAL LÊN CLOUD NGAY LẬP TỨC =====
+        // ===== ĐẨY TOÀN BỘ DỮ LIỆU LOCAL LÊN CLOUD NGAY =====
         window.pushAllToCloud = async function() {
             showSyncStatus('🔄 Đang đẩy toàn bộ dữ liệu lên cloud...');
             try {
-                const payload = collectAllLocalData();
                 await setDoc(doc(db, 'users', 'shared'), {
-                    ...payload,
+                    ...collectAllLocalData(),
                     updatedAt: Date.now(),
                     updatedBy: DEVICE_ID
                 });
+                localStorage.setItem('lastSyncedAt', String(Date.now()));
                 showSyncStatus('✅ Đã đẩy toàn bộ dữ liệu lên cloud!');
             } catch(e) {
                 showSyncStatus('⚠️ Lỗi: ' + e.message);
             }
         };
 
-        // ===== KÉO DỮ LIỆU TỪ CLOUD VỀ =====
+        // ===== KÉO DỮ LIỆU TỪ CLOUD VỀ (CHỈ KHI BẤM NÚT) =====
         window.loadFromCloud = async function() {
             try {
                 showSyncStatus('🔄 Đang tải dữ liệu từ cloud...');
                 const snap = await getDoc(doc(db, 'users', 'shared'));
                 if (snap.exists()) {
                     applyCloudData(snap.data());
-                    showSyncStatus('✅ Đã tải xong — đang tải lại...');
-                    setTimeout(() => location.reload(), 800);
+                    // Đánh dấu vừa tải cloud để tránh onSnapshot kích hoạt lại
+                    sessionStorage.setItem('justLoaded', '1');
+                    showSyncStatus('✅ Đã tải xong! Đang tải lại...');
+                    setTimeout(() => location.reload(), 1000);
                 } else {
                     showSyncStatus('ℹ️ Chưa có dữ liệu trên cloud — hãy bấm 📤 để đẩy lên');
                 }
@@ -155,22 +153,41 @@
             }
         };
 
-        // ===== LẮNG NGHE REALTIME TỪ THIẾT BỊ KHÁC =====
+        // ===== LẮNG NGHE REALTIME — bỏ qua lần bắn đầu tiên khi kết nối =====
+        let _snapshotReady = false;
+        setTimeout(() => { _snapshotReady = true; }, 3000); // chờ 3s sau khi load mới lắng nghe thật
+
         onSnapshot(doc(db, 'users', 'shared'), (snap) => {
+            if (!_snapshotReady) return;           // bỏ qua lần bắn đầu tiên
             if (!snap.exists()) return;
             const data = snap.data();
             if (data.updatedBy === DEVICE_ID) return; // bỏ qua nếu chính mình vừa ghi
             showSyncStatus('🔄 Thiết bị khác vừa cập nhật — nhấn để tải lại', true);
         });
 
-        // ===== AUTO: tự tải cloud nếu local trống =====
+        // ===== AUTO SYNC KHI MỞ APP =====
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                const localCards = localStorage.getItem('cards_v4');
-                const isEmpty = !localCards || JSON.parse(localCards).length === 0;
-                if (isEmpty) {
-                    window.loadFromCloud();
-                } else {
+            if (sessionStorage.getItem('justLoaded')) {
+                sessionStorage.removeItem('justLoaded');
+                setTimeout(() => showSyncStatus('✅ Đã đồng bộ xong'), 500);
+                return;
+            }
+            setTimeout(async () => {
+                try {
+                    const snap = await getDoc(doc(db, 'users', 'shared'));
+                    if (!snap.exists()) { showSyncStatus('☁️ Cloud sẵn sàng'); return; }
+                    const cloudUpdatedAt = snap.data().updatedAt || 0;
+                    const lastSyncedAt   = parseInt(localStorage.getItem('lastSyncedAt') || '0');
+                    if (cloudUpdatedAt > lastSyncedAt) {
+                        showSyncStatus('🔄 Dữ liệu mới trên cloud, đang tải...');
+                        applyCloudData(snap.data());
+                        localStorage.setItem('lastSyncedAt', String(cloudUpdatedAt));
+                        sessionStorage.setItem('justLoaded', '1');
+                        setTimeout(() => location.reload(), 800);
+                    } else {
+                        showSyncStatus('☁️ Cloud sẵn sàng');
+                    }
+                } catch(e) {
                     showSyncStatus('☁️ Cloud sẵn sàng');
                 }
             }, 1200);
