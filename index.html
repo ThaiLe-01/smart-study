@@ -31,79 +31,149 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const db  = getFirestore(app);
 
-        // ID thiết bị — dùng để tránh ghi đè chính mình khi nhận sync
+        // ID thiết bị — tránh tự ghi đè chính mình khi nhận realtime
         const DEVICE_ID = localStorage.getItem('deviceId') || (() => {
             const id = 'dev_' + Math.random().toString(36).slice(2, 10);
             localStorage.setItem('deviceId', id);
             return id;
         })();
 
-        // ===== GHI lên Firebase =====
-        window.syncToCloud = async function(data) {
+        // ===== HÀM THU THẬP TOÀN BỘ DỮ LIỆU LOCAL =====
+        function collectAllLocalData() {
+            // Thu thập tất cả weekly_summary_ và weekly_goal_ (dynamic keys)
+            const weeklySummaries = {}, weeklyGoals = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const k = localStorage.key(i);
+                if (k && k.startsWith('weekly_summary_')) weeklySummaries[k.replace('weekly_summary_', '')] = localStorage.getItem(k);
+                if (k && k.startsWith('weekly_goal_'))    weeklyGoals[k.replace('weekly_goal_', '')]         = localStorage.getItem(k);
+            }
+            return {
+                // Dữ liệu chính
+                cards:          JSON.parse(localStorage.getItem('cards_v4')       || '[]'),
+                history:        JSON.parse(localStorage.getItem('history_v4')     || '[]'),
+                dailyData:      JSON.parse(localStorage.getItem('dailyData_v4')   || '{}'),
+                statsData:      JSON.parse(localStorage.getItem('statsData_v1')   || '{}'),
+                todos:          JSON.parse(localStorage.getItem('todos_v1')       || '[]'),
+                quizQueue:      JSON.parse(localStorage.getItem('quizQueue_v4')   || '[]'),
+                typingQueue:    JSON.parse(localStorage.getItem('typingQueue_v4') || '[]'),
+                // Lịch / tuần
+                weeklySummaries,
+                weeklyGoals,
+                // Cài đặt
+                settings: {
+                    darkMode:       localStorage.getItem('darkMode')       || 'false',
+                    autoSpeak:      localStorage.getItem('autoSpeak')      || 'false',
+                    voice_name:     localStorage.getItem('voice_name')     || '',
+                    voice_rate:     localStorage.getItem('voice_rate')     || '1',
+                    healthReminder: localStorage.getItem('healthReminder') || 'false',
+                },
+            };
+        }
+
+        // ===== HÀM ÁP DỤNG DỮ LIỆU TỪ CLOUD VÀO LOCAL =====
+        function applyCloudData(data) {
+            if (data.cards)       localStorage.setItem('cards_v4',       JSON.stringify(data.cards));
+            if (data.history)     localStorage.setItem('history_v4',     JSON.stringify(data.history));
+            if (data.dailyData)   localStorage.setItem('dailyData_v4',   JSON.stringify(data.dailyData));
+            if (data.statsData)   localStorage.setItem('statsData_v1',   JSON.stringify(data.statsData));
+            if (data.todos)       localStorage.setItem('todos_v1',        JSON.stringify(data.todos));
+            if (data.quizQueue)   localStorage.setItem('quizQueue_v4',   JSON.stringify(data.quizQueue));
+            if (data.typingQueue) localStorage.setItem('typingQueue_v4', JSON.stringify(data.typingQueue));
+            // Weekly dynamic keys
+            if (data.weeklySummaries) {
+                Object.entries(data.weeklySummaries).forEach(([date, val]) => {
+                    localStorage.setItem('weekly_summary_' + date, val);
+                });
+            }
+            if (data.weeklyGoals) {
+                Object.entries(data.weeklyGoals).forEach(([date, val]) => {
+                    localStorage.setItem('weekly_goal_' + date, val);
+                });
+            }
+            // Settings
+            if (data.settings) {
+                const s = data.settings;
+                if (s.darkMode       != null) localStorage.setItem('darkMode',       s.darkMode);
+                if (s.autoSpeak      != null) localStorage.setItem('autoSpeak',      s.autoSpeak);
+                if (s.voice_name     != null) localStorage.setItem('voice_name',     s.voice_name);
+                if (s.voice_rate     != null) localStorage.setItem('voice_rate',     s.voice_rate);
+                if (s.healthReminder != null) localStorage.setItem('healthReminder', s.healthReminder);
+            }
+        }
+
+        // ===== GHI LÊN FIREBASE (debounce 1.5s tránh spam) =====
+        let _syncTimer2 = null;
+        window.syncToCloud = async function(overrideData) {
+            clearTimeout(_syncTimer2);
+            _syncTimer2 = setTimeout(async () => {
+                try {
+                    const payload = overrideData || collectAllLocalData();
+                    await setDoc(doc(db, 'users', 'shared'), {
+                        ...payload,
+                        updatedAt: Date.now(),
+                        updatedBy: DEVICE_ID
+                    });
+                    showSyncStatus('✅ Đã đồng bộ lên cloud');
+                } catch(e) {
+                    showSyncStatus('⚠️ Lỗi đồng bộ: ' + e.message);
+                }
+            }, 1500);
+        };
+
+        // ===== ĐẨY TOÀN BỘ DỮ LIỆU LOCAL LÊN CLOUD NGAY LẬP TỨC =====
+        window.pushAllToCloud = async function() {
+            showSyncStatus('🔄 Đang đẩy toàn bộ dữ liệu lên cloud...');
             try {
+                const payload = collectAllLocalData();
                 await setDoc(doc(db, 'users', 'shared'), {
-                    ...data,
+                    ...payload,
                     updatedAt: Date.now(),
                     updatedBy: DEVICE_ID
                 });
-                showSyncStatus('✅ Đã đồng bộ lên cloud');
+                showSyncStatus('✅ Đã đẩy toàn bộ dữ liệu lên cloud!');
             } catch(e) {
-                showSyncStatus('⚠️ Lỗi đồng bộ: ' + e.message);
+                showSyncStatus('⚠️ Lỗi: ' + e.message);
             }
         };
 
-        // ===== ĐỌC từ Firebase khi mở app =====
+        // ===== KÉO DỮ LIỆU TỪ CLOUD VỀ =====
         window.loadFromCloud = async function() {
             try {
-                showSyncStatus('🔄 Đang tải dữ liệu cloud...');
+                showSyncStatus('🔄 Đang tải dữ liệu từ cloud...');
                 const snap = await getDoc(doc(db, 'users', 'shared'));
                 if (snap.exists()) {
-                    const data = snap.data();
-                    if (data.cards)     { localStorage.setItem('cards_v4',    JSON.stringify(data.cards));    }
-                    if (data.history)   { localStorage.setItem('history_v4',  JSON.stringify(data.history));  }
-                    if (data.dailyData) { localStorage.setItem('dailyData_v4',JSON.stringify(data.dailyData));}
-                    if (data.statsData) { localStorage.setItem('statsData_v1',JSON.stringify(data.statsData));}
-                    showSyncStatus('✅ Đã tải dữ liệu từ cloud');
-                    // Reload để áp dụng dữ liệu mới
+                    applyCloudData(snap.data());
+                    showSyncStatus('✅ Đã tải xong — đang tải lại...');
                     setTimeout(() => location.reload(), 800);
                 } else {
-                    showSyncStatus('ℹ️ Chưa có dữ liệu trên cloud');
+                    showSyncStatus('ℹ️ Chưa có dữ liệu trên cloud — hãy bấm 📤 để đẩy lên');
                 }
             } catch(e) {
                 showSyncStatus('⚠️ Không thể tải cloud: ' + e.message);
             }
         };
 
-        // ===== LẮNG NGHE thay đổi realtime từ thiết bị khác =====
+        // ===== LẮNG NGHE REALTIME TỪ THIẾT BỊ KHÁC =====
         onSnapshot(doc(db, 'users', 'shared'), (snap) => {
             if (!snap.exists()) return;
             const data = snap.data();
-            // Chỉ áp dụng nếu thay đổi đến từ thiết bị KHÁC
-            if (data.updatedBy === DEVICE_ID) return;
-            if (data.cards)     localStorage.setItem('cards_v4',    JSON.stringify(data.cards));
-            if (data.history)   localStorage.setItem('history_v4',  JSON.stringify(data.history));
-            if (data.dailyData) localStorage.setItem('dailyData_v4',JSON.stringify(data.dailyData));
-            if (data.statsData) localStorage.setItem('statsData_v1',JSON.stringify(data.statsData));
-            showSyncStatus('🔄 Dữ liệu được cập nhật từ thiết bị khác — nhấn để tải lại', true);
+            if (data.updatedBy === DEVICE_ID) return; // bỏ qua nếu chính mình vừa ghi
+            showSyncStatus('🔄 Thiết bị khác vừa cập nhật — nhấn để tải lại', true);
         });
 
-        // Tải dữ liệu cloud khi mở app lần đầu
+        // ===== AUTO: tự tải cloud nếu local trống =====
         window.addEventListener('load', () => {
-            // Chỉ tải cloud nếu chưa có dữ liệu local hoặc user bấm nút
-            // (Không auto-reload để tránh mất unsaved data)
             setTimeout(() => {
-                if (typeof window.loadFromCloud === 'function') {
-                    // Kiểm tra nếu local trống thì tự tải
-                    const localCards = localStorage.getItem('cards_v4');
-                    if (!localCards || JSON.parse(localCards).length === 0) {
-                        window.loadFromCloud();
-                    } else {
-                        showSyncStatus('☁️ Cloud sẵn sàng');
-                    }
+                const localCards = localStorage.getItem('cards_v4');
+                const isEmpty = !localCards || JSON.parse(localCards).length === 0;
+                if (isEmpty) {
+                    window.loadFromCloud();
+                } else {
+                    showSyncStatus('☁️ Cloud sẵn sàng');
                 }
-            }, 1000);
+            }, 1200);
         });
     </script>
     <!-- ===== END FIREBASE ===== -->
@@ -1818,7 +1888,8 @@
         <button class="tool-btn" onclick="exportData()" title="Xuất dữ liệu">📤</button>
         <button class="tool-btn" onclick="document.getElementById('import-file').click()" title="Nhập dữ liệu">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
-        <button class="tool-btn" onclick="window.loadFromCloud && window.loadFromCloud()" title="Tải dữ liệu từ cloud">☁️</button>
+        <button class="tool-btn" onclick="window.pushAllToCloud && window.pushAllToCloud()" title="Đẩy toàn bộ dữ liệu lên cloud">📤</button>
+        <button class="tool-btn" onclick="window.loadFromCloud && window.loadFromCloud()" title="Tải dữ liệu từ cloud về">☁️</button>
         <input type="file" id="import-file" style="display:none" onchange="importData(event)">
     </div>
 
@@ -2291,7 +2362,7 @@
         let statsPeriod = 'week'; // 'week' | 'month'
         let gameSessionStartTime = null; // Thời điểm bắt đầu một session ôn tập (quiz/gõ/nghe)
 
-        function saveStats() { localStorage.setItem('statsData_v1', JSON.stringify(statsData)); }
+        function saveStats() { localStorage.setItem('statsData_v1', JSON.stringify(statsData)); if (typeof window.syncToCloud === 'function') window.syncToCloud(); }
 
         // Gọi khi bắt đầu một game ôn tập
         function startPracticeTimer() {
@@ -2407,15 +2478,8 @@
             localStorage.setItem('cards_v4', JSON.stringify(cards));
             localStorage.setItem('history_v4', JSON.stringify(history));
             localStorage.setItem('dailyData_v4', JSON.stringify(dailyData));
-            // Đồng bộ lên Firebase sau mỗi lần lưu
-            if (typeof window.syncToCloud === 'function') {
-                window.syncToCloud({
-                    cards,
-                    history,
-                    dailyData,
-                    statsData: JSON.parse(localStorage.getItem('statsData_v1') || '{}')
-                });
-            }
+            // Đồng bộ toàn bộ lên Firebase
+            if (typeof window.syncToCloud === 'function') window.syncToCloud();
         }
 
         // ===== SYNC STATUS HELPER =====
@@ -3728,6 +3792,7 @@
             _wsSaveTimer = setTimeout(() => {
                 const el = document.getElementById('ws-saved');
                 if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
+                if (typeof window.syncToCloud === 'function') window.syncToCloud();
             }, 600);
         }
         function loadWeeklySummary(dateStr) {
@@ -3741,6 +3806,7 @@
             _wgSaveTimer = setTimeout(() => {
                 const el = document.getElementById('wg-saved');
                 if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
+                if (typeof window.syncToCloud === 'function') window.syncToCloud();
             }, 600);
         }
         function loadWeeklyGoal(dateStr) {
@@ -4697,6 +4763,8 @@
             localStorage.setItem('todos_v1', JSON.stringify(todos));
             // Sync calendar dots whenever todos change
             if (typeof renderCalendar === 'function') renderCalendar();
+            // Đồng bộ lên Firebase
+            if (typeof window.syncToCloud === 'function') window.syncToCloud();
             renderRecurringList();
         }
 
