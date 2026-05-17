@@ -5718,21 +5718,15 @@
             });
             const scoreData = keys.map(k => pointsByDay[k] > 0 ? pointsByDay[k] : null);
 
-            // Double rAF: đảm bảo layout xong hoàn toàn trước khi đo width (quan trọng trên mobile)
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-                drawLineChart('chart-score', labels, scoreData, {
-                    color: '#1877f2', fillColor: 'rgba(24,119,242,0.1)',
-                    unit: ' đ', nullGap: true
-                });
-
-                // ── Chart 2: Words per day ──
-                const wordsData = keys.map(k => statsData.wordsByDay[k] || 0);
-                drawBarChart('chart-words', labels, wordsData, { color: '#28a745', unit: ' từ' });
-
-                // ── Chart 3: Study time ──
-                const timeData = keys.map(k => statsData.timeByDay[k] || 0);
-                drawBarChart('chart-time', labels, timeData, { color: '#6f42c1', unit: ' phút' });
-            }));
+            // Vẽ chart — getCanvasWidth() đo từ stats-section nên luôn đúng
+            drawLineChart('chart-score', labels, scoreData, {
+                color: '#1877f2', fillColor: 'rgba(24,119,242,0.1)',
+                unit: ' đ', nullGap: true
+            });
+            const wordsData = keys.map(k => statsData.wordsByDay[k] || 0);
+            drawBarChart('chart-words', labels, wordsData, { color: '#28a745', unit: ' từ' });
+            const timeData = keys.map(k => statsData.timeByDay[k] || 0);
+            drawBarChart('chart-time', labels, timeData, { color: '#6f42c1', unit: ' phút' });
 
             // ── Demote list ──
             renderDemoteList();
@@ -5778,21 +5772,26 @@
             };
         }
 
+        function getCanvasWidth(canvas) {
+            // Đo từ stats-section container (luôn visible), trừ padding 60px
+            const section = document.getElementById('stats-section');
+            if (section && section.clientWidth > 0) return section.clientWidth - 60;
+            // Fallback: window width trừ padding body + container
+            return Math.max(200, window.innerWidth - 80);
+        }
+
         function drawLineChart(canvasId, labels, data, opts) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const dpr = window.devicePixelRatio || 1;
-            // Lấy width đúng trên mobile kể cả khi section đang ẩn
-            const container = canvas.parentElement;
-            const W = Math.floor(
-                (container && container.clientWidth > 0 ? container.clientWidth : 0) ||
-                canvas.getBoundingClientRect().width ||
-                canvas.offsetWidth ||
-                (window.innerWidth - 80) // fallback: màn hình trừ padding
-            );
+            const W = getCanvasWidth(canvas);
             const H = parseInt(canvas.getAttribute('height')) || 160;
-            canvas.width = W * dpr; canvas.height = H * dpr;
-            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            // Set attribute (pixel buffer), KHÔNG set style.width bằng px
+            // để CSS width:100% tự co giãn đúng
+            canvas.width = W * dpr;
+            canvas.height = H * dpr;
+            canvas.style.width  = '100%';
+            canvas.style.height = H + 'px';
             const ctx = canvas.getContext('2d');
             ctx.scale(dpr, dpr);
 
@@ -5872,16 +5871,12 @@
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const dpr = window.devicePixelRatio || 1;
-            const container = canvas.parentElement;
-            const W = Math.floor(
-                (container && container.clientWidth > 0 ? container.clientWidth : 0) ||
-                canvas.getBoundingClientRect().width ||
-                canvas.offsetWidth ||
-                (window.innerWidth - 80)
-            );
+            const W = getCanvasWidth(canvas);
             const H = parseInt(canvas.getAttribute('height')) || 160;
-            canvas.width = W * dpr; canvas.height = H * dpr;
-            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            canvas.width = W * dpr;
+            canvas.height = H * dpr;
+            canvas.style.width  = '100%';
+            canvas.style.height = H + 'px';
             const ctx = canvas.getContext('2d');
             ctx.scale(dpr, dpr);
 
