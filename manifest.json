@@ -1,0 +1,22 @@
+{
+  "name": "Smart Study Hub",
+  "short_name": "Smart Study",
+  "description": "Ứng dụng học từ vựng & quản lý mục tiêu",
+  "start_url": "./smart_study.html",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#1877f2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "smart.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "smart.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
