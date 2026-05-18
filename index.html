@@ -2237,19 +2237,19 @@
         <!-- Chart 1: Total practice score per day -->
         <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">🏆 Điểm tổng luyện tập theo ngày <span style="font-size:12px;font-weight:normal;color:#888;">(Trắc nghiệm + Luyện gõ + Luyện nghe · 1 câu đúng = 1 điểm)</span></div>
-            <canvas id="chart-score" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
+            <canvas id="chart-score" style="display:block;width:100%;max-width:100%;"></canvas>
         </div>
 
         <!-- Chart 2: Words per day -->
         <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">📚 Số từ học mỗi ngày</div>
-            <canvas id="chart-words" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
+            <canvas id="chart-words" style="display:block;width:100%;max-width:100%;"></canvas>
         </div>
 
         <!-- Chart 3: Study time -->
         <div style="margin-bottom:28px;overflow:hidden;">
             <div style="font-weight:bold;font-size:15px;margin-bottom:10px;">⏱️ Thời gian học (phút)</div>
-            <canvas id="chart-time" height="160" style="width:100%;max-width:100%;display:block;"></canvas>
+            <canvas id="chart-time" style="display:block;width:100%;max-width:100%;"></canvas>
         </div>
 
         <!-- Most demoted words -->
@@ -5772,28 +5772,17 @@
             };
         }
 
-        function getCanvasWidth(canvas) {
-            // Đo từ stats-section container (luôn visible), trừ padding 60px
-            const section = document.getElementById('stats-section');
-            if (section && section.clientWidth > 0) return section.clientWidth - 60;
-            // Fallback: window width trừ padding body + container
-            return Math.max(200, window.innerWidth - 80);
-        }
-
         function drawLineChart(canvasId, labels, data, opts) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
-            const dpr = window.devicePixelRatio || 1;
-            const W = getCanvasWidth(canvas);
-            const H = parseInt(canvas.getAttribute('height')) || 160;
-            // Set attribute (pixel buffer), KHÔNG set style.width bằng px
-            // để CSS width:100% tự co giãn đúng
-            canvas.width = W * dpr;
-            canvas.height = H * dpr;
-            canvas.style.width  = '100%';
-            canvas.style.height = H + 'px';
+            // Luôn vẽ vào buffer 700x160 — CSS max-width:100% tự thu nhỏ trên mobile
+            const W = 700, H = 160;
+            canvas.width  = W;
+            canvas.height = H;
+            canvas.style.width    = '100%';
+            canvas.style.height   = 'auto';
+            canvas.style.maxWidth = '100%';
             const ctx = canvas.getContext('2d');
-            ctx.scale(dpr, dpr);
 
             const { text, grid, bg } = getChartColors();
             const pad = { t: 16, r: 12, b: 36, l: 44 };
@@ -5827,7 +5816,6 @@
                 if (!started) { ctx.moveTo(p.x, p.y); started = true; }
                 else ctx.lineTo(p.x, p.y);
             });
-            const fillPath = new Path2D(ctx.currentPath);
             ctx.strokeStyle = opts.color; ctx.lineWidth = 2.5;
             ctx.lineJoin = 'round'; ctx.lineCap = 'round';
             ctx.stroke();
@@ -5870,15 +5858,13 @@
         function drawBarChart(canvasId, labels, data, opts) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
-            const dpr = window.devicePixelRatio || 1;
-            const W = getCanvasWidth(canvas);
-            const H = parseInt(canvas.getAttribute('height')) || 160;
-            canvas.width = W * dpr;
-            canvas.height = H * dpr;
-            canvas.style.width  = '100%';
-            canvas.style.height = H + 'px';
+            const W = 700, H = 160;
+            canvas.width  = W;
+            canvas.height = H;
+            canvas.style.width    = '100%';
+            canvas.style.height   = 'auto';
+            canvas.style.maxWidth = '100%';
             const ctx = canvas.getContext('2d');
-            ctx.scale(dpr, dpr);
 
             const { text, grid } = getChartColors();
             const pad = { t: 24, r: 12, b: 36, l: 44 };
