@@ -1144,6 +1144,19 @@
         }
         .dark-mode .tag-badge { background: #1a2f5a; color: #7aadff; }
 
+        .type-badge {
+            display: inline-block;
+            background: #fff0e0;
+            color: #c96a00;
+            border-radius: 20px;
+            padding: 2px 9px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px 2px 0 0;
+            white-space: nowrap;
+        }
+        .dark-mode .type-badge { background: #3b2000; color: #fb923c; }
+
         .tag-filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -2852,9 +2865,11 @@
             flipState = 0;
             flashcard.className = "flashcard";
 
-            // Build inner HTML: word + tag row at bottom
-            const tagHtml = (c.tags && c.tags.length > 0)
-                ? `<div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${c.tags.map(t=>`<span class="tag-badge">${t}</span>`).join('')}</div>`
+            // Build inner HTML: word + type + tag row at bottom
+            const typeBadge = c.type ? `<span class="type-badge">${c.type}</span>` : '';
+            const tagBadges = (c.tags && c.tags.length > 0) ? c.tags.map(t=>`<span class="tag-badge">${t}</span>`).join('') : '';
+            const tagHtml = (typeBadge || tagBadges)
+                ? `<div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${typeBadge}${tagBadges}</div>`
                 : '';
             flashcard.innerHTML = `<span>${c.en}</span>${tagHtml}`;
 
@@ -2878,8 +2893,10 @@
             if (displayCards.length === 0) return;
             const flashcard = document.getElementById('flashcard');
             const c = displayCards[currentIndex];
-            const tagHtml = (c.tags && c.tags.length > 0)
-                ? `<div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${c.tags.map(t=>`<span class="tag-badge">${t}</span>`).join('')}</div>`
+            const typeBadge = c.type ? `<span class="type-badge">${c.type}</span>` : '';
+            const tagBadges = (c.tags && c.tags.length > 0) ? c.tags.map(t=>`<span class="tag-badge">${t}</span>`).join('') : '';
+            const tagHtml = (typeBadge || tagBadges)
+                ? `<div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${typeBadge}${tagBadges}</div>`
                 : '';
 
             // Cycle: 0 (front) → 1 (back) → 2 (example, only if has example) → 0
