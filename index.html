@@ -767,6 +767,35 @@
         .todo-item[data-priority="high"]    { border-left: 4px solid #dc3545; }
         .todo-item[data-priority="medium"]  { border-left: 4px solid #fd7e14; }
         .todo-item[data-priority="low"]     { border-left: 4px solid #28a745; }
+        .todo-note-area {
+            display: none; margin-top: 8px; padding: 8px 10px;
+            background: var(--bg-body); border-radius: 8px;
+            border: 1.5px solid var(--border); font-size: 13px;
+            color: var(--text-main); resize: none; width: 100%;
+            box-sizing: border-box; min-height: 60px; font-family: inherit;
+            line-height: 1.5; outline: none; transition: border 0.2s;
+        }
+        .todo-note-area:focus { border-color: var(--primary-btn); }
+        .todo-note-area.visible { display: block; }
+        .todo-note-toggle {
+            font-size: 11px; color: #888; cursor: pointer; margin-top: 4px;
+            display: inline-flex; align-items: center; gap: 3px;
+            background: none; border: none; padding: 0; font-family: inherit;
+        }
+        .todo-note-toggle:hover { color: var(--primary-btn); }
+        .todo-note-toggle.has-note { color: var(--primary-btn); font-weight: bold; }
+        /* Cal note */
+        .cal-task-note {
+            display: none; margin-top: 6px; padding: 7px 10px;
+            background: var(--bg-body); border-radius: 7px;
+            border: 1.5px solid var(--border); font-size: 12px;
+            color: var(--text-main); resize: none; width: 100%;
+            box-sizing: border-box; min-height: 52px; font-family: inherit;
+            line-height: 1.5; outline: none;
+        }
+        .cal-task-note:focus { border-color: var(--primary-btn); }
+        .cal-task-note.visible { display: block; }
+        .cal-task-row-wrap { flex-direction: column; align-items: stretch; }
 
         .todo-checkbox {
             width: 20px;
@@ -3582,7 +3611,9 @@
                         ? 'event.stopPropagation();'
                         : `event.stopPropagation();calToggleTodo(${t.id},'${dateStr}')`;
                     const cbTitle = t.isDaily ? 'Diem danh de hoan thanh' : (t.done ? 'Bo hoan thanh' : 'Danh dau xong');
-                    const menuId = `cal-task-menu-${t.id}`;
+                    const menuId  = `cal-task-menu-${t.id}`;
+                    const calNoteId = `cal-note-${t.id}`;
+                    const hasCalNote = t.note && t.note.trim();
                     const menuBtn = t.isDaily ? '' : `
                         <div style="position:relative;flex-shrink:0;">
                             <button class="cal-task-menu-btn" onclick="event.stopPropagation();toggleCalTaskMenu('${menuId}')" title="Tùy chọn">⋯</button>
@@ -3592,14 +3623,22 @@
                                 <button class="danger" onclick="event.stopPropagation();calDeleteTask(${t.id},'${dateStr}')">🗑️ Xóa task</button>
                             </div>
                         </div>`;
-                    return `<div class="cal-task-item ${t.done ? 'done-item' : ''}" style="cursor:default;">
-                        <div onclick="${cbClick}" title="${cbTitle}" style="width:22px;height:22px;min-width:22px;border-radius:50%;border:2px solid var(--border-color);${cbDone}${cbCursor}display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0;">
-                            <span style="color:white;font-size:13px;${t.done ? '' : 'display:none;'}">&#10003;</span>
+                    return `<div class="cal-task-item ${t.done ? 'done-item' : ''}" style="cursor:default;flex-wrap:wrap;">
+                        <div style="display:flex;align-items:center;width:100;gap:4px;width:100%;" onclick="toggleCalNote('${calNoteId}')" title="Nhấn để ${hasCalNote ? 'xem/ẩn' : 'thêm'} ghi chú" style="cursor:pointer;">
+                            <div onclick="${cbClick};event.stopPropagation();" title="${cbTitle}" style="width:22px;height:22px;min-width:22px;border-radius:50%;border:2px solid var(--border-color);${cbDone}${cbCursor}display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0;">
+                                <span style="color:white;font-size:13px;${t.done ? '' : 'display:none;'}">&#10003;</span>
+                            </div>
+                            <div class="cal-task-dot ${dotCls}" style="margin-left:4px;"></div>
+                            <span class="cal-task-text">${t.text}${hasCalNote ? ' <span style="font-size:10px;color:var(--primary-btn);">📝</span>' : ''}</span>
+                            ${badge}
+                            ${menuBtn}
                         </div>
-                        <div class="cal-task-dot ${dotCls}" style="margin-left:4px;"></div>
-                        <span class="cal-task-text">${t.text}</span>
-                        ${badge}
-                        ${menuBtn}
+                        <textarea id="${calNoteId}" class="cal-task-note"
+                            placeholder="Ghi chú cho task này..."
+                            onblur="saveCalTodoNote(${t.id}, this.value, '${dateStr}')"
+                            onkeydown="if(event.key==='Escape') this.blur()"
+                            onclick="event.stopPropagation()"
+                        >${t.note || ''}</textarea>
                     </div>`;
                 }).join('');
             }
@@ -4821,6 +4860,52 @@
             }
         }
 
+        // ===== TODO NOTE FUNCTIONS =====
+        function toggleTodoNote(id) {
+            const area = document.getElementById(`note-${id}`);
+            const tgl  = document.getElementById(`todo-note-tgl-${id}`);
+            if (!area) return;
+            const visible = area.classList.toggle('visible');
+            if (visible) { area.focus(); area.setSelectionRange(area.value.length, area.value.length); }
+            if (tgl) {
+                const todo = todos.find(t => t.id === id);
+                const hasNote = todo && todo.note && todo.note.trim();
+                tgl.textContent = visible ? '▲ Ẩn ghi chú' : (hasNote ? '📝 Xem ghi chú' : '+ Thêm ghi chú');
+            }
+        }
+
+        function saveTodoNote(id, value) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+            todo.note = value.trim();
+            saveTodos();
+            // Cập nhật label nút
+            const tgl = document.getElementById(`todo-note-tgl-${id}`);
+            const area = document.getElementById(`note-${id}`);
+            if (tgl) {
+                const isVisible = area && area.classList.contains('visible');
+                tgl.textContent = isVisible ? '▲ Ẩn ghi chú' : (todo.note ? '📝 Xem ghi chú' : '+ Thêm ghi chú');
+                tgl.className = `todo-note-toggle ${todo.note ? 'has-note' : ''}`;
+            }
+        }
+
+        function toggleCalNote(noteId) {
+            const area = document.getElementById(noteId);
+            if (!area) return;
+            const visible = area.classList.toggle('visible');
+            if (visible) { area.focus(); area.setSelectionRange(area.value.length, area.value.length); }
+        }
+
+        function saveCalTodoNote(id, value, dateStr) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+            todo.note = value.trim();
+            saveTodos();
+            renderTodos();
+            renderCalDayPanel(dateStr);
+        }
+        // ===== END TODO NOTE FUNCTIONS =====
+
         function clearDoneTodos() {
             const count = todos.filter(t => t.done).length;
             if (count === 0) { showToast('Không có công việc nào đã xong!'); return; }
@@ -4995,6 +5080,9 @@
                 const repeatHTML = (todo.repeat && repeatLabel[todo.repeat])
                     ? `<span class="repeat-badge ${repeatClass[todo.repeat]}">${repeatLabel[todo.repeat]}</span>` : '';
 
+                const noteId   = `note-${todo.id}`;
+                const hasNote  = todo.note && todo.note.trim();
+                const noteTgl  = `todo-note-tgl-${todo.id}`;
                 return `
                 <div class="todo-item ${todo.done ? 'done' : ''}" data-priority="${todo.priority}" data-id="${todo.id}">
                     <div class="todo-checkbox" onclick="toggleTodo(${todo.id})" title="${todo.done ? 'Bỏ hoàn thành' : 'Đánh dấu xong'}">
@@ -5012,6 +5100,15 @@
                             ${repeatHTML}
                             ${dueHTML}
                         </div>
+                        <button id="${noteTgl}" class="todo-note-toggle ${hasNote ? 'has-note' : ''}"
+                            onclick="toggleTodoNote(${todo.id})">
+                            ${hasNote ? '📝 Xem ghi chú' : '+ Thêm ghi chú'}
+                        </button>
+                        <textarea id="${noteId}" class="todo-note-area"
+                            placeholder="Ghi chú cho task này..."
+                            onblur="saveTodoNote(${todo.id}, this.value)"
+                            onkeydown="if(event.key==='Escape') this.blur()"
+                        >${todo.note || ''}</textarea>
                     </div>
                     <div class="todo-actions">
                         <button class="todo-action-btn" onclick="deleteTodo(${todo.id})" title="Xóa">🗑️</button>
