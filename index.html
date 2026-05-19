@@ -15,185 +15,7 @@
     <meta name="apple-mobile-web-app-title" content="Smart Study">
     <link rel="apple-touch-icon" href="smart.png">
 
-    <!-- ===== FIREBASE SDK ===== -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDmztIxHQbnBjAhCBpN8PSSYcm2ldaPwgQ",
-            authDomain: "smart-study-backend.firebaseapp.com",
-            projectId: "smart-study-backend",
-            storageBucket: "smart-study-backend.firebasestorage.app",
-            messagingSenderId: "499174155891",
-            appId: "1:499174155891:web:1045e4a78215c6d6b36c06",
-            measurementId: "G-K7VBTDQS6D"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db  = getFirestore(app);
-
-        // ID thiết bị — tránh tự ghi đè chính mình khi nhận realtime
-        const DEVICE_ID = localStorage.getItem('deviceId') || (() => {
-            const id = 'dev_' + Math.random().toString(36).slice(2, 10);
-            localStorage.setItem('deviceId', id);
-            return id;
-        })();
-
-        // ===== HÀM THU THẬP TOÀN BỘ DỮ LIỆU LOCAL =====
-        function collectAllLocalData() {
-            const weeklySummaries = {}, weeklyGoals = {};
-            for (let i = 0; i < localStorage.length; i++) {
-                const k = localStorage.key(i);
-                if (k && k.startsWith('weekly_summary_')) weeklySummaries[k.replace('weekly_summary_', '')] = localStorage.getItem(k);
-                if (k && k.startsWith('weekly_goal_'))    weeklyGoals[k.replace('weekly_goal_', '')]         = localStorage.getItem(k);
-            }
-            return {
-                cards:          JSON.parse(localStorage.getItem('cards_v4')       || '[]'),
-                history:        JSON.parse(localStorage.getItem('history_v4')     || '[]'),
-                dailyData:      JSON.parse(localStorage.getItem('dailyData_v4')   || '{}'),
-                statsData:      JSON.parse(localStorage.getItem('statsData_v1')   || '{}'),
-                todos:          JSON.parse(localStorage.getItem('todos_v1')       || '[]'),
-                quizQueue:      JSON.parse(localStorage.getItem('quizQueue_v4')   || '[]'),
-                typingQueue:    JSON.parse(localStorage.getItem('typingQueue_v4') || '[]'),
-                weeklySummaries,
-                weeklyGoals,
-                settings: {
-                    darkMode:       localStorage.getItem('darkMode')       || 'false',
-                    autoSpeak:      localStorage.getItem('autoSpeak')      || 'false',
-                    voice_name:     localStorage.getItem('voice_name')     || '',
-                    voice_rate:     localStorage.getItem('voice_rate')     || '1',
-                    healthReminder: localStorage.getItem('healthReminder') || 'false',
-                },
-            };
-        }
-
-        // ===== HÀM ÁP DỤNG DỮ LIỆU TỪ CLOUD VÀO LOCAL =====
-        function applyCloudData(data) {
-            if (data.cards)       localStorage.setItem('cards_v4',       JSON.stringify(data.cards));
-            if (data.history)     localStorage.setItem('history_v4',     JSON.stringify(data.history));
-            if (data.dailyData)   localStorage.setItem('dailyData_v4',   JSON.stringify(data.dailyData));
-            if (data.statsData)   localStorage.setItem('statsData_v1',   JSON.stringify(data.statsData));
-            if (data.todos)       localStorage.setItem('todos_v1',        JSON.stringify(data.todos));
-            if (data.quizQueue)   localStorage.setItem('quizQueue_v4',   JSON.stringify(data.quizQueue));
-            if (data.typingQueue) localStorage.setItem('typingQueue_v4', JSON.stringify(data.typingQueue));
-            if (data.weeklySummaries) {
-                Object.entries(data.weeklySummaries).forEach(([date, val]) => {
-                    localStorage.setItem('weekly_summary_' + date, val);
-                });
-            }
-            if (data.weeklyGoals) {
-                Object.entries(data.weeklyGoals).forEach(([date, val]) => {
-                    localStorage.setItem('weekly_goal_' + date, val);
-                });
-            }
-            if (data.settings) {
-                const s = data.settings;
-                if (s.darkMode       != null) localStorage.setItem('darkMode',       s.darkMode);
-                if (s.autoSpeak      != null) localStorage.setItem('autoSpeak',      s.autoSpeak);
-                if (s.voice_name     != null) localStorage.setItem('voice_name',     s.voice_name);
-                if (s.voice_rate     != null) localStorage.setItem('voice_rate',     s.voice_rate);
-                if (s.healthReminder != null) localStorage.setItem('healthReminder', s.healthReminder);
-            }
-        }
-
-        // ===== GHI LÊN FIREBASE (debounce 1.5s) =====
-        let _syncTimer2 = null;
-        window.syncToCloud = async function() {
-            clearTimeout(_syncTimer2);
-            _syncTimer2 = setTimeout(async () => {
-                try {
-                    const payload = collectAllLocalData();
-                    await setDoc(doc(db, 'users', 'shared'), {
-                        ...payload,
-                        updatedAt: Date.now(),
-                        updatedBy: DEVICE_ID
-                    });
-                    const ts = Date.now();
-                    localStorage.setItem('lastSyncedAt', String(ts));
-                    showSyncStatus('✅ Đã đồng bộ lên cloud');
-                } catch(e) {
-                    showSyncStatus('⚠️ Lỗi đồng bộ: ' + e.message);
-                }
-            }, 1500);
-        };
-
-        // ===== ĐẨY TOÀN BỘ DỮ LIỆU LOCAL LÊN CLOUD NGAY =====
-        window.pushAllToCloud = async function() {
-            showSyncStatus('🔄 Đang đẩy toàn bộ dữ liệu lên cloud...');
-            try {
-                await setDoc(doc(db, 'users', 'shared'), {
-                    ...collectAllLocalData(),
-                    updatedAt: Date.now(),
-                    updatedBy: DEVICE_ID
-                });
-                localStorage.setItem('lastSyncedAt', String(Date.now()));
-                showSyncStatus('✅ Đã đẩy toàn bộ dữ liệu lên cloud!');
-            } catch(e) {
-                showSyncStatus('⚠️ Lỗi: ' + e.message);
-            }
-        };
-
-        // ===== KÉO DỮ LIỆU TỪ CLOUD VỀ (CHỈ KHI BẤM NÚT) =====
-        window.loadFromCloud = async function() {
-            try {
-                showSyncStatus('🔄 Đang tải dữ liệu từ cloud...');
-                const snap = await getDoc(doc(db, 'users', 'shared'));
-                if (snap.exists()) {
-                    applyCloudData(snap.data());
-                    // Đánh dấu vừa tải cloud để tránh onSnapshot kích hoạt lại
-                    sessionStorage.setItem('justLoaded', '1');
-                    showSyncStatus('✅ Đã tải xong! Đang tải lại...');
-                    setTimeout(() => location.reload(), 1000);
-                } else {
-                    showSyncStatus('ℹ️ Chưa có dữ liệu trên cloud — hãy bấm 📤 để đẩy lên');
-                }
-            } catch(e) {
-                showSyncStatus('⚠️ Không thể tải cloud: ' + e.message);
-            }
-        };
-
-        // ===== LẮNG NGHE REALTIME — bỏ qua lần bắn đầu tiên khi kết nối =====
-        let _snapshotReady = false;
-        setTimeout(() => { _snapshotReady = true; }, 3000); // chờ 3s sau khi load mới lắng nghe thật
-
-        onSnapshot(doc(db, 'users', 'shared'), (snap) => {
-            if (!_snapshotReady) return;           // bỏ qua lần bắn đầu tiên
-            if (!snap.exists()) return;
-            const data = snap.data();
-            if (data.updatedBy === DEVICE_ID) return; // bỏ qua nếu chính mình vừa ghi
-            showSyncStatus('🔄 Thiết bị khác vừa cập nhật — nhấn để tải lại', true);
-        });
-
-        // ===== AUTO SYNC KHI MỞ APP =====
-        window.addEventListener('load', () => {
-            if (sessionStorage.getItem('justLoaded')) {
-                sessionStorage.removeItem('justLoaded');
-                setTimeout(() => showSyncStatus('✅ Đã đồng bộ xong'), 500);
-                return;
-            }
-            setTimeout(async () => {
-                try {
-                    const snap = await getDoc(doc(db, 'users', 'shared'));
-                    if (!snap.exists()) { showSyncStatus('☁️ Cloud sẵn sàng'); return; }
-                    const cloudUpdatedAt = snap.data().updatedAt || 0;
-                    const lastSyncedAt   = parseInt(localStorage.getItem('lastSyncedAt') || '0');
-                    if (cloudUpdatedAt > lastSyncedAt) {
-                        showSyncStatus('🔄 Dữ liệu mới trên cloud, đang tải...');
-                        applyCloudData(snap.data());
-                        localStorage.setItem('lastSyncedAt', String(cloudUpdatedAt));
-                        sessionStorage.setItem('justLoaded', '1');
-                        setTimeout(() => location.reload(), 800);
-                    } else {
-                        showSyncStatus('☁️ Cloud sẵn sàng');
-                    }
-                } catch(e) {
-                    showSyncStatus('☁️ Cloud sẵn sàng');
-                }
-            }, 1200);
-        });
-    </script>
-    <!-- ===== END FIREBASE ===== -->
+    <!-- GitHub Sync được tích hợp bên dưới -->
 
     <style>
         :root {
@@ -360,18 +182,7 @@
         .voice-list-scroll { max-height: 260px; overflow-y: auto; }
         /* ===== END VOICE SELECTOR ===== */
 
-        /* ===== SYNC STATUS BAR ===== */
-        #sync-bar {
-            position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%);
-            background: #323232; color: white; padding: 8px 18px;
-            border-radius: 20px; font-size: 13px; z-index: 300;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: none; align-items: center; gap: 8px;
-            max-width: 90vw; cursor: default;
-            transition: opacity 0.3s;
-        }
-        #sync-bar.clickable { cursor: pointer; background: #1877f2; }
-        /* ===== END SYNC STATUS BAR ===== */
+
         .shuffle-btn {
             padding: 8px 16px;
             background: transparent;
@@ -1902,11 +1713,10 @@
     <div class="top-tools">
         <button class="tool-btn" onclick="toggleDarkMode()" title="Chế độ tối">🌓</button>
         <button class="tool-btn" onclick="toggleAutoSpeak()" id="auto-speak-btn" title="Tự động đọc">🔇</button>
-        <button class="tool-btn" onclick="exportData()" title="Xuất dữ liệu">📤</button>
-        <button class="tool-btn" onclick="document.getElementById('import-file').click()" title="Nhập dữ liệu">📥</button>
+        <button class="tool-btn" onclick="exportData()" title="Lưu lên GitHub">📤</button>
+        <button class="tool-btn" onclick="importFromGitHub()" title="Tải từ GitHub về">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
-        <button class="tool-btn" onclick="window.pushAllToCloud && window.pushAllToCloud()" title="Đẩy toàn bộ dữ liệu lên cloud">📤</button>
-        <button class="tool-btn" onclick="window.loadFromCloud && window.loadFromCloud()" title="Tải dữ liệu từ cloud về">☁️</button>
+
         <input type="file" id="import-file" style="display:none" onchange="importData(event)">
     </div>
 
@@ -2362,7 +2172,6 @@
 
     <!-- ===== MOBILE BOTTOM NAV ===== -->
     <nav class="mobile-nav"></nav>
-    <div id="sync-bar"></div>
     <!-- ===== END MOBILE BOTTOM NAV ===== -->
 
     <script>
@@ -2379,7 +2188,7 @@
         let statsPeriod = 'week'; // 'week' | 'month'
         let gameSessionStartTime = null; // Thời điểm bắt đầu một session ôn tập (quiz/gõ/nghe)
 
-        function saveStats() { localStorage.setItem('statsData_v1', JSON.stringify(statsData)); if (typeof window.syncToCloud === 'function') window.syncToCloud(); }
+        function saveStats() { localStorage.setItem('statsData_v1', JSON.stringify(statsData)); }
 
         // Gọi khi bắt đầu một game ôn tập
         function startPracticeTimer() {
@@ -2496,26 +2305,9 @@
             localStorage.setItem('history_v4', JSON.stringify(history));
             localStorage.setItem('dailyData_v4', JSON.stringify(dailyData));
             // Đồng bộ toàn bộ lên Firebase
-            if (typeof window.syncToCloud === 'function') window.syncToCloud();
         }
 
-        // ===== SYNC STATUS HELPER =====
-        let _syncTimer = null;
-        function showSyncStatus(msg, clickable = false) {
-            const bar = document.getElementById('sync-bar');
-            if (!bar) return;
-            bar.textContent = msg;
-            bar.style.display = 'flex';
-            bar.className = clickable ? 'clickable' : '';
-            if (clickable) {
-                bar.onclick = () => location.reload();
-            } else {
-                bar.onclick = null;
-                clearTimeout(_syncTimer);
-                _syncTimer = setTimeout(() => { bar.style.display = 'none'; }, 3000);
-            }
-        }
-        // ===== END SYNC STATUS HELPER =====
+
 
         // ===== SHUFFLE LOGIC =====
         function toggleShuffle() {
@@ -3809,8 +3601,7 @@
             _wsSaveTimer = setTimeout(() => {
                 const el = document.getElementById('ws-saved');
                 if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
-                if (typeof window.syncToCloud === 'function') window.syncToCloud();
-            }, 600);
+                }, 600);
         }
         function loadWeeklySummary(dateStr) {
             return localStorage.getItem('weekly_summary_' + dateStr) || '';
@@ -3823,8 +3614,7 @@
             _wgSaveTimer = setTimeout(() => {
                 const el = document.getElementById('wg-saved');
                 if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
-                if (typeof window.syncToCloud === 'function') window.syncToCloud();
-            }, 600);
+                }, 600);
         }
         function loadWeeklyGoal(dateStr) {
             return localStorage.getItem('weekly_goal_' + dateStr) || '';
@@ -4423,125 +4213,165 @@
 
         function clearAll() { if (confirm("Xóa toàn bộ?")) { localStorage.clear(); location.reload(); } }
         function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.className = "show"; setTimeout(() => t.className = "", 2500); }
-        function exportData() {
-            // Gom tất cả weekly summary từ localStorage
-            const weeklySummaries = {};
-            const weeklyGoals = {};
+        // ===== GITHUB SYNC CONFIG =====
+        const GH_TOKEN  = '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';
+        const GH_OWNER  = 'ThaiLe-01';
+        const GH_REPO   = 'smart-study';
+        const GH_FILE   = 'data.json';   // file lưu dữ liệu trong repo
+        const GH_BRANCH = 'main';
+        const GH_API    = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+        function collectExportData() {
+            const weeklySummaries = {}, weeklyGoals = {};
             for (let i = 0; i < localStorage.length; i++) {
                 const k = localStorage.key(i);
-                if (k && k.startsWith('weekly_summary_')) {
-                    weeklySummaries[k.replace('weekly_summary_', '')] = localStorage.getItem(k);
-                }
-                if (k && k.startsWith('weekly_goal_')) {
-                    weeklyGoals[k.replace('weekly_goal_', '')] = localStorage.getItem(k);
-                }
+                if (k && k.startsWith('weekly_summary_')) weeklySummaries[k.replace('weekly_summary_', '')] = localStorage.getItem(k);
+                if (k && k.startsWith('weekly_goal_'))    weeklyGoals[k.replace('weekly_goal_', '')]         = localStorage.getItem(k);
             }
-
-            const exportObj = {
-                version: 2,
+            return {
+                version: 3,
                 exportedAt: new Date().toISOString(),
-                // Flashcards
-                cards: cards,
-                // Chuỗi điểm danh
-                history: history,
-                dailyData: dailyData,
-                // Quiz & typing queues
-                quizQueue: quizQueue,
+                cards:       cards,
+                history:     history,
+                dailyData:   dailyData,
+                quizQueue:   quizQueue,
                 typingQueue: typeof typingQueue !== 'undefined' ? typingQueue : [],
-                // Danh sách công việc
-                todos: typeof todos !== 'undefined' ? todos : [],
-                // Thống kê học tập
-                statsData: typeof statsData !== 'undefined' ? statsData : { scores: [], wordsByDay: {}, timeByDay: {}, demotes: {} },
-                // Weekly summaries
+                todos:       typeof todos       !== 'undefined' ? todos       : [],
+                statsData:   typeof statsData   !== 'undefined' ? statsData   : { scores: [], wordsByDay: {}, timeByDay: {}, demotes: {} },
                 weeklySummaries,
-                // Mục tiêu tuần sau
                 weeklyGoals,
             };
-            const json = JSON.stringify(exportObj, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const today = new Date().toISOString().split('T')[0];
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `smart_study_backup_${today}.json`;
-            a.click();
-            showToast('📤 Đã xuất dữ liệu đầy đủ!');
+        }
+
+        // ===== EXPORT: ghi đè data.json lên GitHub =====
+        async function exportData() {
+            showToast('⏳ Đang lưu lên GitHub...');
+            try {
+                const exportObj = collectExportData();
+                const json      = JSON.stringify(exportObj, null, 2);
+                const encoded   = btoa(unescape(encodeURIComponent(json))); // base64 UTF-8 safe
+
+                // Lấy SHA của file hiện tại (bắt buộc để ghi đè)
+                let sha = null;
+                const getRes = await fetch(GH_API, {
+                    headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github+json' }
+                });
+                if (getRes.ok) {
+                    const info = await getRes.json();
+                    sha = info.sha;
+                }
+
+                // Ghi đè (hoặc tạo mới nếu chưa có)
+                const body = {
+                    message: `sync: ${new Date().toLocaleString('vi-VN')}`,
+                    content: encoded,
+                    branch:  GH_BRANCH,
+                };
+                if (sha) body.sha = sha;
+
+                const putRes = await fetch(GH_API, {
+                    method:  'PUT',
+                    headers: {
+                        Authorization: `token ${GH_TOKEN}`,
+                        Accept:        'application/vnd.github+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                if (putRes.ok) {
+                    showToast('✅ Đã lưu dữ liệu lên GitHub!');
+                } else {
+                    const err = await putRes.json();
+                    showToast('❌ Lỗi GitHub: ' + (err.message || putRes.status));
+                }
+            } catch(e) {
+                showToast('❌ Lỗi kết nối: ' + e.message);
+            }
+        }
+
+        // ===== IMPORT: tải data.json từ GitHub về =====
+        async function importFromGitHub() {
+            showToast('⏳ Đang tải dữ liệu từ GitHub...');
+            try {
+                const res = await fetch(GH_API + '?ref=' + GH_BRANCH + '&t=' + Date.now(), {
+                    headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github+json' }
+                });
+                if (!res.ok) {
+                    showToast('❌ Không tìm thấy file data.json trên GitHub (hãy Export lần đầu)');
+                    return;
+                }
+                const info    = await res.json();
+                const decoded = decodeURIComponent(escape(atob(info.content.replace(/\n/g, ''))));
+                const data    = JSON.parse(decoded);
+                applyImportData(data);
+                showToast('✅ Đã tải dữ liệu từ GitHub! Đang tải lại...');
+                setTimeout(() => location.reload(), 1000);
+            } catch(e) {
+                showToast('❌ Lỗi tải dữ liệu: ' + e.message);
+            }
+        }
+
+        // ===== Hàm chung áp dụng dữ liệu import (dùng cho cả file lẫn GitHub) =====
+        function applyImportData(data) {
+            if (Array.isArray(data.cards)) {
+                cards = data.cards.map(c => ({ ...c, category: c.category || 'common', tags: c.tags || [] }));
+                localStorage.setItem('cards_v4', JSON.stringify(cards));
+            }
+            if (Array.isArray(data.history)) {
+                history = data.history;
+                localStorage.setItem('history_v4', JSON.stringify(history));
+            }
+            if (data.dailyData && typeof data.dailyData === 'object') {
+                dailyData = data.dailyData;
+                localStorage.setItem('dailyData_v4', JSON.stringify(dailyData));
+            }
+            if (Array.isArray(data.quizQueue)) {
+                quizQueue = data.quizQueue;
+                localStorage.setItem('quizQueue_v4', JSON.stringify(quizQueue));
+            }
+            if (Array.isArray(data.typingQueue)) {
+                typingQueue = data.typingQueue;
+                localStorage.setItem('typingQueue_v4', JSON.stringify(typingQueue));
+            }
+            if (Array.isArray(data.todos)) {
+                todos = data.todos;
+                localStorage.setItem('todos_v1', JSON.stringify(todos));
+            }
+            if (data.statsData && typeof data.statsData === 'object') {
+                statsData = {
+                    scores:     Array.isArray(data.statsData.scores)     ? data.statsData.scores     : [],
+                    wordsByDay: typeof data.statsData.wordsByDay === 'object' ? data.statsData.wordsByDay : {},
+                    timeByDay:  typeof data.statsData.timeByDay  === 'object' ? data.statsData.timeByDay  : {},
+                    demotes:    typeof data.statsData.demotes    === 'object' ? data.statsData.demotes    : {},
+                };
+                localStorage.setItem('statsData_v1', JSON.stringify(statsData));
+            }
+            if (data.weeklySummaries && typeof data.weeklySummaries === 'object') {
+                Object.entries(data.weeklySummaries).forEach(([d, v]) => {
+                    if (typeof v === 'string') localStorage.setItem('weekly_summary_' + d, v);
+                });
+            }
+            if (data.weeklyGoals && typeof data.weeklyGoals === 'object') {
+                Object.entries(data.weeklyGoals).forEach(([d, v]) => {
+                    if (typeof v === 'string') localStorage.setItem('weekly_goal_' + d, v);
+                });
+            }
         }
 
         function importData(e) {
             const file = e.target.files[0];
             if (!file) return;
-            // Reset input so same file can be re-selected
             e.target.value = '';
             const reader = new FileReader();
             reader.onload = (event) => {
                 try {
                     const data = JSON.parse(event.target.result);
-
-                    // ── Flashcards ──
-                    if (Array.isArray(data.cards)) {
-                        cards = data.cards.map(c => ({ ...c, category: c.category || 'common', tags: c.tags || [] }));
-                        localStorage.setItem('cards_v4', JSON.stringify(cards));
-                    }
-
-                    // ── Chuỗi điểm danh ──
-                    if (Array.isArray(data.history)) {
-                        history = data.history;
-                        localStorage.setItem('history_v4', JSON.stringify(history));
-                    }
-                    if (data.dailyData && typeof data.dailyData === 'object') {
-                        dailyData = data.dailyData;
-                        localStorage.setItem('dailyData_v4', JSON.stringify(dailyData));
-                    }
-
-                    // ── Quiz & typing queues ──
-                    if (Array.isArray(data.quizQueue)) {
-                        quizQueue = data.quizQueue;
-                        localStorage.setItem('quizQueue_v4', JSON.stringify(quizQueue));
-                    }
-                    if (Array.isArray(data.typingQueue)) {
-                        typingQueue = data.typingQueue;
-                        localStorage.setItem('typingQueue_v4', JSON.stringify(typingQueue));
-                    }
-
-                    // ── Danh sách công việc ──
-                    if (Array.isArray(data.todos)) {
-                        todos = data.todos;
-                        localStorage.setItem('todos_v1', JSON.stringify(todos));
-                    }
-
-                    // ── Thống kê học tập ──
-                    if (data.statsData && typeof data.statsData === 'object') {
-                        statsData = {
-                            scores:     Array.isArray(data.statsData.scores)    ? data.statsData.scores    : [],
-                            wordsByDay: data.statsData.wordsByDay && typeof data.statsData.wordsByDay === 'object' ? data.statsData.wordsByDay : {},
-                            timeByDay:  data.statsData.timeByDay  && typeof data.statsData.timeByDay  === 'object' ? data.statsData.timeByDay  : {},
-                            demotes:    data.statsData.demotes    && typeof data.statsData.demotes    === 'object' ? data.statsData.demotes    : {},
-                        };
-                        localStorage.setItem('statsData_v1', JSON.stringify(statsData));
-                    }
-
-                    // ── Weekly summaries ──
-                    if (data.weeklySummaries && typeof data.weeklySummaries === 'object') {
-                        Object.entries(data.weeklySummaries).forEach(([dateStr, note]) => {
-                            if (typeof note === 'string') {
-                                localStorage.setItem('weekly_summary_' + dateStr, note);
-                            }
-                        });
-                    }
-
-                    // ── Mục tiêu tuần sau ──
-                    if (data.weeklyGoals && typeof data.weeklyGoals === 'object') {
-                        Object.entries(data.weeklyGoals).forEach(([dateStr, note]) => {
-                            if (typeof note === 'string') {
-                                localStorage.setItem('weekly_goal_' + dateStr, note);
-                            }
-                        });
-                    }
-
+                    applyImportData(data);
                     showToast('📥 Import thành công! Đang tải lại...');
                     setTimeout(() => location.reload(), 1000);
                 } catch (err) {
-                    showToast('❌ File không hợp lệ! Vui lòng chọn file JSON đúng định dạng.');
+                    showToast('❌ File không hợp lệ!');
                     console.error('Import error:', err);
                 }
             };
@@ -4781,7 +4611,6 @@
             // Sync calendar dots whenever todos change
             if (typeof renderCalendar === 'function') renderCalendar();
             // Đồng bộ lên Firebase
-            if (typeof window.syncToCloud === 'function') window.syncToCloud();
             renderRecurringList();
         }
 
