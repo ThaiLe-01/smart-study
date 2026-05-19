@@ -2075,8 +2075,11 @@
         </div>
 
         <!-- TAG FILTER -->
-        <div id="flashcard-tag-filter" class="tag-filter-bar" style="display:none;">
+        <div id="flashcard-tag-filter" style="display:none; align-items:center; gap:8px; margin-bottom:14px;">
             <span style="font-size:13px; font-weight:bold; white-space:nowrap;">🏷️ Tag:</span>
+            <select id="flashcard-tag-select" onchange="setFlashcardTag(this.value === '__all__' ? null : this.value)"
+                style="flex:1; margin-bottom:0; font-size:14px; font-weight:bold; color:var(--primary-btn); border-radius:20px; padding:6px 14px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+            </select>
         </div>
 
         <div class="filter-box">
@@ -2649,6 +2652,22 @@
             if (!bar) return;
             const allTags = getAllTags(category);
             if (allTags.length === 0) { bar.style.display = 'none'; return; }
+
+            // Flashcard tag filter uses a dropdown select
+            if (containerId === 'flashcard-tag-filter') {
+                bar.style.display = 'flex';
+                const sel = document.getElementById('flashcard-tag-select');
+                if (!sel) return;
+                const activeTag = activeFn();
+                let opts = `<option value="__all__"${activeTag === null ? ' selected' : ''}>📚 Tất cả tag</option>`;
+                allTags.forEach(t => {
+                    opts += `<option value="${t}"${activeTag === t ? ' selected' : ''}>${t}</option>`;
+                });
+                sel.innerHTML = opts;
+                return;
+            }
+
+            // Other filter bars keep the chip style
             bar.style.display = 'flex';
             const activeTag = activeFn();
             let html = `<button class="tag-filter-chip${activeTag === null ? ' active' : ''}" onclick="${setFn}(null)">📚 Tất cả</button>`;
