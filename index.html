@@ -1604,11 +1604,34 @@
 
         /* ===== EXAMPLE SENTENCE IN FLASHCARD ===== */
         .flashcard-example {
-            font-size: 12px; font-style: italic; color: rgba(255,255,255,0.6);
-            margin-top: 8px; max-width: 260px; line-height: 1.5; text-align: center;
+            font-size: 13px; font-style: italic; color: rgba(255,255,255,0.6);
+            margin-top: 8px; max-width: 280px; line-height: 1.6; text-align: center;
         }
         .flashcard.back .flashcard-example { color: rgba(0,100,0,0.55); }
         .dark-mode .flashcard.back .flashcard-example { color: rgba(180,255,180,0.5); }
+
+        /* Example card — 3rd flip state */
+        .flashcard.example-card {
+            background: #e8f4ff;
+            color: #1a4a7a;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .dark-mode .flashcard.example-card { background: #162840; color: #7dc4ff; }
+        body.specialized-mode .flashcard.example-card { background: #e0f7fa; color: #004d56; }
+        body.specialized-mode.dark-mode .flashcard.example-card { background: #003c44; color: #80deea; }
+
+        .flashcard-example-label {
+            font-size: 11px; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 1px; opacity: 0.5; margin-bottom: 2px;
+        }
+        .flashcard-example-sentence {
+            font-size: 20px; font-weight: 600; font-style: italic;
+            line-height: 1.5; text-align: center; max-width: 320px;
+        }
+        .flashcard-example-word-hint {
+            font-size: 12px; opacity: 0.55; margin-top: 4px;
+        }
         /* ===== END EXAMPLE SENTENCE ===== */
 
         /* ================================================================
@@ -1747,6 +1770,100 @@
         /* ================================================================
            ===== END MOBILE RESPONSIVE ====================================
            ================================================================ */
+
+        /* ================================================================
+           ===== SIDEBAR TAB NAVIGATION ===================================
+           ================================================================ */
+        .page-layout {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 920px;
+            gap: 0;
+            position: relative;
+        }
+
+        /* Sidebar */
+        .side-nav {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 100;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 10px 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            border: 1px solid var(--border-color);
+        }
+
+        .side-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 8px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #888;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 56px;
+            transition: all 0.2s;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .side-nav-btn .nav-icon { font-size: 22px; line-height: 1; }
+        .side-nav-btn:hover {
+            background: rgba(24,119,242,0.08);
+            color: var(--primary-btn);
+        }
+        .side-nav-btn.active {
+            background: var(--primary-btn);
+            color: white;
+            box-shadow: 0 3px 10px rgba(24,119,242,0.35);
+        }
+        .dark-mode .side-nav-btn:hover {
+            background: rgba(45,136,255,0.15);
+        }
+
+        /* Tab panels */
+        .tab-panel {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+        .tab-panel.active {
+            display: flex;
+        }
+
+        /* Main content area */
+        .main-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Adjust body layout */
+        body {
+            align-items: center;
+        }
+
+        @media (max-width: 780px) {
+            .side-nav {
+                display: none;
+            }
+        }
+        /* ================================================================
+           ===== END SIDEBAR TAB NAVIGATION ===============================
+           ================================================================ */
     </style>
 </head>
 <body>
@@ -1766,9 +1883,36 @@
         <button class="tool-btn" onclick="exportData()" title="Lưu lên GitHub">📤</button>
         <button class="tool-btn" onclick="importFromGitHub()" title="Tải từ GitHub về">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
-
         <input type="file" id="import-file" style="display:none" onchange="importData(event)">
     </div>
+
+    <!-- ===== SIDEBAR TAB NAV ===== -->
+    <nav class="side-nav" id="side-nav">
+        <button class="side-nav-btn active" id="snav-0" onclick="switchSideTab(0)">
+            <span class="nav-icon">🗓️</span>
+            <span>Lịch &<br>Việc làm</span>
+        </button>
+        <button class="side-nav-btn" id="snav-1" onclick="switchSideTab(1)">
+            <span class="nav-icon">🧠</span>
+            <span>Flashcard<br>& Từ vựng</span>
+        </button>
+        <button class="side-nav-btn" id="snav-2" onclick="switchSideTab(2)">
+            <span class="nav-icon">🎯</span>
+            <span>Ôn<br>tập</span>
+        </button>
+        <button class="side-nav-btn" id="snav-3" onclick="switchSideTab(3)">
+            <span class="nav-icon">📊</span>
+            <span>Thống<br>kê</span>
+        </button>
+        <button class="side-nav-btn" id="snav-4" onclick="switchSideTab(4)">
+            <span class="nav-icon">📋</span>
+            <span>Quản lý<br>danh sách</span>
+        </button>
+    </nav>
+    <!-- ===== END SIDEBAR TAB NAV ===== -->
+
+    <!-- ===== TAB 0: LỊCH & DANH SÁCH CÔNG VIỆC ===== -->
+    <div class="tab-panel active" id="tabpanel-0">
 
     <div class="container" id="sec-calendar" style="padding: 15px 30px;">
         <h3 style="margin: 0 0 15px 0; display: flex; justify-content: space-between;">
@@ -1841,6 +1985,12 @@
         <p style="font-size:13px;color:#888;text-align:center;margin:8px 0 0;">💡 Nhấn vào ngày trong lịch để xem và hoàn thành công việc</p>
     </div>
     <!-- ===== END TODO LIST SECTION ===== -->
+
+    </div><!-- end tabpanel-0 -->
+
+    <!-- ===== TAB 1: FLASHCARD & THÊM TỪ VỰNG ===== -->
+    <div class="tab-panel" id="tabpanel-1">
+
     <div class="container">
         <h2>📚 Thêm Từ Vựng</h2>
         <select id="category-select" style="font-weight: bold; color: var(--primary-btn);">
@@ -1851,6 +2001,7 @@
             <input type="text" id="eng-input" placeholder="Tiếng Anh">
             <input type="text" id="vie-input" placeholder="Tiếng Việt">
         </div>
+        <input type="text" id="example-input" placeholder='📝 Câu ví dụ (không bắt buộc) — vd: She runs every morning.'>
         <select id="type-select">
             <option value="Danh từ (n)">Danh từ (n)</option>
             <option value="Động từ (v)">Động từ (v)</option>
@@ -1877,11 +2028,13 @@
 
         <div class="bulk-box" id="bulk-box">
             <div class="bulk-hint">
-                📋 <b>Cách nhập:</b> Mỗi dòng một từ, dùng dấu <b> - </b> để ngăn cách tiếng Anh và tiếng Việt.<br>
+                📋 <b>Cách nhập:</b> Mỗi dòng một từ, dùng dấu <b> - </b> ngăn cách Anh/Việt. Dòng tiếp theo có thể thêm câu ví dụ trong dấu <b>"..."</b> (không bắt buộc).<br>
                 Ví dụ:<br>
                 hello - xin chào<br>
+                "Hello, how are you today?"<br>
                 apple - quả táo<br>
-                run - chạy
+                run - chạy<br>
+                "She runs every morning."
             </div>
 
             <select id="bulk-type-select" style="margin-bottom: 10px;">
@@ -1901,7 +2054,7 @@
             </div>
             <div class="tag-chips" id="bulk-tag-chips"></div>
 
-            <textarea id="bulk-textarea" placeholder="hello - xin chào&#10;apple - quả táo&#10;run - chạy&#10;..." oninput="previewBulk()"></textarea>
+            <textarea id="bulk-textarea" placeholder="hello - xin chào&#10;&quot;Hello, how are you?&quot;&#10;apple - quả táo&#10;run - chạy&#10;&quot;She runs every morning.&quot;" oninput="previewBulk()"></textarea>
 
             <div class="bulk-preview" id="bulk-preview"></div>
 
@@ -1958,6 +2111,7 @@
                 <div class="icon-circle" onclick="speakWordAction(event)" title="Phát âm">🔊</div>
             </div>
         </div>
+        <div id="flip-hint" style="text-align:center;font-size:12px;color:#aaa;margin:-8px 0 10px;min-height:18px;"></div>
 
         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
             <button onclick="markStatus('learning_spelling')" style="flex:1; background:#fd7e14; padding: 12px 5px;">Quên chữ</button>
@@ -1968,15 +2122,31 @@
             <button onclick="prevCard()" style="background:#6c757d;">⬅️ Trước</button>
             <button onclick="nextCard()" style="background:#6c757d;">Tiếp ➡️</button>
         </div>
-    </div>
+    </div><!-- end sec-flashcard -->
+
+    </div><!-- end tabpanel-1 -->
+
+    <!-- ===== TAB 2: ÔN TẬP ===== -->
+    <div class="tab-panel" id="tabpanel-2">
 
     <div class="container">
-        <h2>🎯 Trắc Nghiệm: Minigame (1 Phút)</h2>
+        <h2>🎯 Trắc Nghiệm: Minigame</h2>
         <div id="quiz-area" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <p>Hệ thống sẽ xoay vòng kiểm tra <b>tối đa 20 từ</b> bạn đã đánh dấu "Đã thuộc" trong <b>60 giây</b>.<br>
+                <p>Hệ thống sẽ xoay vòng kiểm tra các từ bạn đã đánh dấu "Đã thuộc" trong thời gian đã chọn.<br>
                 <span style="color:#28a745; font-size: 14px;">💡 Các từ sẽ không bị lặp lại cho đến khi bạn ôn hết toàn bộ danh sách!</span><br>
                 <span style="color:#dc3545; font-size: 14px;">⚠️ Lưu ý: Từ nào chọn sai sẽ bị giáng cấp về trạng thái "Quên chữ"!</span></p>
+
+                <!-- QUIZ TIME SELECTOR -->
+                <div style="display:inline-flex; align-items:center; gap:12px; margin: 10px 0; background:rgba(0,0,0,0.04); padding:10px 18px; border-radius:12px; border:1px solid var(--border-color);">
+                    <span style="font-size:14px; font-weight:bold;">⏱️ Thời gian:</span>
+                    <select id="quiz-time-select" onchange="updateQuizInfo()" style="width:auto; margin:0; padding:8px 12px; font-size:15px; font-weight:bold; color:var(--primary-btn); border-radius:8px;">
+                        <option value="1">1 phút — 20 từ</option>
+                        <option value="2">2 phút — 40 từ</option>
+                        <option value="3">3 phút — 60 từ</option>
+                    </select>
+                </div>
+                <div id="quiz-info-text" style="font-size:13px; color:#888; margin-bottom:4px;">Kiểm tra tối đa <b>20 từ</b> trong <b>60 giây</b></div>
                 
                 <!-- QUIZ TAG FILTER -->
                 <div style="margin: 12px 0 6px; text-align:left;">
@@ -1984,7 +2154,7 @@
                 </div>
                 <div id="quiz-tag-filter" class="tag-filter-bar" style="justify-content:center; margin-bottom:10px;"></div>
 
-                <button onclick="initQuiz()" style="background: #28a745; padding: 15px 30px; font-size: 18px; margin-top: 15px;">Bắt đầu (1 Phút)</button>
+                <button onclick="initQuiz()" style="background: #28a745; padding: 15px 30px; font-size: 18px; margin-top: 15px;" id="quiz-start-btn">▶ Bắt đầu (1 Phút)</button>
             </div>
         </div>
     </div>
@@ -2003,25 +2173,7 @@
     </div>
     <!-- ===== END TYPING GAME ===== -->
 
-    <!-- ===== SM-2 SPACED REPETITION ===== -->
-    <div class="container sm2-section" id="sec-sm2">
-        <h2>🧠 Ôn Tập Thông Minh (SM-2)</h2>
-        <p style="font-size:14px;color:#888;margin-bottom:12px;">
-            Thuật toán tự động lên lịch ôn từ đúng lúc sắp quên — từ nào sai sẽ được ôn sớm hơn, từ thuộc nhiều sẽ ôn thưa dần.
-        </p>
-        <div id="sm2-area"></div>
-    </div>
-    <!-- ===== END SM-2 ===== -->
 
-    <!-- ===== WORD FAMILY ===== -->
-    <div class="container">
-        <h2>🌳 Word Family — Nhóm Từ Cùng Gốc</h2>
-        <p style="font-size:14px;color:#888;margin-bottom:12px;">
-            Các từ có cùng trường <b>Family</b> sẽ được gom thành nhóm. Thêm/sửa family trong ô chỉnh sửa từ vựng.
-        </p>
-        <div id="wf-area"></div>
-    </div>
-    <!-- ===== END WORD FAMILY ===== -->
 
     <!-- ===== LISTENING MINIGAMES ===== -->
     <div class="container">
@@ -2080,6 +2232,10 @@
     </div>
     <!-- ===== END LISTENING MINIGAMES ===== -->
 
+    </div><!-- end tabpanel-2 -->
+
+    <!-- ===== TAB 3: THỐNG KÊ ===== -->
+    <div class="tab-panel" id="tabpanel-3">
 
     <!-- ===== STATISTICS SECTION ===== -->
     <div class="container" id="stats-section">
@@ -2119,6 +2275,21 @@
         </div>
     </div>
     <!-- ===== END STATISTICS SECTION ===== -->
+
+    <!-- ===== WORD FAMILY ===== -->
+    <div class="container">
+        <h2>🌳 Word Family — Nhóm Từ Cùng Gốc</h2>
+        <p style="font-size:14px;color:#888;margin-bottom:12px;">
+            Tự động gom nhóm khi thêm từ mới. Chỉ hiển thị họ từ có từ 2 từ trở lên.
+        </p>
+        <div id="wf-area"></div>
+    </div>
+    <!-- ===== END WORD FAMILY ===== -->
+
+    </div><!-- end tabpanel-3 -->
+
+    <!-- ===== TAB 4: QUẢN LÝ DANH SÁCH ===== -->
+    <div class="tab-panel" id="tabpanel-4">
 
     <div class="container" id="wordlist-container">
         <h2>📋 Quản Lý Danh Sách</h2>
@@ -2218,6 +2389,8 @@
         <button onclick="clearAll()" style="background:#dc3545; width: 100%; margin-top: 20px;">🗑️ Xóa sạch dữ liệu</button>
     </div>
 
+    </div><!-- end tabpanel-4 -->
+
     <div id="toast">Thông báo!</div>
 
     <!-- ===== MOBILE BOTTOM NAV ===== -->
@@ -2302,6 +2475,7 @@
         let displayCards = [];
         let currentIndex = 0;
         let isFront = true;
+        let flipState = 0; // 0=front, 1=back, 2=example
         let currentStudyCategory = 'common';
 
         // ===== SHUFFLE STATE =====
@@ -2656,6 +2830,7 @@
 
             const c = displayCards[currentIndex];
             isFront = true;
+            flipState = 0;
             flashcard.className = "flashcard";
 
             // Build inner HTML: word + tag row at bottom
@@ -2677,29 +2852,46 @@
 
             recordStudyWord(c.en);
             if (autoSpeak) speakWord(c.en);
+            updateFlipHint();
         }
 
         function flipCard() {
             if (displayCards.length === 0) return;
-            isFront = !isFront;
             const flashcard = document.getElementById('flashcard');
             const c = displayCards[currentIndex];
             const tagHtml = (c.tags && c.tags.length > 0)
                 ? `<div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${c.tags.map(t=>`<span class="tag-badge">${t}</span>`).join('')}</div>`
                 : '';
-            
-            if (isFront) {
+
+            // Cycle: 0 (front) → 1 (back) → 2 (example, only if has example) → 0
+            const hasExample = !!(c.example && c.example.trim());
+            const maxState = hasExample ? 2 : 1;
+            flipState = flipState >= maxState ? 0 : flipState + 1;
+            isFront = (flipState === 0);
+
+            if (flipState === 0) {
+                // Front: English word
+                flashcard.className = 'flashcard';
                 flashcard.innerHTML = `<span>${c.en}</span>${tagHtml}`;
-                flashcard.classList.remove('back');
-            } else {
-                const exampleHtml = c.example
-                    ? `<div class="flashcard-example">"${c.example}"</div>`
-                    : '';
+            } else if (flipState === 1) {
+                // Back: Vietnamese meaning + IPA
                 const ipaHtml = c.ipa
                     ? `<div style="font-size:13px;opacity:0.65;margin-top:3px;">${c.ipa}</div>`
                     : '';
-                flashcard.innerHTML = `<span>${c.vi}</span>${ipaHtml}${exampleHtml}${tagHtml}`;
-                flashcard.classList.add('back');
+                flashcard.className = 'flashcard back';
+                flashcard.innerHTML = `<span>${c.vi}</span>${ipaHtml}${tagHtml}`;
+            } else {
+                // Example card: full sentence
+                const highlighted = c.example.replace(
+                    new RegExp('\b(' + c.en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\b', 'gi'),
+                    '<u><b>$1</b></u>'
+                );
+                flashcard.className = 'flashcard example-card';
+                flashcard.innerHTML = `
+                    <div class="flashcard-example-label">📝 Câu ví dụ</div>
+                    <div class="flashcard-example-sentence">"${highlighted}"</div>
+                    <div class="flashcard-example-word-hint">${c.en} — ${c.vi}</div>
+                    ${tagHtml}`;
             }
 
             // Re-add shuffle badge
@@ -2708,6 +2900,23 @@
                 badge.className = 'shuffle-badge';
                 badge.innerText = '🔀 Ngẫu nhiên';
                 flashcard.appendChild(badge);
+            }
+            updateFlipHint();
+        }
+
+        function updateFlipHint() {
+            const hint = document.getElementById('flip-hint');
+            if (!hint || displayCards.length === 0) return;
+            const c = displayCards[currentIndex];
+            const hasEx = !!(c.example && c.example.trim());
+            if (flipState === 0) {
+                hint.innerHTML = hasEx
+                    ? '👆 Nhấn để xem nghĩa &nbsp;·&nbsp; <span style="color:#1877f2">📝 có câu ví dụ</span>'
+                    : '👆 Nhấn để xem nghĩa';
+            } else if (flipState === 1) {
+                hint.innerHTML = hasEx ? '👆 Nhấn tiếp để xem câu ví dụ' : '👆 Nhấn để quay lại';
+            } else {
+                hint.innerHTML = '👆 Nhấn để quay lại mặt trước';
             }
         }
 
@@ -2761,19 +2970,39 @@
             const valid = [];
             const invalid = [];
 
+            let pendingWord = null; // last parsed word, waiting for possible example line
+
             lines.forEach((line, idx) => {
                 const trimmed = line.trim();
                 if (!trimmed) return;
+
+                // Check if this line is an example sentence: starts and ends with "
+                const isExample = trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length > 2;
+
+                if (isExample) {
+                    const example = trimmed.slice(1, -1).trim(); // strip surrounding quotes
+                    if (pendingWord) {
+                        // Attach example to the last word
+                        pendingWord.example = example;
+                    }
+                    // Example lines are never "invalid" on their own
+                    return;
+                }
+
+                // Otherwise treat as a word line
                 const dashIdx = trimmed.indexOf(' - ');
                 if (dashIdx !== -1) {
                     const en = trimmed.substring(0, dashIdx).trim();
                     const vi = trimmed.substring(dashIdx + 3).trim();
                     if (en && vi) {
-                        valid.push({ en, vi });
+                        pendingWord = { en, vi, example: '' };
+                        valid.push(pendingWord);
                     } else {
+                        pendingWord = null;
                         invalid.push(idx + 1);
                     }
                 } else {
+                    pendingWord = null;
                     invalid.push(idx + 1);
                 }
             });
@@ -2822,7 +3051,7 @@
             let addedCount = 0;
             let skippedCount = 0;
 
-            valid.forEach(({ en, vi }) => {
+            valid.forEach(({ en, vi, example }) => {
                 // Trùng hoàn toàn = cùng từ, cùng nhóm VÀ cùng tags → mới bỏ qua
                 const exists = cards.some(c =>
                     c.en.toLowerCase() === en.toLowerCase() &&
@@ -2830,7 +3059,7 @@
                     tagsEqual(c.tags || [], tags)
                 );
                 if (!exists) {
-                    cards.push({ en, vi, type, category, tags, status: 'learning_spelling' });
+                    cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
                     addedCount++;
                 } else {
                     skippedCount++;
@@ -2860,7 +3089,21 @@
         }
         // ===== END BULK ADD =====
 
+        function updateQuizInfo() {
+            const mins = parseInt(document.getElementById('quiz-time-select')?.value || 1);
+            const words = mins * 20;
+            const secs = mins * 60;
+            const infoEl = document.getElementById('quiz-info-text');
+            const btnEl  = document.getElementById('quiz-start-btn');
+            if (infoEl) infoEl.innerHTML = `Kiểm tra tối đa <b>${words} từ</b> trong <b>${secs} giây</b>`;
+            if (btnEl)  btnEl.textContent = `▶ Bắt đầu (${mins} Phút)`;
+        }
+
         function initQuiz() {
+            const quizMins  = parseInt(document.getElementById('quiz-time-select')?.value || 1);
+            const quizMaxWords = quizMins * 20;
+            const quizTotalSecs = quizMins * 60;
+
             const allLearnedCards = cards.filter(c => c.status === 'learned');
             const learnedCards = activeQuizTag
                 ? allLearnedCards.filter(c => (c.tags||[]).includes(activeQuizTag))
@@ -2881,7 +3124,7 @@
             quizQueue = quizQueue.filter(qWord => learnedCards.some(c => c.en === qWord.en && c.category === qWord.category));
 
             quizSessionWords = [];
-            let numToDraw = Math.min(20, learnedCards.length);
+            let numToDraw = Math.min(quizMaxWords, learnedCards.length);
 
             for (let i = 0; i < numToDraw; i++) {
                 if (quizQueue.length === 0) {
@@ -2899,7 +3142,7 @@
 
             currentQuizIdx = 0;
             quizCorrectCount = 0;
-            quizTimeLeft = 60;
+            quizTimeLeft = quizTotalSecs;
             quizWrongWords = [];
             startPracticeTimer();
             
@@ -3028,6 +3271,80 @@
             return sa === sb;
         }
 
+        // ===== AUTO WORD FAMILY DETECTION =====
+        async function detectAndAssignFamily(newWord) {
+            // Get all existing English words with their family values
+            const existingWords = cards.map(c => ({ en: c.en, family: c.family || '' }));
+            const wordList = existingWords.map(w => w.en).join(', ');
+
+            if (existingWords.length < 2) return; // Need at least 2 words to form a family
+
+            const prompt = `You are a linguistics assistant. I have a new English word: "${newWord}".
+My existing vocabulary list: ${wordList}
+
+Task: Determine the word root/family (base form) for "${newWord}", then check if any words in my list share the same root family.
+
+Rules:
+- Word family = words derived from the same root (e.g. run/running/runner, happy/happiness/unhappy, work/worker/working/overwork)
+- The family name should be the simplest root form (e.g. "run", "happy", "work")
+- Only group words that are clearly from the same root family
+- If no existing words share the same root as "${newWord}", return null
+
+Respond with ONLY valid JSON, no explanation:
+{"family": "root_word_or_null", "matched_words": ["word1", "word2"]}
+
+If no family match found: {"family": null, "matched_words": []}`;
+
+            try {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 200,
+                        messages: [{ role: 'user', content: prompt }]
+                    })
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                const raw = data.content?.find(b => b.type === 'text')?.text || '';
+                const clean = raw.replace(/```json|```/g, '').trim();
+                const result = JSON.parse(clean);
+
+                if (!result.family) return; // No match found
+
+                const family = result.family.toLowerCase().trim();
+                const matched = (result.matched_words || []).map(w => w.toLowerCase());
+
+                // Assign family to the newly added word
+                const newCardIdx = cards.findIndex(c => c.en.toLowerCase() === newWord.toLowerCase() && !c.family);
+                if (newCardIdx !== -1) {
+                    cards[newCardIdx].family = family;
+                }
+
+                // Also assign family to matched existing words that don't have one yet
+                let updatedCount = 0;
+                cards.forEach(c => {
+                    if (matched.includes(c.en.toLowerCase()) && !c.family) {
+                        c.family = family;
+                        updatedCount++;
+                    }
+                });
+
+                if (newCardIdx !== -1 || updatedCount > 0) {
+                    saveAll();
+                    renderWordTable();
+                    if (updatedCount > 0) {
+                        showToast(`🌱 Tự động gom họ từ "${family}" (${updatedCount + 1} từ)`);
+                    }
+                }
+            } catch(e) {
+                // Silently fail — word family is optional
+                console.warn('Word family detection failed:', e);
+            }
+        }
+        // ===== END AUTO WORD FAMILY DETECTION =====
+
         function addCard() {
             const en = document.getElementById('eng-input').value.trim();
             const vi = document.getElementById('vie-input').value.trim();
@@ -3052,9 +3369,12 @@
                 return;
             }
             
-            cards.push({ en, vi, type, category, tags, status: 'learning_spelling' });
+            const example = (document.getElementById('example-input')?.value || '').trim();
+            cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
             document.getElementById('eng-input').value = '';
             document.getElementById('vie-input').value = '';
+            const exInp = document.getElementById('example-input');
+            if (exInp) exInp.value = '';
             // Clear tag chips
             document.getElementById('add-tag-chips').innerHTML = '';
             saveAll();
@@ -3068,6 +3388,9 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             showToast("Đã thêm từ!");
+
+            // Auto-detect word family in background (non-blocking)
+            if (cards.length >= 2) detectAndAssignFamily(en);
         }
         
         function deleteCard(index) {
@@ -3089,7 +3412,8 @@
             if (existing) existing.remove();
 
             const tagsStr = (c.tags || []).join(', ');
-            const typeOptions = ['noun','verb','adjective','adverb','phrase','other']
+            const TYPE_LIST = ['Danh từ (n)','Động từ (v)','Tính từ (adj)','Trạng từ (adv)','Khác'];
+            const typeOptions = TYPE_LIST
                 .map(t => `<option value="${t}" ${c.type === t ? 'selected' : ''}>${t}</option>`).join('');
             const catOptions = [['common','📖 Thường dùng'],['specialized','🔬 Chuyên ngành']]
                 .map(([v,l]) => `<option value="${v}" ${c.category === v ? 'selected' : ''}>${l}</option>`).join('');
@@ -3169,7 +3493,15 @@
                             .split(',').map(t => t.trim()).filter(Boolean);
 
             saveAll();
+
+            // Rebuild filter then try to keep the edited card in view on flashcard
             applyFilter();
+            const newIdx = displayCards.findIndex(d => d.en === c.en && d.category === c.category);
+            if (newIdx !== -1) {
+                currentIndex = newIdx;
+                updateCard();
+            }
+
             renderWordTable();
             closeEditCard();
             showToast('✅ Đã lưu thay đổi!');
@@ -6199,15 +6531,18 @@
                 groups.get(fam).push(c);
             });
 
-            if (groups.size === 0) {
+            // Chỉ hiển thị nhóm có từ 2 từ trở lên
+            const validGroups = new Map([...groups.entries()].filter(([, members]) => members.length >= 2));
+
+            if (validGroups.size === 0) {
                 area.innerHTML = `<div style="text-align:center;color:#aaa;font-style:italic;padding:20px 0;">
-                    Chưa có nhóm từ nào. Thêm trường <b>Family</b> khi sửa từ trong bảng quản lý từ vựng.
+                    Chưa có nhóm từ nào có từ 2 từ trở lên. Hệ thống sẽ tự động gom nhóm khi bạn thêm từ mới.
                 </div>`;
                 return;
             }
 
             const statusIcon = { new: '🆕', learning_spelling: '🔤', learned: '✅' };
-            area.innerHTML = [...groups.entries()].sort((a,b) => a[0].localeCompare(b[0])).map(([fam, members]) => `
+            area.innerHTML = [...validGroups.entries()].sort((a,b) => a[0].localeCompare(b[0])).map(([fam, members]) => `
                 <div class="wf-group">
                     <div class="wf-group-name">🌱 ${fam} (${members.length} từ)</div>
                     <div>
@@ -6234,7 +6569,6 @@
             { id: 'sec-calendar',  icon: '🗓️',  label: 'Lịch'    },
             { id: 'sec-todo',      icon: '✅',   label: 'Việc cần làm'  },
             { id: 'sec-flashcard', icon: '🧠',   label: 'Flashcard' },
-            { id: 'sec-sm2',       icon: '🔁',   label: 'Ôn SM-2'  },
             { id: 'wordlist-container', icon: '📋', label: 'Từ vựng' },
         ];
 
@@ -6366,5 +6700,29 @@
     <!-- ===== END GITHUB TOKEN MODAL ===== -->
 
     </script>
+
+    <script>
+        // ===== SIDEBAR TAB NAVIGATION JS =====
+        function switchSideTab(idx) {
+            const panels = document.querySelectorAll('.tab-panel');
+            const btns   = document.querySelectorAll('.side-nav-btn');
+            panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+            btns.forEach((b, i)   => b.classList.toggle('active', i === idx));
+            // Scroll to top when switching tabs
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Trigger chart/stats re-render if switching to stats tab
+            if (idx === 3) { try { renderStats(); } catch(e) {} }
+            // Save last active tab
+            localStorage.setItem('sideTab', idx);
+        }
+
+        // Restore last active tab on load
+        window.addEventListener('load', function() {
+            const saved = parseInt(localStorage.getItem('sideTab') || '0');
+            if (saved > 0) switchSideTab(saved);
+        });
+        // ===== END SIDEBAR TAB NAVIGATION JS =====
+    </script>
+
 </body>
 </html>
