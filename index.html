@@ -4305,16 +4305,16 @@
             if (!getGHToken()) { showGHTokenModal(); return; }
             showToast('⏳ Đang tải dữ liệu từ GitHub...');
             try {
-                const res = await fetch(GH_API + '?ref=' + GH_BRANCH + '&t=' + Date.now(), {
-                    headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' }
+                // Dùng raw URL để bypass giới hạn 1MB của GitHub API
+                const rawUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`;
+                const res = await fetch(rawUrl, {
+                    headers: { Authorization: `token ${getGHToken()}` }
                 });
                 if (!res.ok) {
-                    showToast('❌ Không tìm thấy file data.json trên GitHub (hãy Export lần đầu)');
+                    showToast('❌ Không tìm thấy file data.json (lỗi ' + res.status + ')');
                     return;
                 }
-                const info    = await res.json();
-                const decoded = decodeURIComponent(escape(atob(info.content.replace(/\n/g, ''))));
-                const data    = JSON.parse(decoded);
+                const data = await res.json();
                 applyImportData(data);
                 showToast('✅ Đã tải dữ liệu từ GitHub! Đang tải lại...');
                 setTimeout(() => location.reload(), 1000);
