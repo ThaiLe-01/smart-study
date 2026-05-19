@@ -4283,7 +4283,14 @@
                     showToast('✅ Đã lưu dữ liệu lên GitHub!');
                 } else {
                     const err = await putRes.json();
-                    showToast('❌ Lỗi GitHub: ' + (err.message || putRes.status));
+                    const detail = err.message || '';
+                    const status = putRes.status;
+                    if (status === 401) showToast('❌ Token sai hoặc hết hạn (401)');
+                    else if (status === 403) showToast('❌ Token không có quyền ghi (403)');
+                    else if (status === 404) showToast('❌ Không tìm thấy repo/file (404) — kiểm tra tên repo và file data.json');
+                    else if (status === 422) showToast('❌ SHA không khớp (422) — thử lại');
+                    else showToast('❌ Lỗi ' + status + ': ' + detail);
+                    console.error('GitHub PUT error:', status, err);
                 }
             } catch(e) {
                 showToast('❌ Lỗi kết nối: ' + e.message);
