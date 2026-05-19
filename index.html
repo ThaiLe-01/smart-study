@@ -1713,6 +1713,7 @@
     <div class="top-tools">
         <button class="tool-btn" onclick="toggleDarkMode()" title="Chế độ tối">🌓</button>
         <button class="tool-btn" onclick="toggleAutoSpeak()" id="auto-speak-btn" title="Tự động đọc">🔇</button>
+        <button class="tool-btn" onclick="showGHTokenModal()" title="Cài đặt GitHub Token">🔑</button>
         <button class="tool-btn" onclick="exportData()" title="Lưu lên GitHub">📤</button>
         <button class="tool-btn" onclick="importFromGitHub()" title="Tải từ GitHub về">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
@@ -4214,12 +4215,13 @@
         function clearAll() { if (confirm("Xóa toàn bộ?")) { localStorage.clear(); location.reload(); } }
         function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.className = "show"; setTimeout(() => t.className = "", 2500); }
         // ===== GITHUB SYNC CONFIG =====
-        const GH_TOKEN  = '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';
         const GH_OWNER  = 'ThaiLe-01';
         const GH_REPO   = 'smart-study';
-        const GH_FILE   = 'data.json';   // file lưu dữ liệu trong repo
+        const GH_FILE   = 'data.json';
         const GH_BRANCH = 'main';
         const GH_API    = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+        // Token lưu trong localStorage — không hardcode trong code
+        function getGHToken() { return localStorage.getItem('gh_token') || ''; }
 
         function collectExportData() {
             const weeklySummaries = {}, weeklyGoals = {};
@@ -4245,6 +4247,7 @@
 
         // ===== EXPORT: ghi đè data.json lên GitHub =====
         async function exportData() {
+            if (!getGHToken()) { showGHTokenModal(); return; }
             showToast('⏳ Đang lưu lên GitHub...');
             try {
                 const exportObj = collectExportData();
@@ -4254,7 +4257,7 @@
                 // Lấy SHA của file hiện tại (bắt buộc để ghi đè)
                 let sha = null;
                 const getRes = await fetch(GH_API, {
-                    headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github+json' }
+                    headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' }
                 });
                 if (getRes.ok) {
                     const info = await getRes.json();
@@ -4272,7 +4275,7 @@
                 const putRes = await fetch(GH_API, {
                     method:  'PUT',
                     headers: {
-                        Authorization: `token ${GH_TOKEN}`,
+                        Authorization: `token ${getGHToken()}`,
                         Accept:        'application/vnd.github+json',
                         'Content-Type': 'application/json',
                     },
@@ -4299,10 +4302,11 @@
 
         // ===== IMPORT: tải data.json từ GitHub về =====
         async function importFromGitHub() {
+            if (!getGHToken()) { showGHTokenModal(); return; }
             showToast('⏳ Đang tải dữ liệu từ GitHub...');
             try {
                 const res = await fetch(GH_API + '?ref=' + GH_BRANCH + '&t=' + Date.now(), {
-                    headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github+json' }
+                    headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' }
                 });
                 if (!res.ok) {
                     showToast('❌ Không tìm thấy file data.json trên GitHub (hãy Export lần đầu)');
@@ -6080,6 +6084,85 @@
             deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
         }
         // ===== END PWA =====
+
+    </script>
+
+    <!-- ===== GITHUB TOKEN MODAL ===== -->
+    <div id="gh-token-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+        <div style="background:var(--bg-card);border-radius:16px;padding:28px 24px;width:90%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+            <div style="font-size:20px;font-weight:bold;margin-bottom:8px;">🔑 Nhập GitHub Token</div>
+            <div style="font-size:13px;color:#888;margin-bottom:16px;">
+                Token chỉ lưu trên thiết bị này, không bao giờ lên server.<br><br>
+                Tạo tại: <b>GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)</b><br>
+                Tick scope: <b>repo</b>
+            </div>
+            <input id="gh-token-input" type="password"
+                placeholder="ghp_xxxxxxxxxxxx"
+                style="width:100%;padding:10px 14px;border-radius:8px;border:1.5px solid var(--border);
+                       background:var(--bg-body);color:var(--text-main);font-size:14px;
+                       box-sizing:border-box;margin-bottom:16px;outline:none;">
+            <div style="display:flex;gap:10px;">
+                <button onclick="saveGHToken()"
+                    style="flex:1;padding:11px;background:var(--primary-btn);color:white;
+                           border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;">
+                    Lưu & Tiếp tục
+                </button>
+                <button onclick="document.getElementById('gh-token-modal').style.display='none'"
+                    style="padding:11px 18px;background:var(--bg-body);color:var(--text-main);
+                           border:1.5px solid var(--border);border-radius:8px;font-size:15px;cursor:pointer;">
+                    Hủy
+                </button>
+            </div>
+            <div id="gh-token-status" style="margin-top:12px;font-size:13px;color:#888;text-align:center;"></div>
+        </div>
+    </div>
+
+    <script>
+        function showGHTokenModal() {
+            const modal = document.getElementById('gh-token-modal');
+            modal.style.display = 'flex';
+            const input = document.getElementById('gh-token-input');
+            input.value = localStorage.getItem('gh_token') || '';
+            input.focus();
+        }
+
+        async function saveGHToken() {
+            const token = document.getElementById('gh-token-input').value.trim();
+            if (!token) { document.getElementById('gh-token-status').textContent = '⚠️ Vui lòng nhập token'; return; }
+            document.getElementById('gh-token-status').textContent = '🔄 Đang kiểm tra token...';
+            // Kiểm tra token hợp lệ
+            try {
+                const res = await fetch('https://api.github.com/user', {
+                    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
+                });
+                if (res.ok) {
+                    const user = await res.json();
+                    localStorage.setItem('gh_token', token);
+                    document.getElementById('gh-token-modal').style.display = 'none';
+                    showToast('✅ Token hợp lệ! Tài khoản: ' + user.login);
+                    // Thử lại thao tác vừa rồi
+                } else {
+                    document.getElementById('gh-token-status').textContent = '❌ Token không hợp lệ (lỗi ' + res.status + ')';
+                }
+            } catch(e) {
+                document.getElementById('gh-token-status').textContent = '❌ Lỗi kết nối: ' + e.message;
+            }
+        }
+
+        // Cho phép nhấn Enter để lưu
+        document.getElementById('gh-token-input').addEventListener('keydown', e => {
+            if (e.key === 'Enter') saveGHToken();
+        });
+
+        // Thêm nút cài đặt token vào top-tools nếu chưa có token
+        window.addEventListener('load', () => {
+            if (!localStorage.getItem('gh_token')) {
+                // Hiện gợi ý nhỏ
+                setTimeout(() => showToast('💡 Bấm 🔑 để cài token GitHub cho tính năng sync'), 2000);
+            }
+        });
+    </script>
+    <!-- ===== END GITHUB TOKEN MODAL ===== -->
 
     </script>
 </body>
