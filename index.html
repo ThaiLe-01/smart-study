@@ -4305,21 +4305,41 @@
             if (!getGHToken()) { showGHTokenModal(); return; }
             showToast('⏳ Đang tải dữ liệu từ GitHub...');
             try {
-                // Dùng raw URL để bypass giới hạn 1MB của GitHub API
-                const rawUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`;
-                const res = await fetch(rawUrl, {
-                    headers: { Authorization: `token ${getGHToken()}` }
+                // Bước 1: Lấy blob SHA của file (không bị giới hạn 1MB)
+                const refUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/refs/heads/${GH_BRANCH}`;
+                const refRes = await fetch(refUrl, {
+                    headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' }
                 });
-                if (!res.ok) {
-                    showToast('❌ Không tìm thấy file data.json (lỗi ' + res.status + ')');
-                    return;
-                }
-                const data = await res.json();
+                if (!refRes.ok) { showToast('❌ Lỗi lấy ref: ' + refRes.status); return; }
+                const refData   = await refRes.json();
+                const commitSha = refData.object.sha;
+
+                // Bước 2: Lấy tree để tìm blob SHA của data.json
+                const treeRes = await fetch(
+                    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/trees/${commitSha}`,
+                    { headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' } }
+                );
+                if (!treeRes.ok) { showToast('❌ Lỗi lấy tree: ' + treeRes.status); return; }
+                const treeData = await treeRes.json();
+                const fileItem = treeData.tree.find(f => f.path === GH_FILE);
+                if (!fileItem) { showToast('❌ Không tìm thấy data.json trong repo'); return; }
+
+                // Bước 3: Lấy blob content bằng blob SHA — không giới hạn size
+                const blobRes = await fetch(
+                    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/blobs/${fileItem.sha}`,
+                    { headers: { Authorization: `token ${getGHToken()}`, Accept: 'application/vnd.github+json' } }
+                );
+                if (!blobRes.ok) { showToast('❌ Lỗi tải blob: ' + blobRes.status); return; }
+                const blobData = await blobRes.json();
+
+                // Bước 4: Decode base64 → JSON
+                const decoded = decodeURIComponent(escape(atob(blobData.content.replace(/\n/g, ''))));
+                const data    = JSON.parse(decoded);
                 applyImportData(data);
                 showToast('✅ Đã tải dữ liệu từ GitHub! Đang tải lại...');
                 setTimeout(() => location.reload(), 1000);
             } catch(e) {
-                showToast('❌ Lỗi tải dữ liệu: ' + e.message);
+                showToast('❌ Lỗi: ' + e.message);
             }
         }
 
