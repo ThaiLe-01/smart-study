@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "exportedAt": "2026-05-19T00:54:46.492Z",
+  "exportedAt": "2026-05-20T01:23:05.360Z",
   "cards": [
     {
       "status": "learning_spelling",
@@ -17,7 +17,10 @@
         "repetition": 1,
         "interval": 1,
         "dueDate": "2026-05-18"
-      }
+      },
+      "ipa": "",
+      "example": "",
+      "family": ""
     },
     {
       "sm": {
@@ -34,7 +37,10 @@
       ],
       "vi": "transistor",
       "en": "Transistor",
-      "status": "learning_spelling"
+      "status": "learning_spelling",
+      "ipa": "",
+      "example": "",
+      "family": ""
     },
     {
       "status": "learning_spelling",
@@ -51,7 +57,10 @@
       "en": "Layout",
       "type": "Danh từ (n)",
       "_origIdx": 2,
-      "category": "specialized"
+      "category": "specialized",
+      "ipa": "",
+      "example": "",
+      "family": ""
     },
     {
       "status": "learning_spelling",
@@ -12341,7 +12350,7 @@
       }
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "en": "Cluster",
       "vi": "cụm",
       "tags": [
@@ -12664,7 +12673,7 @@
       }
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "_origIdx": 748,
       "category": "specialized",
       "type": "Động từ (v)",
@@ -17849,7 +17858,7 @@
       "vi": "sát"
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "vi": "rộng",
       "en": "Widely",
       "tags": [
@@ -27434,7 +27443,7 @@
         "interval": 1,
         "ef": 2.5
       },
-      "status": "learned"
+      "status": "learning_spelling"
     },
     {
       "status": "learning_spelling",
@@ -36665,7 +36674,7 @@
         "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learning_spelling",
@@ -37263,7 +37272,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
         "interval": 1,
@@ -37705,7 +37714,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "type": "Động từ (v)",
       "_origIdx": 2221,
       "category": "common",
@@ -37940,7 +37949,7 @@
         "#BUSINESS"
       ],
       "en": "reliable",
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learning_spelling",
@@ -38215,7 +38224,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "sm": {
         "ef": 2.5,
         "repetition": 0,
@@ -39031,7 +39040,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "category": "common",
       "_origIdx": 2299,
       "type": "Trạng từ (adv)",
@@ -40320,7 +40329,7 @@
       ],
       "en": "network",
       "vi": "mạng",
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "vi": "kênh",
@@ -40442,7 +40451,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "vi": "mở",
       "tags": [
         "#EMAIL & COMMUNICATION"
@@ -40575,7 +40584,7 @@
         "repetition": 0,
         "ef": 2.5
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learning_spelling",
@@ -40966,7 +40975,7 @@
         "repetition": 0,
         "ef": 2.5
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learned",
@@ -42465,7 +42474,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
         "interval": 1,
@@ -44879,7 +44888,7 @@
       "vi": "ổn định"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "vi": "không ổn định",
       "en": "unstable",
       "tags": [
@@ -45964,7 +45973,7 @@
         "#COMPUTER"
       ],
       "vi": "máy tính bàn",
-      "status": "learned"
+      "status": "learning_spelling"
     },
     {
       "status": "learning_spelling",
@@ -45984,7 +45993,7 @@
       }
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "en": "mouse",
       "vi": "chuột",
       "tags": [
@@ -46168,7 +46177,7 @@
         "repetition": 0,
         "dueDate": "2026-05-17"
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learning_spelling",
@@ -46627,7 +46636,7 @@
         "interval": 1,
         "ef": 2.5
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "sm": {
@@ -46780,7 +46789,7 @@
       "_origIdx": 2754,
       "type": "Động từ (v)",
       "category": "common",
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "category": "common",
@@ -47055,7 +47064,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "sm": {
         "ef": 2.5,
         "interval": 1,
@@ -47089,7 +47098,7 @@
       }
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "sm": {
         "ef": 2.5,
         "repetition": 0,
@@ -47358,7 +47367,7 @@
         "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "status": "learning_spelling",
@@ -47463,7 +47472,7 @@
       }
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "en": "encode",
       "tags": [
         "#COMPUTER"
@@ -48157,7 +48166,7 @@
         "#COMPUTER"
       ],
       "vi": "yếu",
-      "status": "learning_spelling"
+      "status": "learned"
     },
     {
       "sm": {
@@ -48296,7 +48305,7 @@
       "status": "learning_spelling"
     },
     {
-      "status": "learning_spelling",
+      "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
@@ -52883,7 +52892,7 @@
         "repetition": 0,
         "interval": 1
       },
-      "status": "learned"
+      "status": "learning_spelling"
     },
     {
       "category": "common",
@@ -61055,7 +61064,7 @@
         "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "status": "learned"
+      "status": "learning_spelling"
     },
     {
       "sm": {
@@ -61262,7 +61271,7 @@
       "status": "learned"
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "sm": {
         "interval": 1,
         "repetition": 0,
@@ -61534,7 +61543,7 @@
       }
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
@@ -62571,7 +62580,7 @@
       "status": "learned"
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "sm": {
         "dueDate": "2026-05-17",
         "interval": 1,
@@ -62792,7 +62801,7 @@
       }
     },
     {
-      "status": "learned",
+      "status": "learning_spelling",
       "sm": {
         "repetition": 0,
         "interval": 1,
@@ -63351,6 +63360,48 @@
         "interval": 1,
         "ef": 2.5
       }
+    },
+    {
+      "en": "analyze",
+      "vi": "phân tích",
+      "type": "Danh từ (n)",
+      "category": "common",
+      "tags": [
+        "#TEST"
+      ],
+      "example": "We analyze timing violations",
+      "status": "learning_spelling",
+      "_origIdx": 3729,
+      "ipa": "",
+      "family": "analyze"
+    },
+    {
+      "en": "analytical",
+      "vi": "phân tích",
+      "type": "Tính từ (adj)",
+      "category": "common",
+      "tags": [
+        "#TEST"
+      ],
+      "example": "This requires analytical thinking.",
+      "status": "learned",
+      "_origIdx": 3730,
+      "ipa": "",
+      "family": "analyze"
+    },
+    {
+      "en": "analysis",
+      "vi": "phân tích",
+      "type": "Danh từ (n)",
+      "category": "common",
+      "tags": [
+        "#TEST"
+      ],
+      "example": "The analysis shows congestion.",
+      "status": "learned",
+      "_origIdx": 3731,
+      "ipa": "",
+      "family": "analyze"
     }
   ],
   "history": [
@@ -63361,99 +63412,52 @@
     "2026-05-15",
     "2026-05-16",
     "2026-05-17",
-    "2026-05-18"
+    "2026-05-18",
+    "2026-05-19"
   ],
   "dailyData": {
-    "date": "2026-05-19",
+    "date": "2026-05-20",
     "words": [
-      "company"
+      "company",
+      "desktop",
+      "microphone",
+      "user-friendly"
     ]
   },
   "quizQueue": [
     {
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 738,
-      "en": "Parasitic net",
-      "vi": "mạng ký sinh",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "status": "learned"
-    },
-    {
-      "vi": "lỗi DRC",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "DRC violation",
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 734,
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 713,
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "cây clock",
-      "en": "Clock tree",
-      "status": "learned"
-    },
-    {
       "status": "learned",
-      "_origIdx": 719,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "en": "Metal layer",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "lớp kim loại",
       "sm": {
         "dueDate": "2026-05-17",
         "repetition": 0,
         "interval": 1,
         "ef": 2.5
-      }
+      },
+      "_origIdx": 3629,
+      "category": "specialized",
+      "type": "Khác",
+      "vi": "trong số (giới từ)",
+      "en": "Among",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ]
     },
     {
       "status": "learned",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "đồng đều",
-      "en": "Uniformly",
-      "_origIdx": 799,
-      "category": "specialized",
-      "type": "Trạng từ (adv)",
       "sm": {
+        "ef": 2.5,
         "repetition": 0,
         "interval": 1,
-        "ef": 2.5,
         "dueDate": "2026-05-17"
-      }
+      },
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "en": "Track",
+      "vi": "theo dõi",
+      "category": "specialized",
+      "_origIdx": 175,
+      "type": "Động từ (v)"
     },
     {
       "sm": {
@@ -63462,98 +63466,62 @@
         "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "en": "Routing congestion",
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 772,
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "vi": "tắc nghẽn dây",
-      "_origIdx": 720,
-      "type": "Danh từ (n)",
-      "category": "specialized",
+      "vi": "thẳng hàng",
+      "en": "Aligned",
       "status": "learned"
     },
     {
+      "en": "Critical",
+      "tags": [],
+      "vi": "quan trọng",
+      "category": "specialized",
+      "_origIdx": 82,
+      "type": "Tính từ (adj)",
       "sm": {
         "ef": 2.5,
-        "interval": 1,
         "repetition": 0,
+        "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "category": "specialized",
-      "_origIdx": 727,
-      "type": "Danh từ (n)",
-      "en": "Region",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "vùng",
       "status": "learned"
     },
     {
+      "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
-        "interval": 1,
+        "ef": 2.5,
         "repetition": 0,
-        "ef": 2.5
+        "interval": 1
       },
-      "type": "Danh từ (n)",
-      "_origIdx": 715,
-      "category": "specialized",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Macro",
-      "vi": "khối lớn",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
       "type": "Động từ (v)",
-      "_origIdx": 758,
-      "en": "Restrict",
+      "category": "specialized",
+      "_origIdx": 34,
+      "vi": "phân tích",
+      "en": "Analyze",
       "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "hạn chế",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      }
+        "#IC DESIGN"
+      ]
     },
     {
-      "category": "specialized",
-      "_origIdx": 737,
-      "type": "Danh từ (n)",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Extraction",
-      "vi": "trích xuất ký sinh",
       "sm": {
         "ef": 2.5,
         "interval": 1,
         "repetition": 0,
         "dueDate": "2026-05-17"
       },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
       "category": "specialized",
-      "_origIdx": 725,
-      "type": "Danh từ (n)",
-      "vi": "căn chỉnh",
-      "en": "Alignment",
+      "_origIdx": 521,
+      "type": "Động từ (v)",
+      "vi": "sửa lỗi",
+      "en": "Fix",
       "tags": [
-        "#PHYSICAL DESIGN"
+        "#DESIGN VERIFICATION"
       ],
       "status": "learned"
     },
@@ -63575,15 +63543,66 @@
       "status": "learned"
     },
     {
-      "status": "learned",
+      "category": "specialized",
+      "_origIdx": 724,
+      "type": "Danh từ (n)",
+      "vi": "khoảng cách cell",
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "en": "Shielding",
-      "vi": "che chắn",
-      "type": "Danh từ (n)",
+      "en": "Cell spacing",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 49,
       "category": "specialized",
-      "_origIdx": 730,
+      "type": "Động từ (v)",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "en": "Reduce",
+      "vi": "giảm",
+      "status": "learned"
+    },
+    {
+      "vi": "sửa",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "fix",
+      "type": "Động từ (v)",
+      "category": "common",
+      "_origIdx": 2788,
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "category": "common",
+      "_origIdx": 2299,
+      "type": "Trạng từ (adv)",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "hoàn toàn",
+      "en": "fully",
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
@@ -63592,139 +63611,37 @@
       }
     },
     {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "chèn",
-      "en": "Insert",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
+      "status": "learned",
       "category": "specialized",
       "type": "Động từ (v)",
-      "_origIdx": 743,
-      "status": "learned"
-    },
-    {
-      "vi": "đi dây",
+      "_origIdx": 758,
+      "en": "Restrict",
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "en": "Routing",
-      "_origIdx": 710,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
-      "_origIdx": 755,
-      "type": "Động từ (v)",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Reserve",
-      "vi": "dành chỗ",
+      "vi": "hạn chế",
       "sm": {
         "dueDate": "2026-05-17",
-        "ef": 2.5,
         "interval": 1,
-        "repetition": 0
+        "repetition": 0,
+        "ef": 2.5
       }
     },
     {
-      "status": "learned",
-      "en": "Cluster",
-      "vi": "cụm",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "_origIdx": 729,
-      "type": "Danh từ (n)",
-      "category": "specialized",
       "sm": {
         "ef": 2.5,
-        "repetition": 0,
         "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Buffer",
-      "vi": "chèn buffer",
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "_origIdx": 744,
-      "sm": {
         "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
-      "_origIdx": 723,
-      "type": "Danh từ (n)",
-      "en": "Utilization",
-      "vi": "mức sử dụng",
+      "en": "carefully",
       "tags": [
-        "#PHYSICAL DESIGN"
+        "#BUSINESS"
       ],
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "_origIdx": 792,
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Risky",
-      "vi": "rủi ro",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "en": "Crosstalk",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "nhiễu xuyên âm",
-      "type": "Danh từ (n)",
-      "_origIdx": 731,
-      "category": "specialized",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
+      "vi": "cẩn thận",
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "_origIdx": 2279,
       "status": "learned"
     },
     {
@@ -63746,20 +63663,2105 @@
     },
     {
       "status": "learned",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 513,
+      "vi": "chèn lỗi",
+      "en": "Inject",
+      "tags": [
+        "#DESIGN VERIFICATION"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Reliable",
+      "tags": [],
+      "vi": "đáng tin cậy",
+      "_origIdx": 70,
+      "category": "specialized",
+      "type": "Tính từ (adj)"
+    },
+    {
+      "tags": [
+        "#FABRICATION"
+      ],
+      "vi": "khuếch tán",
+      "en": "Diffuse",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 860,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "category": "specialized",
+      "_origIdx": 737,
+      "type": "Danh từ (n)",
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "vi": "được che chắn",
-      "en": "Shielded",
-      "_origIdx": 778,
-      "category": "specialized",
-      "type": "Tính từ (adj)",
+      "en": "Extraction",
+      "vi": "trích xuất ký sinh",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "type": "Động từ (v)",
+      "category": "common",
+      "_origIdx": 2413,
+      "vi": "kết nối",
+      "en": "connect",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
       "sm": {
         "ef": 2.5,
         "interval": 1,
         "repetition": 0,
         "dueDate": "2026-05-17"
       }
+    },
+    {
+      "en": "Efficiently",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "vi": "hiệu quả",
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 88,
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "_origIdx": 2255,
+      "type": "Tính từ (adj)",
+      "category": "common",
+      "en": "new",
+      "vi": "mới",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "en": "yoga",
+      "tags": [
+        "#RELAX"
+      ],
+      "vi": "yoga",
+      "type": "Danh từ (n)",
+      "_origIdx": 2915,
+      "category": "common",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "_origIdx": 3502,
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "vi": "tạo ra, sản xuất",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Produce",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "phân phối",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Distribute",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 742
+    },
+    {
+      "status": "learned",
+      "en": "Field",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "lĩnh vực / trường (điện trường)",
+      "category": "specialized",
+      "_origIdx": 3541,
+      "type": "Danh từ (n)",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "en": "Investigate",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "khảo sát, nghiên cứu",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 3496,
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "category": "specialized",
+      "_origIdx": 732,
+      "type": "Danh từ (n)",
+      "vi": "sụt áp",
+      "en": "IR drop",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ]
+    },
+    {
+      "_origIdx": 735,
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "vi": "kiểm tra LVS",
+      "en": "LVS check",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "vi": "nhật ký",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "log",
+      "_origIdx": 2368,
+      "category": "common",
+      "type": "Danh từ (n)"
+    },
+    {
+      "status": "learned",
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 3509,
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "đại diện, biểu diễn",
+      "en": "Represent",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "biên",
+      "en": "Boundary",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 726
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 1335,
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "vi": "xả",
+      "en": "Discharge",
+      "tags": [
+        "#ANALOG DESIGN"
+      ]
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 752,
+      "vi": "hợp lệ hóa",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Legalize",
+      "status": "learned"
+    },
+    {
+      "type": "Động từ (v)",
+      "_origIdx": 2412,
+      "category": "common",
+      "vi": "dán",
+      "en": "paste",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "type": "Danh từ (n)",
+      "_origIdx": 3550,
+      "category": "specialized",
+      "vi": "chiều dài",
+      "en": "Length",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Calculator",
+      "vi": "máy tính (thực hiện phép toán)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 3522,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "category": "specialized",
+      "_origIdx": 755,
+      "type": "Động từ (v)",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Reserve",
+      "vi": "dành chỗ",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      }
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "đường tới hạn",
+      "tags": [
+        "#LOGIC SYNTHESIS"
+      ],
+      "en": "Critical path",
+      "type": "Danh từ (n)",
+      "_origIdx": 603,
+      "category": "specialized",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Pin access",
+      "vi": "truy cập pin",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "_origIdx": 721,
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "phân tích",
+      "en": "analyze",
+      "_origIdx": 2195,
+      "category": "common",
+      "type": "Động từ (v)"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "en": "Mixed-signal",
+      "tags": [],
+      "vi": "hỗn hợp",
+      "_origIdx": 61,
+      "type": "Tính từ (adj)",
+      "category": "specialized"
+    },
+    {
+      "status": "learned",
+      "vi": "kỹ thuật",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Technique",
+      "_origIdx": 3574,
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "_origIdx": 2814,
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "vi": "trực tuyến",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "online"
+    },
+    {
+      "status": "learned",
+      "vi": "hình thành, tạo thành",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Form",
+      "type": "Động từ (v)",
+      "_origIdx": 3490,
+      "category": "specialized",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "xây dựng, cấu tạo",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Construct",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 3478
+    },
+    {
+      "vi": "sao lưu",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "backup",
+      "category": "common",
+      "_origIdx": 2745,
+      "type": "Danh từ (n)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Doping",
+      "vi": "sự pha tạp (chất bán dẫn)",
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 3533,
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "category": "common",
+      "_origIdx": 2261,
+      "type": "Tính từ (adj)",
+      "vi": "rõ ràng",
+      "en": "clear",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      }
+    },
+    {
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "_origIdx": 2294,
+      "tags": [
+        "#BUSINESS"
+      ],
+      "en": "always",
+      "vi": "luôn",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "vi": "thiền",
+      "en": "meditate",
+      "tags": [
+        "#RELAX"
+      ],
+      "type": "Động từ (v)",
+      "_origIdx": 2958,
+      "category": "common",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "type": "Danh từ (n)",
+      "_origIdx": 3568,
+      "category": "specialized",
+      "vi": "khả năng mở rộng (thu nhỏ kích thước)",
+      "en": "Scalability",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "vi": "thích hợp, đúng đắn",
+      "en": "Proper",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "type": "Tính từ (adj)",
+      "category": "specialized",
+      "_origIdx": 3601,
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "vi": "rẻ",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "en": "cheap",
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "_origIdx": 2249,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#DESIGN VERIFICATION"
+      ],
+      "en": "Mismatch",
+      "vi": "sai lệch",
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "_origIdx": 490,
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "vi": "phân chia",
+      "tags": [
+        "#ARCHITECTURE"
+      ],
+      "en": "Partition",
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 268,
+      "status": "learned"
+    },
+    {
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 754,
+      "vi": "cố định",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Anchor",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "bao gồm",
+      "en": "Consist of",
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3650,
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 3590,
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "vi": "thiết yếu",
+      "en": "Essential",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Particularly",
+      "vi": "đặc biệt là",
+      "category": "specialized",
+      "_origIdx": 3620,
+      "type": "Trạng từ (adv)",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Khác",
+      "_origIdx": 3649,
+      "category": "specialized",
+      "en": "Conductive path",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "đường dẫn điện"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Khác",
+      "_origIdx": 3632,
+      "category": "specialized",
+      "vi": "Đơn vị logic số học (ALU)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Arithmetic Logic Units"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "vi": "cấu hình",
+      "tags": [
+        "#ARCHITECTURE"
+      ],
+      "en": "Configuration",
+      "_origIdx": 261,
+      "category": "specialized",
+      "type": "Danh từ (n)"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Due to",
+      "vi": "bởi vì, do",
+      "category": "specialized",
+      "_origIdx": 3668,
+      "type": "Khác"
+    },
+    {
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "_origIdx": 3525,
+      "vi": "công nghệ bán dẫn Oxit Kim loại Bù",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "CMOS",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "vi": "đạt được",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Achieve",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 3471
+    },
+    {
+      "vi": "kiểm chứng",
+      "en": "Validate",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "type": "Động từ (v)",
+      "_origIdx": 55,
+      "category": "specialized",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "_origIdx": 3499,
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "en": "Perform",
+      "vi": "thực hiện",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "en": "growing",
+      "tags": [
+        "#FINANCE & ACCOUNTING"
+      ],
+      "vi": "đang tăng",
+      "_origIdx": 2644,
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "type": "Động từ (v)",
+      "category": "common",
+      "_origIdx": 2963,
+      "tags": [
+        "#RELAX"
+      ],
+      "en": "chat",
+      "vi": "trò chuyện",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "_origIdx": 3508,
+      "category": "specialized",
+      "en": "Remain",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "duy trì, vẫn là",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.3600000000000003,
+        "repetition": 1,
+        "interval": 1,
+        "dueDate": "2026-05-18"
+      },
+      "type": "Danh từ (n)",
+      "_origIdx": 8,
+      "category": "specialized",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "en": "Block",
+      "vi": "khối"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "_origIdx": 2950,
+      "category": "common",
+      "vi": "xem",
+      "en": "watch",
+      "tags": [
+        "#RELAX"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "type": "Tính từ (adj)",
+      "category": "common",
+      "_origIdx": 2628,
+      "en": "gross",
+      "tags": [
+        "#FINANCE & ACCOUNTING"
+      ],
+      "vi": "tổng (trước thuế)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      }
+    },
+    {
+      "category": "specialized",
+      "_origIdx": 3725,
+      "type": "Khác",
+      "vi": "Tích hợp quy mô rất lớn (VLSI)",
+      "en": "Very Large Scale Integration",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "category": "common",
+      "_origIdx": 3070,
+      "type": "Trạng từ (adv)",
+      "en": "there",
+      "tags": [
+        "#RELAX"
+      ],
+      "vi": "ở đó",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "vi": "xác định",
+      "en": "Determine",
+      "type": "Động từ (v)",
+      "_origIdx": 168,
+      "category": "specialized"
+    },
+    {
+      "type": "Danh từ (n)",
+      "_origIdx": 2718,
+      "category": "common",
+      "vi": "bộ nhớ RAM",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "RAM",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "_origIdx": 2450,
+      "en": "linked",
+      "vi": "được liên kết",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 2773,
+      "type": "Động từ (v)",
+      "category": "common",
+      "en": "drop",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "thả"
+    },
+    {
+      "status": "learned",
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "_origIdx": 3254,
+      "vi": "bất cẩn",
+      "tags": [
+        "#MARKETING & SALES"
+      ],
+      "en": "carelessly",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "en": "private",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "vi": "riêng tư",
+      "type": "Tính từ (adj)",
+      "_origIdx": 2452,
+      "category": "common",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "category": "common",
+      "type": "Danh từ (n)",
+      "_origIdx": 3316,
+      "vi": "bữa sáng",
+      "en": "breakfast",
+      "tags": [
+        "#TRAVEL & HOTEL"
+      ]
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "type": "Tính từ (adj)",
+      "_origIdx": 2844,
+      "category": "common",
+      "en": "real-time",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "thời gian thực"
+    },
+    {
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 99,
+      "en": "Physically",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "vi": "vật lý",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "_origIdx": 3515,
+      "en": "Adoption",
+      "vi": "sự áp dụng, sự chấp thuận",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ]
+    },
+    {
+      "status": "learned",
+      "_origIdx": 2340,
+      "category": "common",
+      "type": "Danh từ (n)",
+      "en": "detail",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "vi": "chi tiết",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "category": "common",
+      "_origIdx": 2798,
+      "en": "extract",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "giải nén",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Drain terminal",
+      "vi": "cực máng (Cực D)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "type": "Khác",
+      "_origIdx": 3667,
+      "category": "specialized"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Optimization",
+      "vi": "sự tối ưu hóa",
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 3557,
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "turn on",
+      "vi": "bật",
+      "_origIdx": 2754,
+      "type": "Động từ (v)",
+      "category": "common",
+      "status": "learned"
+    },
+    {
+      "type": "Khác",
+      "_origIdx": 3671,
+      "category": "specialized",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Electronic Design Automation",
+      "vi": "tự động hóa thiết kế điện tử (EDA)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "_origIdx": 1427,
+      "type": "Danh từ (n)",
+      "vi": "độ linh động",
+      "en": "Mobility",
+      "tags": [
+        "#SEMICONDUCTOR"
+      ]
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "category": "common",
+      "type": "Trạng từ (adv)",
+      "_origIdx": 3079,
+      "vi": "ngày mai",
+      "tags": [
+        "#RELAX"
+      ],
+      "en": "tomorrow",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 2981,
+      "category": "common",
+      "type": "Động từ (v)",
+      "tags": [
+        "#RELAX"
+      ],
+      "vi": "đóng gói",
+      "en": "pack",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "category": "specialized",
+      "_origIdx": 723,
+      "type": "Danh từ (n)",
+      "en": "Utilization",
+      "vi": "mức sử dụng",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "_origIdx": 3411,
+      "vi": "tuyệt vời",
+      "tags": [
+        "#TRAVEL & HOTEL"
+      ],
+      "en": "amazing"
+    },
+    {
+      "_origIdx": 2389,
+      "category": "common",
+      "type": "Động từ (v)",
+      "vi": "lưu",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "save",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Preferred",
+      "vi": "được ưu tiên",
+      "_origIdx": 3599,
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "_origIdx": 3647,
+      "type": "Khác",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Conduct current",
+      "vi": "dẫn dòng (điện)"
+    },
+    {
+      "status": "learned",
+      "en": "Base current",
+      "vi": "dòng điện cực gốc ($I_B$)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "_origIdx": 3633,
+      "type": "Khác",
+      "category": "specialized",
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "tách",
+      "tags": [
+        "#ARCHITECTURE"
+      ],
+      "en": "Separate",
+      "type": "Động từ (v)",
+      "_origIdx": 272,
+      "category": "specialized"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 3704,
+      "type": "Khác",
+      "category": "specialized",
+      "vi": "điện trở ký sinh",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Parasitic resistance",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "vượt trội",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Excel",
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 3489,
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "en": "Practically",
+      "vi": "thực tế",
+      "category": "specialized",
+      "type": "Trạng từ (adv)",
+      "_origIdx": 116,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3681,
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "High frequency",
+      "vi": "tần số cao"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "vi": "đóng",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "close",
+      "category": "common",
+      "type": "Động từ (v)",
+      "_origIdx": 2383
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "en": "microphone",
+      "vi": "micro",
+      "category": "common",
+      "_origIdx": 2714,
+      "type": "Danh từ (n)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "_origIdx": 92,
+      "category": "specialized",
+      "type": "Trạng từ (adv)",
+      "vi": "cẩn thận",
+      "en": "Carefully",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "sự giới hạn, hạn chế",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Limitation",
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 3551,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#CHIP"
+      ],
+      "en": "Store",
+      "vi": "lưu kho",
+      "_origIdx": 989,
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 625,
+      "tags": [
+        "#LOGIC SYNTHESIS"
+      ],
+      "en": "Simplify",
+      "vi": "đơn giản hóa"
+    },
+    {
+      "_origIdx": 2293,
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "en": "never",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "không bao giờ",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 3624,
+      "vi": "do đó, vì vậy",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Therefore"
+    },
+    {
+      "status": "learned",
+      "category": "common",
+      "_origIdx": 3284,
+      "type": "Danh từ (n)",
+      "en": "hotel",
+      "tags": [
+        "#TRAVEL & HOTEL"
+      ],
+      "vi": "khách sạn",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Moderately doped",
+      "vi": "pha tạp nồng độ trung bình",
+      "_origIdx": 3699,
+      "type": "Khác",
+      "category": "specialized"
+    },
+    {
+      "status": "learned",
+      "vi": "nghỉ giải lao",
+      "en": "take a break",
+      "tags": [
+        "#RELAX"
+      ],
+      "_origIdx": 2971,
+      "category": "common",
+      "type": "Động từ (v)",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "type": "Tính từ (adj)",
+      "_origIdx": 2841,
+      "category": "common",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "dễ dùng",
+      "en": "user-friendly"
+    },
+    {
+      "tags": [
+        "#RTL CODING"
+      ],
+      "vi": "theo cấu trúc",
+      "en": "Structurally",
+      "category": "specialized",
+      "type": "Trạng từ (adv)",
+      "_origIdx": 463,
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [],
+      "en": "Compact",
+      "vi": "gọn",
+      "type": "Tính từ (adj)",
+      "_origIdx": 76,
+      "category": "specialized"
+    },
+    {
+      "status": "learned",
+      "type": "Tính từ (adj)",
+      "_origIdx": 313,
+      "category": "specialized",
+      "vi": "cân bằng",
+      "tags": [
+        "#ARCHITECTURE"
+      ],
+      "en": "Balanced",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 792,
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Risky",
+      "vi": "rủi ro",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "status": "learned",
+      "vi": "mở",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "open",
+      "_origIdx": 2382,
+      "category": "common",
+      "type": "Động từ (v)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "status": "learned",
+      "en": "Current flow",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "luồng dòng điện",
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3658,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Khác",
+      "_origIdx": 3642,
+      "en": "Chip area",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "diện tích chip"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Low power consumption",
+      "vi": "mức tiêu thụ điện năng thấp",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3693
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 98,
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "vi": "logic",
+      "en": "Logically"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "_origIdx": 1433,
+      "vi": "điện trường",
+      "en": "Electric field",
+      "tags": [
+        "#SEMICONDUCTOR"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "type": "Động từ (v)",
+      "_origIdx": 42,
+      "category": "specialized",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "en": "Adjust",
+      "vi": "điều chỉnh"
+    },
+    {
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "mạch số",
+      "en": "Digital circuit",
+      "type": "Khác",
+      "_origIdx": 3666,
+      "category": "specialized",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "category": "common",
+      "_origIdx": 2984,
+      "tags": [
+        "#RELAX"
+      ],
+      "en": "return",
+      "vi": "quay lại"
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "en": "modern",
+      "vi": "hiện đại",
+      "_origIdx": 2257,
+      "type": "Tính từ (adj)",
+      "category": "common",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "en": "Oxide",
+      "vi": "lớp oxit",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "type": "Danh từ (n)",
+      "_origIdx": 3558,
+      "category": "specialized",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "type": "Động từ (v)",
+      "_origIdx": 155,
+      "category": "specialized",
+      "vi": "so sánh",
+      "en": "Compare",
+      "tags": [
+        "#SPECIFICATION"
+      ]
+    },
+    {
+      "status": "learned",
+      "_origIdx": 1258,
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "en": "Asymmetric",
+      "tags": [
+        "#LOGIC GATE"
+      ],
+      "vi": "không đối xứng",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 626,
+      "vi": "tối thiểu hóa",
+      "en": "Minimize",
+      "tags": [
+        "#LOGIC SYNTHESIS"
+      ]
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "_origIdx": 2501,
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "vi": "đơn giản",
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "simply"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 712,
+      "en": "Power grid",
+      "vi": "lưới nguồn",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 3600,
+      "en": "Primary",
+      "vi": "chính, chủ yếu",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "status": "learned"
     },
     {
       "status": "learned",
@@ -63780,6 +65782,635 @@
     },
     {
       "status": "learned",
+      "type": "Khác",
+      "_origIdx": 3652,
+      "category": "specialized",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Coupling capacitance",
+      "vi": "điện dung ghép ký sinh",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 3504,
+      "vi": "theo đuổi (dạng V-ing)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Pursuing",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "en": "Manually",
+      "vi": "thủ công",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "type": "Trạng từ (adv)",
+      "_origIdx": 94,
+      "category": "specialized",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 783,
+      "en": "Low-density",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "vi": "mật độ thấp",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "_origIdx": 2835,
+      "en": "weak",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "yếu",
+      "status": "learned"
+    },
+    {
+      "vi": "đi dây",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Routing",
+      "_origIdx": 710,
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 163,
+      "en": "Check",
+      "vi": "kiểm tra",
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "en": "Lightly doped",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "pha tạp nồng độ thấp",
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3690,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Early effect",
+      "vi": "hiệu ứng Early",
+      "category": "specialized",
+      "type": "Khác",
+      "_origIdx": 3669,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "category": "specialized",
+      "_origIdx": 3607,
+      "type": "Tính từ (adj)",
+      "vi": "phù hợp",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Suitable",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "category": "specialized",
+      "type": "Khác",
+      "_origIdx": 3723,
+      "en": "Turn on",
+      "vi": "bật, dẫn điện",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ]
+    },
+    {
+      "vi": "an toàn",
+      "tags": [
+        "#RELAX"
+      ],
+      "en": "safe",
+      "category": "common",
+      "_origIdx": 3032,
+      "type": "Tính từ (adj)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 1334,
+      "en": "Charge",
+      "tags": [
+        "#ANALOG DESIGN"
+      ],
+      "vi": "nạp",
+      "status": "learned"
+    },
+    {
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 709,
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Placement",
+      "vi": "đặt cell",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "en": "Align",
+      "vi": "căn chỉnh",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "type": "Động từ (v)",
+      "_origIdx": 741,
+      "category": "specialized"
+    },
+    {
+      "status": "learned",
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 93,
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "vi": "tự động",
+      "en": "Automatically",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "mạnh",
+      "en": "strongly",
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "_origIdx": 2311,
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "_origIdx": 464,
+      "vi": "theo chức năng",
+      "tags": [
+        "#RTL CODING"
+      ],
+      "en": "Functionally",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "category": "common",
+      "_origIdx": 2626,
+      "type": "Tính từ (adj)",
+      "tags": [
+        "#FINANCE & ACCOUNTING"
+      ],
+      "en": "fixed",
+      "vi": "cố định",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "category": "specialized",
+      "_origIdx": 3542,
+      "type": "Danh từ (n)",
+      "vi": "nền tảng",
+      "en": "Foundation",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "vi": "triển khai",
+      "en": "Implement",
+      "type": "Động từ (v)",
+      "_origIdx": 30,
+      "category": "specialized",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "type": "Trạng từ (adv)",
+      "_origIdx": 3617,
+      "category": "specialized",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Extremely",
+      "vi": "cực kỳ",
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "category": "specialized",
+      "_origIdx": 725,
+      "type": "Danh từ (n)",
+      "vi": "căn chỉnh",
+      "en": "Alignment",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "en": "Performance",
+      "vi": "hiệu năng",
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "type": "Danh từ (n)",
+      "_origIdx": 126,
+      "category": "specialized",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Strength",
+      "vi": "thế mạnh",
+      "type": "Danh từ (n)",
+      "_origIdx": 3572,
+      "category": "specialized",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Carrier mobility",
+      "vi": "độ linh động của hạt tải",
+      "category": "specialized",
+      "_origIdx": 3638,
+      "type": "Khác",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "chèn",
+      "en": "Insert",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 743,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "vi": "nhận biết công suất",
+      "en": "Power-aware",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "type": "Tính từ (adj)",
+      "_origIdx": 794,
+      "category": "specialized",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      }
+    },
+    {
+      "vi": "trạng thái ngưng dẫn",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Cut-off",
+      "category": "specialized",
+      "type": "Khác",
+      "_origIdx": 3662,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "status": "learned"
+    },
+    {
+      "type": "Danh từ (n)",
+      "category": "common",
+      "_origIdx": 2175,
+      "tags": [
+        "#BUSINESS"
+      ],
+      "en": "issue",
+      "vi": "vấn đề",
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "Transistor lưỡng cực phân lớp (BJT)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Bipolar Junction Transistor",
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3636,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "_origIdx": 3019,
+      "type": "Tính từ (adj)",
+      "category": "common",
+      "tags": [
+        "#RELAX"
+      ],
+      "vi": "ngắn",
+      "en": "short",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "điện dung ký sinh",
+      "en": "Parasitic capacitance",
+      "_origIdx": 3703,
+      "category": "specialized",
+      "type": "Khác"
+    },
+    {
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Demonstrate",
+      "vi": "chứng minh, minh họa",
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 3481,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "vi": "công suất",
+      "en": "Power",
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 136
+    },
+    {
+      "_origIdx": 96,
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "en": "Directly",
+      "vi": "trực tiếp",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
+        "dueDate": "2026-05-17"
+      },
+      "category": "common",
+      "type": "Danh từ (n)",
+      "_origIdx": 2711,
+      "vi": "máy in",
+      "en": "printer",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "status": "learned"
+    },
+    {
+      "status": "learned",
       "sm": {
         "repetition": 0,
         "interval": 1,
@@ -63796,1005 +66427,242 @@
       "category": "specialized"
     },
     {
-      "status": "learned",
-      "_origIdx": 748,
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "en": "Spread",
-      "vi": "dàn đều",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 709,
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Placement",
-      "vi": "đặt cell",
       "sm": {
         "ef": 2.5,
         "repetition": 0,
         "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "category": "specialized",
-      "_origIdx": 732,
-      "type": "Danh từ (n)",
-      "vi": "sụt áp",
-      "en": "IR drop",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ]
-    }
-  ],
-  "typingQueue": [
-    {
+      "vi": "tắt, ngưng dẫn",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
       "en": "Turn off",
-      "vi": "tắt, ngưng dẫn",
-      "type": "Khác",
       "_origIdx": 3722,
       "category": "specialized",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
+      "type": "Khác",
       "status": "learned"
     },
     {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "category": "specialized",
-      "_origIdx": 626,
-      "type": "Động từ (v)",
-      "vi": "tối thiểu hóa",
-      "tags": [
-        "#LOGIC SYNTHESIS"
-      ],
-      "en": "Minimize",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "category": "specialized",
-      "_origIdx": 61,
-      "type": "Tính từ (adj)",
-      "vi": "hỗn hợp",
-      "en": "Mixed-signal",
-      "tags": []
-    },
-    {
-      "status": "learned",
-      "vi": "nạp",
-      "tags": [
-        "#ANALOG DESIGN"
-      ],
-      "en": "Charge",
-      "type": "Động từ (v)",
-      "_origIdx": 1334,
-      "category": "specialized",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "vi": "mức cổng",
       "en": "Gate-level",
       "tags": [
         "#LOGIC SYNTHESIS"
       ],
+      "vi": "mức cổng",
       "category": "specialized",
+      "type": "Tính từ (adj)",
       "_origIdx": 649,
-      "type": "Tính từ (adj)",
       "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      }
-    },
-    {
-      "vi": "quan trọng",
-      "en": "Critical",
-      "tags": [],
-      "category": "specialized",
-      "_origIdx": 82,
-      "type": "Tính từ (adj)",
-      "sm": {
-        "dueDate": "2026-05-17",
         "repetition": 0,
         "interval": 1,
-        "ef": 2.5
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
       },
       "status": "learned"
     },
     {
+      "status": "learned",
+      "type": "Động từ (v)",
+      "_origIdx": 3488,
+      "category": "specialized",
+      "en": "Employ",
+      "vi": "sử dụng",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
       "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
         "repetition": 0,
-        "interval": 1
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
       },
+      "_origIdx": 1010,
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "en": "Thermal",
+      "vi": "nhiệt",
+      "tags": [
+        "#CHIP"
+      ],
+      "status": "learned"
+    },
+    {
+      "en": "respond",
+      "vi": "phản hồi",
       "tags": [
         "#BUSINESS"
       ],
-      "en": "new",
-      "vi": "mới",
-      "type": "Tính từ (adj)",
-      "_origIdx": 2255,
+      "_origIdx": 2214,
+      "type": "Động từ (v)",
       "category": "common",
-      "status": "learned"
-    },
-    {
       "sm": {
         "ef": 2.5,
         "interval": 1,
         "repetition": 0,
         "dueDate": "2026-05-17"
       },
-      "category": "specialized",
-      "_origIdx": 3669,
-      "type": "Khác",
-      "en": "Early effect",
-      "vi": "hiệu ứng Early",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "status": "learned"
-    },
-    {
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "hơn nữa",
-      "en": "Furthermore",
-      "category": "specialized",
-      "_origIdx": 3618,
-      "type": "Trạng từ (adv)",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Efficiently",
-      "tags": [
-        "#IC DESIGN"
-      ],
-      "vi": "hiệu quả",
-      "_origIdx": 88,
-      "category": "specialized",
-      "type": "Trạng từ (adv)",
       "status": "learned"
     },
     {
       "status": "learned",
       "sm": {
+        "ef": 2.5,
         "interval": 1,
         "repetition": 0,
-        "ef": 2.5,
         "dueDate": "2026-05-17"
       },
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "vi": "mức tiêu thụ điện năng thấp",
-      "en": "Low power consumption",
+      "vi": "mắc nối tiếp",
+      "en": "In series",
+      "type": "Khác",
       "category": "specialized",
-      "_origIdx": 3693,
-      "type": "Khác"
+      "_origIdx": 3687
     },
     {
-      "en": "Signal integrity",
+      "en": "Engineer",
+      "vi": "kỹ sư",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "vi": "tính toàn vẹn của tín hiệu",
-      "_origIdx": 3714,
       "category": "specialized",
-      "type": "Khác",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3642,
-      "en": "Chip area",
-      "vi": "diện tích chip",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "status": "learned"
-    },
-    {
-      "status": "learned",
+      "_origIdx": 3536,
+      "type": "Danh từ (n)",
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
         "interval": 1
       },
-      "_origIdx": 3645,
-      "category": "specialized",
-      "type": "Khác",
-      "vi": "sơ đồ bố trí đồng trọng tâm",
-      "en": "Common-centroid layout",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ]
-    },
-    {
-      "en": "Purely",
-      "vi": "hoàn toàn, đơn thuần",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Trạng từ (adv)",
-      "_origIdx": 3621,
-      "category": "specialized",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
       "status": "learned"
     },
     {
       "status": "learned",
-      "type": "Trạng từ (adv)",
-      "_origIdx": 463,
-      "category": "specialized",
-      "tags": [
-        "#RTL CODING"
-      ],
-      "vi": "theo cấu trúc",
-      "en": "Structurally",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Moderately doped",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "pha tạp nồng độ trung bình",
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3699,
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "_origIdx": 2900,
       "category": "common",
-      "type": "Danh từ (n)",
-      "vi": "giờ nghỉ",
-      "en": "break",
-      "tags": [
-        "#RELAX"
-      ],
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "_origIdx": 3633,
-      "type": "Khác",
-      "category": "specialized",
-      "vi": "dòng điện cực gốc ($I_B$)",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Base current",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "tags": [
-        "#SPECIFICATION"
-      ],
-      "en": "Typical",
-      "vi": "điển hình",
-      "_origIdx": 182,
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.3600000000000003,
-        "repetition": 1,
-        "interval": 1,
-        "dueDate": "2026-05-18"
-      },
-      "en": "Block",
-      "vi": "khối",
-      "tags": [
-        "#IC DESIGN"
-      ],
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 8,
-      "status": "learned"
-    },
-    {
-      "status": "learned",
+      "type": "Động từ (v)",
+      "_origIdx": 2968,
+      "vi": "nấu",
       "tags": [
         "#RELAX"
       ],
       "en": "cook",
-      "vi": "nấu",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 37,
+      "category": "specialized",
       "type": "Động từ (v)",
-      "_origIdx": 2968,
-      "category": "common",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "_origIdx": 3666,
-      "category": "specialized",
-      "type": "Khác",
-      "en": "Digital circuit",
-      "vi": "mạch số",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "_origIdx": 3713,
-      "type": "Khác",
-      "category": "specialized",
-      "en": "Signal delay",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "độ trễ tín hiệu"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3658,
-      "en": "Current flow",
-      "vi": "luồng dòng điện",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ]
-    },
-    {
-      "en": "Conductive path",
-      "vi": "đường dẫn điện",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Khác",
-      "_origIdx": 3649,
-      "category": "specialized",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Meanwhile",
-      "vi": "trong khi đó",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Trạng từ (adv)",
-      "category": "specialized",
-      "_origIdx": 3619
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "tags": [
-        "#LOGIC SYNTHESIS"
-      ],
-      "vi": "đường tới hạn",
-      "en": "Critical path",
-      "category": "specialized",
-      "_origIdx": 603,
-      "type": "Danh từ (n)"
-    },
-    {
-      "en": "Consist of",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "bao gồm",
-      "_origIdx": 3650,
-      "category": "specialized",
-      "type": "Khác",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "en": "Very Large Scale Integration",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "Tích hợp quy mô rất lớn (VLSI)",
-      "type": "Khác",
-      "_origIdx": 3725,
-      "category": "specialized"
-    },
-    {
-      "category": "specialized",
-      "_origIdx": 3636,
-      "type": "Khác",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "Transistor lưỡng cực phân lớp (BJT)",
-      "en": "Bipolar Junction Transistor",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Tính từ (adj)",
-      "_origIdx": 3611,
-      "category": "specialized",
-      "en": "Unnecessary",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "không cần thiết",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Cut-off region",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "vùng ngưng dẫn (vùng cắt)",
-      "category": "specialized",
-      "type": "Khác",
-      "_origIdx": 3661,
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
-      "type": "Khác",
-      "_origIdx": 3686,
-      "vi": "mắc song song",
-      "en": "In parallel",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "en": "return",
-      "tags": [
-        "#RELAX"
-      ],
-      "vi": "quay lại",
-      "category": "common",
-      "_origIdx": 2984,
-      "type": "Động từ (v)",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "en": "IR drop",
-      "vi": "sụt áp",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "type": "Danh từ (n)",
-      "_origIdx": 732,
-      "category": "specialized"
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 2450,
-      "category": "common",
-      "type": "Tính từ (adj)",
-      "vi": "được liên kết",
-      "tags": [
-        "#EMAIL & COMMUNICATION"
-      ],
-      "en": "linked",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "vi": "theo đuổi (dạng V-ing)",
-      "en": "Pursuing",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "_origIdx": 3504,
-      "category": "specialized",
-      "type": "Động từ (v)"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Concept",
-      "vi": "khái niệm",
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 3528,
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "đạt được",
-      "en": "Achieve",
-      "_origIdx": 3471,
-      "type": "Động từ (v)",
-      "category": "specialized"
-    },
-    {
-      "_origIdx": 2257,
-      "type": "Tính từ (adj)",
-      "category": "common",
-      "vi": "hiện đại",
-      "en": "modern",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 2268,
-      "type": "Tính từ (adj)",
-      "category": "common",
-      "vi": "chậm",
-      "en": "slow",
-      "tags": [
-        "#BUSINESS"
-      ]
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "_origIdx": 2368,
-      "category": "common",
-      "type": "Danh từ (n)",
-      "vi": "nhật ký",
-      "en": "log",
-      "tags": [
-        "#EMAIL & COMMUNICATION"
-      ],
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "_origIdx": 2175,
-      "type": "Danh từ (n)",
-      "category": "common",
-      "en": "issue",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "vi": "vấn đề",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "vi": "một mình",
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "alone",
-      "_origIdx": 3066,
-      "category": "common",
-      "type": "Trạng từ (adv)",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "type": "Khác",
-      "_origIdx": 3631,
-      "category": "specialized",
-      "vi": "điện áp đặt vào",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Applied voltage",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "vi": "tiếp giáp",
-      "en": "Junction",
-      "tags": [
-        "#SEMICONDUCTOR"
-      ],
-      "category": "specialized",
-      "_origIdx": 1430,
-      "type": "Danh từ (n)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "type": "Động từ (v)",
-      "_origIdx": 2958,
-      "category": "common",
-      "tags": [
-        "#RELAX"
-      ],
-      "vi": "thiền",
-      "en": "meditate",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "vi": "thua lỗ",
-      "en": "loss",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "_origIdx": 2140,
-      "category": "common",
-      "type": "Danh từ (n)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      }
-    },
-    {
-      "status": "learned",
-      "_origIdx": 55,
-      "type": "Động từ (v)",
-      "category": "specialized",
+      "en": "Route",
+      "vi": "đi dây",
       "tags": [
         "#IC DESIGN"
-      ],
-      "en": "Validate",
-      "vi": "kiểm chứng",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
+      ]
     },
     {
-      "_origIdx": 2224,
-      "category": "common",
-      "type": "Động từ (v)",
-      "vi": "lãnh đạo",
-      "en": "lead",
-      "tags": [
-        "#BUSINESS"
-      ],
       "sm": {
+        "dueDate": "2026-05-17",
         "repetition": 0,
         "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
+        "ef": 2.5
+      },
+      "type": "Tính từ (adj)",
+      "_origIdx": 3592,
+      "category": "specialized",
+      "vi": "không thể thiếu",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Indispensable",
+      "status": "learned"
+    },
+    {
+      "_origIdx": 182,
+      "type": "Tính từ (adj)",
+      "category": "specialized",
+      "vi": "điển hình",
+      "en": "Typical",
+      "tags": [
+        "#SPECIFICATION"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
       },
       "status": "learned"
     },
     {
       "status": "learned",
-      "en": "Affect",
-      "vi": "ảnh hưởng",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 3472,
-      "type": "Động từ (v)",
       "sm": {
-        "ef": 2.5,
-        "repetition": 0,
         "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
         "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "vi": "tỷ lệ hình học",
-      "en": "Geometrical ratio",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
+      },
       "_origIdx": 3678,
       "category": "specialized",
       "type": "Khác",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "then",
-      "vi": "sau đó",
-      "_origIdx": 3074,
-      "type": "Trạng từ (adv)",
-      "category": "common",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3568,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "vi": "khả năng mở rộng (thu nhỏ kích thước)",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "en": "Scalability",
-      "status": "learned"
+      "vi": "tỷ lệ hình học",
+      "en": "Geometrical ratio"
     },
     {
       "status": "learned",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Shielding",
+      "vi": "che chắn",
+      "type": "Danh từ (n)",
+      "category": "specialized",
+      "_origIdx": 730,
       "sm": {
         "dueDate": "2026-05-17",
-        "interval": 1,
+        "ef": 2.5,
         "repetition": 0,
-        "ef": 2.5
+        "interval": 1
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
       },
-      "type": "Động từ (v)",
-      "_origIdx": 521,
+      "_origIdx": 3715,
       "category": "specialized",
-      "vi": "sửa lỗi",
+      "type": "Khác",
+      "vi": "xử lý tín hiệu",
+      "en": "Signal processing",
       "tags": [
-        "#DESIGN VERIFICATION"
+        "#EXAM-IC DESIGN"
       ],
-      "en": "Fix"
+      "status": "learned"
     },
     {
       "tags": [
@@ -64802,592 +66670,152 @@
       ],
       "en": "Boolean algebra",
       "vi": "đại số Boole",
-      "type": "Danh từ (n)",
+      "category": "specialized",
       "_origIdx": 1188,
-      "category": "specialized",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "vi": "không thể thiếu",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Indispensable",
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3592,
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "_origIdx": 3574,
       "type": "Danh từ (n)",
-      "category": "specialized",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Technique",
-      "vi": "kỹ thuật",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "en": "close",
-      "tags": [
-        "#EMAIL & COMMUNICATION"
-      ],
-      "vi": "đóng",
-      "category": "common",
-      "_origIdx": 2383,
-      "type": "Động từ (v)",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Doping",
-      "vi": "sự pha tạp (chất bán dẫn)",
-      "type": "Danh từ (n)",
-      "_origIdx": 3533,
-      "category": "specialized",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "khảo sát, nghiên cứu",
-      "en": "Investigate",
-      "category": "specialized",
-      "_origIdx": 3496,
-      "type": "Động từ (v)"
-    },
-    {
-      "status": "learned",
-      "vi": "rút tiền",
-      "tags": [
-        "#FINANCE & ACCOUNTING"
-      ],
-      "en": "withdraw",
-      "type": "Động từ (v)",
-      "_origIdx": 2567,
-      "category": "common",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3502,
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "vi": "tạo ra, sản xuất",
-      "en": "Produce",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ]
-    },
-    {
-      "en": "Calculator",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "máy tính (thực hiện phép toán)",
-      "category": "specialized",
-      "_origIdx": 3522,
-      "type": "Danh từ (n)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "type": "Danh từ (n)",
-      "_origIdx": 3284,
-      "category": "common",
-      "vi": "khách sạn",
-      "tags": [
-        "#TRAVEL & HOTEL"
-      ],
-      "en": "hotel"
-    },
-    {
-      "category": "specialized",
-      "_origIdx": 1010,
-      "type": "Tính từ (adj)",
-      "tags": [
-        "#CHIP"
-      ],
-      "en": "Thermal",
-      "vi": "nhiệt",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
         "interval": 1
       },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "điện dẫn truyền (độ hỗ dẫn)",
-      "en": "Transconductance",
-      "_origIdx": 3576,
-      "category": "specialized",
-      "type": "Danh từ (n)",
       "status": "learned"
     },
     {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Base",
-      "vi": "cực gốc (Cực B của transistor)",
-      "type": "Danh từ (n)",
-      "_origIdx": 3520,
-      "category": "specialized"
-    },
-    {
-      "status": "learned",
-      "tags": [
-        "#COMPUTER"
-      ],
-      "vi": "trực tuyến",
-      "en": "online",
-      "_origIdx": 2814,
-      "type": "Tính từ (adj)",
-      "category": "common",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "category": "specialized",
-      "_origIdx": 3600,
-      "type": "Tính từ (adj)",
-      "vi": "chính, chủ yếu",
-      "en": "Primary",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ]
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3551,
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "sự giới hạn, hạn chế",
-      "en": "Limitation",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#SPECIFICATION"
-      ],
-      "en": "Continuous",
-      "vi": "liên tục",
-      "category": "specialized",
-      "_origIdx": 198,
-      "type": "Tính từ (adj)",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3590,
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "thiết yếu",
-      "en": "Essential",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "vi": "nền tảng",
-      "en": "Foundation",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 3542
-    },
-    {
-      "status": "learned",
-      "type": "Động từ (v)",
-      "_origIdx": 3490,
-      "category": "specialized",
-      "vi": "hình thành, tạo thành",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Form",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "sự tối ưu hóa",
-      "en": "Optimization",
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 3557
-    },
-    {
-      "status": "learned",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3019,
-      "category": "common",
-      "en": "short",
-      "tags": [
-        "#RELAX"
-      ],
-      "vi": "ngắn",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "_origIdx": 736,
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "vi": "bước chốt",
-      "en": "Signoff",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "vi": "hiệu quả",
-      "en": "Efficient",
-      "tags": [],
-      "type": "Tính từ (adj)",
-      "_origIdx": 65,
-      "category": "specialized",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Khác",
-      "_origIdx": 3728,
-      "category": "specialized",
-      "vi": "tỷ lệ Chiều rộng / Chiều dài (W/L)",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Width/Length ratio"
-    },
-    {
-      "tags": [
-        "#BUSINESS"
-      ],
-      "en": "always",
-      "vi": "luôn",
-      "type": "Trạng từ (adv)",
-      "category": "common",
-      "_origIdx": 2294,
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "vi": "chơi",
-      "en": "play",
-      "tags": [
-        "#RELAX"
-      ],
-      "category": "common",
-      "type": "Động từ (v)",
-      "_origIdx": 2953,
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "High input impedance",
-      "vi": "trở kháng đầu vào cao",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
       "type": "Khác",
       "category": "specialized",
       "_origIdx": 3682,
+      "en": "High input impedance",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "trở kháng đầu vào cao",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "chiếm ưu thế, thống trị",
+      "en": "Dominate",
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "_origIdx": 3486
+    },
+    {
+      "vi": "đặt",
+      "tags": [
+        "#IC DESIGN"
+      ],
+      "en": "Place",
+      "_origIdx": 38,
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
       "status": "learned"
     },
     {
       "status": "learned",
       "sm": {
         "ef": 2.5,
-        "interval": 1,
         "repetition": 0,
+        "interval": 1,
         "dueDate": "2026-05-17"
       },
+      "category": "specialized",
+      "_origIdx": 714,
+      "type": "Danh từ (n)",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Standard cell row",
+      "vi": "hàng cell"
+    },
+    {
+      "vi": "tăng",
       "tags": [
         "#IC DESIGN"
       ],
-      "en": "Implement",
-      "vi": "triển khai",
-      "_origIdx": 30,
+      "en": "Increase",
+      "_origIdx": 50,
+      "category": "specialized",
       "type": "Động từ (v)",
-      "category": "specialized"
-    },
-    {
-      "status": "learned",
-      "type": "Tính từ (adj)",
-      "category": "common",
-      "_origIdx": 3025,
-      "vi": "phổ biến",
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "popular",
       "sm": {
         "dueDate": "2026-05-17",
         "interval": 1,
         "repetition": 0,
+        "ef": 2.5
+      },
+      "status": "learned"
+    },
+    {
+      "en": "Crosstalk",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "vi": "nhiễu xuyên âm",
+      "type": "Danh từ (n)",
+      "_origIdx": 731,
+      "category": "specialized",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      },
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "vi": "không ổn định",
+      "en": "unstable",
+      "tags": [
+        "#FINANCE & ACCOUNTING"
+      ],
+      "_origIdx": 2643,
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
         "ef": 2.5
       }
     },
     {
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "dẫn dòng (điện)",
-      "en": "Conduct current",
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3647,
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "đặt cell",
-      "en": "Placement",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 709,
-      "type": "Danh từ (n)",
-      "status": "learned"
-    },
-    {
       "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "vi": "kỹ thuật số đương đại",
-      "en": "Contemporary digital",
+      "en": "encode",
       "tags": [
-        "#EXAM-IC DESIGN"
+        "#COMPUTER"
       ],
-      "_origIdx": 3651,
-      "type": "Khác",
-      "category": "specialized"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
+      "vi": "mã hóa",
+      "_origIdx": 2795,
       "type": "Động từ (v)",
       "category": "common",
-      "_origIdx": 2981,
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "pack",
-      "vi": "đóng gói",
-      "status": "learned"
-    },
-    {
-      "vi": "nhược điểm chính",
-      "en": "Main drawback",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3695,
       "sm": {
-        "dueDate": "2026-05-17",
         "repetition": 0,
         "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      }
     },
     {
       "sm": {
@@ -65396,763 +66824,185 @@
         "repetition": 0,
         "interval": 1
       },
-      "tags": [
-        "#SEMICONDUCTOR"
-      ],
-      "vi": "tái hợp",
-      "en": "Recombination",
+      "category": "common",
       "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 1442,
+      "_origIdx": 2374,
+      "tags": [
+        "#EMAIL & COMMUNICATION"
+      ],
+      "en": "network",
+      "vi": "mạng",
       "status": "learned"
     },
     {
-      "en": "extract",
-      "vi": "giải nén",
-      "tags": [
-        "#COMPUTER"
-      ],
-      "_origIdx": 2798,
-      "category": "common",
-      "type": "Động từ (v)",
+      "status": "learned",
       "sm": {
         "interval": 1,
         "repetition": 0,
         "ef": 2.5,
         "dueDate": "2026-05-17"
       },
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "nhất định",
+      "en": "Certain",
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 3583
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "en": "Metal Oxide Semiconductor Field Effect Transistor",
+      "vi": "Transistor hiệu ứng trường oxit kim loại bán dẫn (MOSFET)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "_origIdx": 3697,
+      "category": "specialized",
+      "type": "Khác"
+    },
+    {
+      "sm": {
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "_origIdx": 3074,
+      "type": "Trạng từ (adv)",
+      "category": "common",
+      "en": "then",
+      "tags": [
+        "#RELAX"
+      ],
+      "vi": "sau đó",
       "status": "learned"
     },
     {
       "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
-        "ef": 2.5,
+        "repetition": 0,
         "interval": 1,
-        "repetition": 0
+        "ef": 2.5
       },
-      "en": "yoga",
-      "vi": "yoga",
+      "_origIdx": 3685,
+      "category": "specialized",
+      "type": "Khác",
       "tags": [
-        "#RELAX"
+        "#EXAM-IC DESIGN"
       ],
-      "_origIdx": 2915,
-      "type": "Danh từ (n)",
-      "category": "common"
+      "vi": "ngược lại",
+      "en": "In contrast"
     },
     {
       "status": "learned",
-      "type": "Danh từ (n)",
       "category": "specialized",
-      "_origIdx": 1437,
+      "_origIdx": 3728,
+      "type": "Khác",
+      "en": "Width/Length ratio",
       "tags": [
-        "#SEMICONDUCTOR"
+        "#EXAM-IC DESIGN"
       ],
-      "en": "Threshold voltage",
-      "vi": "điện áp ngưỡng",
+      "vi": "tỷ lệ Chiều rộng / Chiều dài (W/L)",
       "sm": {
+        "dueDate": "2026-05-17",
         "repetition": 0,
         "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
+        "ef": 2.5
       }
     },
     {
-      "status": "learned",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "sự di chuyển",
+      "en": "Movement",
+      "type": "Danh từ (n)",
+      "_origIdx": 3555,
+      "category": "specialized",
       "sm": {
-        "repetition": 0,
         "interval": 1,
+        "repetition": 0,
         "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "type": "Động từ (v)",
-      "_origIdx": 1335,
-      "category": "specialized",
-      "tags": [
-        "#ANALOG DESIGN"
-      ],
-      "en": "Discharge",
-      "vi": "xả"
+      "status": "learned"
     },
     {
-      "status": "learned",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Khác",
+      "_origIdx": 3677,
+      "en": "Genetic algorithms",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
       "vi": "thuật toán di truyền",
-      "en": "Genetic algorithms",
-      "category": "specialized",
-      "_origIdx": 3677,
-      "type": "Khác",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "en": "Shielding",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "che chắn",
-      "_origIdx": 730,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
       "status": "learned"
     },
     {
-      "status": "learned",
-      "en": "Drain terminal",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "cực máng (Cực D)",
-      "_origIdx": 3667,
-      "type": "Khác",
-      "category": "specialized",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#MARKETING & SALES"
-      ],
+      "type": "Trạng từ (adv)",
+      "_origIdx": 3268,
+      "category": "common",
       "en": "openly",
       "vi": "công khai",
-      "category": "common",
-      "_origIdx": 3268,
-      "type": "Trạng từ (adv)",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "en": "Density",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "mật độ",
-      "category": "specialized",
-      "_origIdx": 722,
-      "type": "Danh từ (n)"
-    },
-    {
-      "en": "amazing",
-      "tags": [
-        "#TRAVEL & HOTEL"
-      ],
-      "vi": "tuyệt vời",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3411,
-      "category": "common",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "type": "Khác",
-      "_origIdx": 3690,
-      "category": "specialized",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Lightly doped",
-      "vi": "pha tạp nồng độ thấp",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "_origIdx": 3640,
-      "category": "specialized",
-      "type": "Khác",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Charge carrier",
-      "vi": "hạt tải điện",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "type": "Tính từ (adj)",
-      "category": "specialized",
-      "_origIdx": 3596,
-      "vi": "không đáng kể",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Negligible",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "en": "Behavior",
-      "vi": "hành vi, đặc tính hoạt động",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 3521,
-      "type": "Danh từ (n)"
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "category": "specialized",
-      "_origIdx": 3480,
-      "type": "Động từ (v)",
-      "en": "Create",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "tạo ra",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Parasitic capacitance",
-      "vi": "điện dung ký sinh",
-      "category": "specialized",
-      "_origIdx": 3703,
-      "type": "Khác",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3697,
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "Transistor hiệu ứng trường oxit kim loại bán dẫn (MOSFET)",
-      "en": "Metal Oxide Semiconductor Field Effect Transistor",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 3569,
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "sự đơn giản hóa",
-      "en": "Simplification"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Certain",
-      "vi": "nhất định",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3583,
-      "category": "specialized"
-    },
-    {
-      "status": "learned",
-      "_origIdx": 3652,
-      "type": "Khác",
-      "category": "specialized",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "điện dung ghép ký sinh",
-      "en": "Coupling capacitance",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      }
-    },
-    {
-      "status": "learned",
-      "en": "Collector current",
-      "vi": "dòng điện cực thu ($I_C$)",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "_origIdx": 3644,
-      "type": "Khác",
-      "category": "specialized",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "tính năng định hình, đặc điểm nhận diện",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Defining feature",
-      "_origIdx": 3663,
-      "category": "specialized",
-      "type": "Khác",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "điện trở ký sinh",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Parasitic resistance",
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3704,
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3489,
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "vi": "vượt trội",
-      "en": "Excel",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 1896,
-      "tags": [
-        "#SYSTEMVERILOG"
-      ],
-      "en": "Method",
-      "vi": "phương thức",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "category": "specialized",
-      "type": "Khác",
-      "_origIdx": 3687,
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "In series",
-      "vi": "mắc nối tiếp",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "vi": "kết nối",
-      "tags": [
-        "#EMAIL & COMMUNICATION"
-      ],
-      "en": "connect",
-      "_origIdx": 2413,
-      "category": "common",
-      "type": "Động từ (v)"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Pin access",
-      "vi": "truy cập pin",
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 721
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "type": "Động từ (v)",
-      "_origIdx": 155,
-      "category": "specialized",
-      "vi": "so sánh",
-      "en": "Compare",
-      "tags": [
-        "#SPECIFICATION"
-      ],
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "vi": "rõ ràng",
-      "en": "clear",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "category": "common",
-      "_origIdx": 2261,
-      "type": "Tính từ (adj)",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "category": "specialized",
-      "_origIdx": 744,
-      "type": "Động từ (v)",
-      "vi": "chèn buffer",
-      "en": "Buffer",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "vi": "đang tăng",
-      "tags": [
-        "#FINANCE & ACCOUNTING"
-      ],
-      "en": "growing",
-      "_origIdx": 2644,
-      "type": "Tính từ (adj)",
-      "category": "common"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "type": "Động từ (v)",
-      "_origIdx": 2947,
-      "category": "common",
-      "tags": [
-        "#RELAX"
-      ],
-      "vi": "ngủ",
-      "en": "sleep",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "en": "Gain",
-      "tags": [
-        "#ANALOG DESIGN"
-      ],
-      "vi": "độ lợi",
-      "category": "specialized",
-      "_origIdx": 1303,
-      "type": "Danh từ (n)",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "tags": [
-        "#SEMICONDUCTOR"
-      ],
-      "en": "Mobility",
-      "vi": "độ linh động",
-      "_origIdx": 1427,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "kỳ nghỉ",
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "vacation",
-      "category": "common",
-      "type": "Danh từ (n)",
-      "_origIdx": 2898
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Trạng từ (adv)",
-      "category": "common",
-      "_origIdx": 3254,
-      "en": "carelessly",
-      "vi": "bất cẩn",
       "tags": [
         "#MARKETING & SALES"
-      ]
-    },
-    {
-      "status": "learned",
-      "type": "Trạng từ (adv)",
-      "category": "common",
-      "_origIdx": 2311,
-      "tags": [
-        "#BUSINESS"
-      ],
-      "en": "strongly",
-      "vi": "mạnh",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "_origIdx": 2214,
-      "type": "Động từ (v)",
-      "category": "common",
-      "vi": "phản hồi",
-      "en": "respond",
-      "tags": [
-        "#BUSINESS"
       ],
       "sm": {
-        "interval": 1,
         "repetition": 0,
+        "interval": 1,
         "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "status": "learned"
-    },
-    {
-      "type": "Động từ (v)",
-      "category": "specialized",
-      "_origIdx": 860,
-      "tags": [
-        "#FABRICATION"
-      ],
-      "vi": "khuếch tán",
-      "en": "Diffuse",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "en": "Logically",
-      "vi": "logic",
-      "tags": [
-        "#IC DESIGN"
-      ],
-      "_origIdx": 98,
-      "type": "Trạng từ (adv)",
-      "category": "specialized",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "tags": [
-        "#RELAX"
-      ],
-      "vi": "trò chuyện",
-      "en": "chat",
-      "type": "Động từ (v)",
-      "category": "common",
-      "_origIdx": 2963,
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 714,
-      "en": "Standard cell row",
-      "vi": "hàng cell",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
       "status": "learned"
     },
     {
       "status": "learned",
+      "type": "Động từ (v)",
+      "_origIdx": 747,
+      "category": "specialized",
+      "en": "Group",
+      "vi": "nhóm",
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "vi": "cây clock",
-      "en": "Clock tree",
-      "category": "specialized",
-      "_origIdx": 713,
-      "type": "Danh từ (n)",
       "sm": {
         "ef": 2.5,
         "repetition": 0,
         "interval": 1,
         "dueDate": "2026-05-17"
       }
+    },
+    {
+      "vi": "bắt lưới",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Snap",
+      "_origIdx": 753,
+      "type": "Động từ (v)",
+      "category": "specialized",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
     },
     {
       "sm": {
@@ -66161,799 +67011,204 @@
         "interval": 1,
         "repetition": 0
       },
-      "_origIdx": 2706,
-      "type": "Danh từ (n)",
-      "category": "common",
-      "tags": [
-        "#COMPUTER"
-      ],
-      "en": "desktop",
-      "vi": "máy tính bàn",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#BUSINESS"
-      ],
-      "en": "notify",
-      "vi": "thông báo",
-      "_origIdx": 2213,
-      "type": "Động từ (v)",
-      "category": "common"
-    },
-    {
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Floorplan",
-      "vi": "sơ đồ mặt bằng",
-      "_origIdx": 711,
+      "_origIdx": 3645,
       "category": "specialized",
-      "type": "Danh từ (n)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "en": "Particularly",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "đặc biệt là",
-      "type": "Trạng từ (adv)",
-      "_origIdx": 3620,
-      "category": "specialized",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "vi": "độ linh động của hạt tải",
-      "en": "Carrier mobility",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 3638,
       "type": "Khác",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Significant",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "vi": "đáng kể, quan trọng",
-      "_origIdx": 3605,
-      "category": "specialized",
-      "type": "Tính từ (adj)",
+      "vi": "sơ đồ bố trí đồng trọng tâm",
+      "en": "Common-centroid layout",
       "status": "learned"
     },
     {
-      "status": "learned",
-      "type": "Danh từ (n)",
-      "_origIdx": 3517,
-      "category": "specialized",
-      "vi": "các thuật toán",
-      "en": "Algorithms",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      }
-    },
-    {
-      "type": "Danh từ (n)",
-      "category": "specialized",
       "_origIdx": 3529,
+      "type": "Danh từ (n)",
+      "category": "specialized",
       "en": "Conclusion",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
       "vi": "kết luận",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
       "sm": {
-        "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
         "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "en": "Turn on",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "bật, dẫn điện",
-      "type": "Khác",
-      "_origIdx": 3723,
-      "category": "specialized",
       "status": "learned"
     },
     {
       "status": "learned",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3607,
-      "category": "specialized",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Suitable",
-      "vi": "phù hợp",
       "sm": {
-        "dueDate": "2026-05-17",
         "ef": 2.5,
         "interval": 1,
-        "repetition": 0
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
         "repetition": 0,
-        "interval": 1,
         "dueDate": "2026-05-17"
       },
       "type": "Động từ (v)",
-      "category": "specialized",
-      "_origIdx": 513,
-      "vi": "chèn lỗi",
-      "tags": [
-        "#DESIGN VERIFICATION"
-      ],
-      "en": "Inject"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "vi": "hiệu năng",
-      "tags": [
-        "#SPECIFICATION"
-      ],
-      "en": "Performance",
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 126
-    },
-    {
-      "en": "performance",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "vi": "hiệu suất",
+      "_origIdx": 2771,
       "category": "common",
-      "_origIdx": 2150,
-      "type": "Danh từ (n)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "vi": "được ưu tiên",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Preferred",
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "_origIdx": 3599,
-      "status": "learned"
-    },
-    {
-      "type": "Khác",
-      "_origIdx": 3708,
-      "category": "specialized",
-      "en": "Relies on",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "dựa vào",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "en": "Asymmetric",
-      "vi": "không đối xứng",
-      "tags": [
-        "#LOGIC GATE"
-      ],
-      "category": "specialized",
-      "type": "Tính từ (adj)",
-      "_origIdx": 1258,
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "_origIdx": 3629,
-      "category": "specialized",
-      "type": "Khác",
-      "en": "Among",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "trong số (giới từ)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Reduce",
-      "tags": [
-        "#IC DESIGN"
-      ],
-      "vi": "giảm",
-      "_origIdx": 49,
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Field",
-      "vi": "lĩnh vực / trường (điện trường)",
-      "category": "specialized",
-      "_origIdx": 3541,
-      "type": "Danh từ (n)"
-    },
-    {
-      "status": "learned",
-      "vi": "chiếm ưu thế, thống trị",
-      "en": "Dominate",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 3486,
-      "type": "Động từ (v)",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EMAIL & COMMUNICATION"
-      ],
-      "en": "detail",
-      "vi": "chi tiết",
-      "type": "Danh từ (n)",
-      "category": "common",
-      "_origIdx": 2340,
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 710,
-      "en": "Routing",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "vi": "đi dây"
-    },
-    {
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 3540,
-      "en": "Factor",
-      "vi": "yếu tố, hệ số",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "_origIdx": 989,
-      "vi": "lưu kho",
-      "en": "Store",
-      "tags": [
-        "#CHIP"
-      ],
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "vi": "tinh vi, phức tạp",
-      "en": "Sophisticated",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Tính từ (adj)",
-      "_origIdx": 3606,
-      "category": "specialized",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      }
-    },
-    {
-      "_origIdx": 2279,
-      "category": "common",
-      "type": "Trạng từ (adv)",
-      "en": "carefully",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "vi": "cẩn thận",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
+      "vi": "cuộn",
       "tags": [
         "#COMPUTER"
       ],
-      "vi": "máy in",
-      "en": "printer",
-      "_origIdx": 2711,
-      "type": "Danh từ (n)",
-      "category": "common",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "vi": "góc nhìn, quan điểm",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Perspective",
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 3560,
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      }
+      "en": "scroll"
     },
     {
       "status": "learned",
       "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Construct",
-      "vi": "xây dựng, cấu tạo",
-      "type": "Động từ (v)",
-      "category": "specialized",
-      "_origIdx": 3478
-    },
-    {
-      "sm": {
         "repetition": 0,
         "interval": 1,
         "ef": 2.5,
         "dueDate": "2026-05-17"
       },
-      "vi": "lỗi DRC",
-      "en": "DRC violation",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "category": "specialized",
-      "_origIdx": 734,
-      "type": "Danh từ (n)",
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 783,
-      "type": "Tính từ (adj)",
-      "category": "specialized",
-      "tags": [
-        "#PHYSICAL DESIGN"
-      ],
-      "en": "Low-density",
-      "vi": "mật độ thấp",
-      "status": "learned"
-    },
-    {
-      "category": "specialized",
-      "_origIdx": 1323,
-      "type": "Danh từ (n)",
-      "en": "Stability",
-      "vi": "ổn định",
-      "tags": [
-        "#ANALOG DESIGN"
-      ],
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "_origIdx": 3671,
-      "category": "specialized",
-      "type": "Khác",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Electronic Design Automation",
-      "vi": "tự động hóa thiết kế điện tử (EDA)",
-      "status": "learned"
-    },
-    {
-      "vi": "xác định",
-      "tags": [
-        "#SPECIFICATION"
-      ],
-      "en": "Determine",
-      "_origIdx": 168,
-      "category": "specialized",
-      "type": "Động từ (v)",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "type": "Danh từ (n)",
-      "_origIdx": 3515,
-      "category": "specialized",
-      "vi": "sự áp dụng, sự chấp thuận",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "Adoption",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      }
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "category": "specialized",
-      "_origIdx": 96,
-      "type": "Trạng từ (adv)",
-      "vi": "trực tiếp",
-      "tags": [
-        "#IC DESIGN"
-      ],
-      "en": "Directly"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "CMOS",
-      "vi": "công nghệ bán dẫn Oxit Kim loại Bù",
-      "_origIdx": 3525,
-      "category": "specialized",
-      "type": "Danh từ (n)"
-    },
-    {
-      "type": "Động từ (v)",
-      "_origIdx": 3499,
-      "category": "specialized",
-      "en": "Perform",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "thực hiện",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "vi": "xử lý tín hiệu",
-      "en": "Signal processing",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "type": "Khác",
-      "_origIdx": 3715,
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0
-      },
-      "category": "common",
-      "type": "Tính từ (adj)",
-      "_origIdx": 2249,
-      "tags": [
-        "#BUSINESS"
-      ],
-      "vi": "rẻ",
-      "en": "cheap",
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 3536,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "kỹ sư",
-      "en": "Engineer"
-    },
-    {
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "_origIdx": 3558,
-      "vi": "lớp oxit",
-      "en": "Oxide",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "status": "learned"
-    },
-    {
-      "type": "Danh từ (n)",
-      "_origIdx": 3086,
-      "category": "common",
       "vi": "tiếp thị",
       "tags": [
         "#MARKETING & SALES"
       ],
       "en": "marketing",
+      "type": "Danh từ (n)",
+      "_origIdx": 3086,
+      "category": "common"
+    },
+    {
+      "family": "",
+      "ipa": "",
       "sm": {
         "dueDate": "2026-05-17",
-        "ef": 2.5,
         "repetition": 0,
-        "interval": 1
+        "interval": 1,
+        "ef": 2.5
       },
-      "status": "learned"
+      "_origIdx": 3573,
+      "example": "",
+      "status": "learned",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "lớp đế (trong chế tạo bán dẫn)",
+      "en": "Substrate",
+      "category": "specialized",
+      "type": "noun"
+    },
+    {
+      "status": "learned",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "vi": "dòng điện cực phát ($I_E$)",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Emitter current",
+      "type": "Khác",
+      "category": "specialized",
+      "_origIdx": 3672
     },
     {
       "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
+      },
+      "_origIdx": 2125,
+      "type": "Trạng từ (adv)",
+      "category": "specialized",
+      "tags": [
+        "#EDA TOOLS"
+      ],
+      "en": "Visually",
+      "vi": "trực quan"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
         "interval": 1
       },
-      "category": "specialized",
-      "_origIdx": 3601,
-      "type": "Tính từ (adj)",
+      "vi": "hành vi, đặc tính hoạt động",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "vi": "thích hợp, đúng đắn",
-      "en": "Proper"
+      "en": "Behavior",
+      "type": "Danh từ (n)",
+      "_origIdx": 3521,
+      "category": "specialized",
+      "status": "learned"
     },
     {
       "type": "Trạng từ (adv)",
       "category": "specialized",
-      "_origIdx": 2125,
-      "en": "Visually",
+      "_origIdx": 3619,
+      "vi": "trong khi đó",
+      "en": "Meanwhile",
       "tags": [
-        "#EDA TOOLS"
+        "#EXAM-IC DESIGN"
       ],
-      "vi": "trực quan",
+      "sm": {
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
+        "dueDate": "2026-05-17"
+      },
+      "status": "learned"
+    },
+    {
+      "en": "analysis",
+      "vi": "phân tích",
+      "type": "Danh từ (n)",
+      "category": "common",
+      "tags": [
+        "#TEST"
+      ],
+      "example": "The analysis shows congestion.",
+      "status": "learned",
+      "_origIdx": 3731,
+      "ipa": "",
+      "family": "analyze"
+    },
+    {
       "sm": {
         "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
         "interval": 1
       },
+      "category": "common",
+      "_origIdx": 2706,
+      "type": "Danh từ (n)",
+      "en": "desktop",
+      "tags": [
+        "#COMPUTER"
+      ],
+      "vi": "máy tính bàn",
       "status": "learned"
     },
     {
       "status": "learned",
-      "_origIdx": 2628,
-      "category": "common",
-      "type": "Tính từ (adj)",
-      "vi": "tổng (trước thuế)",
-      "en": "gross",
+      "category": "specialized",
+      "_origIdx": 3695,
+      "type": "Khác",
+      "en": "Main drawback",
       "tags": [
-        "#FINANCE & ACCOUNTING"
+        "#EXAM-IC DESIGN"
       ],
+      "vi": "nhược điểm chính",
       "sm": {
-        "ef": 2.5,
-        "repetition": 0,
         "interval": 1,
+        "repetition": 0,
+        "ef": 2.5,
         "dueDate": "2026-05-17"
       }
     },
     {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "category": "specialized",
-      "_origIdx": 3672,
-      "type": "Khác",
-      "en": "Emitter current",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "dòng điện cực phát ($I_E$)",
-      "status": "learned"
-    },
-    {
       "status": "learned",
       "sm": {
         "dueDate": "2026-05-17",
@@ -66961,165 +67216,14 @@
         "repetition": 0,
         "interval": 1
       },
-      "tags": [],
-      "en": "Complex",
-      "vi": "phức tạp",
-      "type": "Tính từ (adj)",
-      "category": "specialized",
-      "_origIdx": 63
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "type": "Khác",
-      "_origIdx": 3685,
-      "category": "specialized",
-      "vi": "ngược lại",
+      "en": "Junction",
       "tags": [
-        "#EXAM-IC DESIGN"
+        "#SEMICONDUCTOR"
       ],
-      "en": "In contrast"
-    },
-    {
-      "en": "Demonstrate",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "chứng minh, minh họa",
-      "type": "Động từ (v)",
-      "_origIdx": 3481,
+      "vi": "tiếp giáp",
       "category": "specialized",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "vi": "Đơn vị logic số học (ALU)",
-      "en": "Arithmetic Logic Units",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "category": "specialized",
-      "type": "Khác",
-      "_origIdx": 3632,
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "en": "Cut-off",
-      "vi": "trạng thái ngưng dẫn",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3662,
-      "status": "learned"
-    },
-    {
-      "vi": "rộng",
-      "tags": [
-        "#CHIP"
-      ],
-      "en": "Widely",
-      "type": "Trạng từ (adv)",
-      "category": "specialized",
-      "_origIdx": 1053,
-      "sm": {
-        "dueDate": "2026-05-17",
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "category": "specialized",
-      "type": "Danh từ (n)",
-      "_origIdx": 3572,
-      "en": "Strength",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "thế mạnh",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "status": "learned"
-    },
-    {
-      "type": "Danh từ (n)",
-      "_origIdx": 3555,
-      "category": "specialized",
-      "en": "Movement",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "sự di chuyển",
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "_origIdx": 2971,
-      "type": "Động từ (v)",
-      "category": "common",
-      "tags": [
-        "#RELAX"
-      ],
-      "en": "take a break",
-      "vi": "nghỉ giải lao"
-    },
-    {
-      "type": "Danh từ (n)",
-      "_origIdx": 261,
-      "category": "specialized",
-      "tags": [
-        "#ARCHITECTURE"
-      ],
-      "vi": "cấu hình",
-      "en": "Configuration",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
+      "_origIdx": 1430,
+      "type": "Danh từ (n)"
     },
     {
       "sm": {
@@ -67128,145 +67232,60 @@
         "interval": 1,
         "repetition": 0
       },
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3683,
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "en": "High precision",
-      "vi": "độ chính xác cao",
-      "status": "learned"
-    },
-    {
       "type": "Tính từ (adj)",
+      "_origIdx": 198,
       "category": "specialized",
-      "_origIdx": 1616,
-      "tags": [
-        "#TIMING & PERFORMANCE"
-      ],
-      "en": "Predictable",
-      "vi": "dự đoán được",
-      "sm": {
-        "repetition": 0,
-        "interval": 1,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "status": "learned",
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "tags": [
-        "#FINANCE & ACCOUNTING"
-      ],
-      "en": "lend",
-      "vi": "cho vay",
-      "type": "Động từ (v)",
-      "_origIdx": 2570,
-      "category": "common"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1
-      },
-      "en": "Invaluable",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "vô giá",
-      "type": "Tính từ (adj)",
-      "category": "specialized",
-      "_origIdx": 3593,
-      "status": "learned"
-    },
-    {
-      "vi": "việc nắm vững (danh động từ)",
-      "en": "Mastering",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "type": "Khác",
-      "category": "specialized",
-      "_origIdx": 3696,
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "en": "large",
-      "tags": [
-        "#BUSINESS"
-      ],
-      "vi": "lớn",
-      "type": "Tính từ (adj)",
-      "category": "common",
-      "_origIdx": 2251,
-      "sm": {
-        "ef": 2.5,
-        "interval": 1,
-        "repetition": 0,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
-    },
-    {
-      "sm": {
-        "dueDate": "2026-05-17",
-        "interval": 1,
-        "repetition": 0,
-        "ef": 2.5
-      },
-      "en": "Electric field",
-      "tags": [
-        "#SEMICONDUCTOR"
-      ],
-      "vi": "điện trường",
-      "_origIdx": 1433,
-      "type": "Danh từ (n)",
-      "category": "specialized",
-      "status": "learned"
-    },
-    {
-      "type": "Động từ (v)",
-      "category": "specialized",
-      "_origIdx": 163,
-      "vi": "kiểm tra",
-      "en": "Check",
       "tags": [
         "#SPECIFICATION"
       ],
-      "sm": {
-        "ef": 2.5,
-        "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
-      },
+      "en": "Continuous",
+      "vi": "liên tục",
       "status": "learned"
     },
     {
       "status": "learned",
-      "vi": "chiều dài",
-      "en": "Length",
+      "category": "specialized",
+      "type": "Danh từ (n)",
+      "_origIdx": 711,
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "Floorplan",
+      "vi": "sơ đồ mặt bằng",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "repetition": 0,
+        "interval": 1,
+        "ef": 2.5
+      },
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "_origIdx": 3550,
+      "en": "Significant",
+      "vi": "đáng kể, quan trọng",
+      "type": "Tính từ (adj)",
       "category": "specialized",
-      "type": "Danh từ (n)",
+      "_origIdx": 3605,
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "vi": "trung tâm",
+      "tags": [
+        "#TRAVEL & HOTEL"
+      ],
+      "en": "central",
+      "_origIdx": 3388,
+      "type": "Tính từ (adj)",
+      "category": "common",
       "sm": {
         "ef": 2.5,
         "repetition": 0,
@@ -67275,100 +67294,242 @@
       }
     },
     {
+      "category": "common",
+      "_origIdx": 2159,
+      "type": "Danh từ (n)",
+      "en": "document",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "tài liệu",
       "sm": {
-        "interval": 1,
-        "repetition": 0,
         "ef": 2.5,
+        "repetition": 0,
+        "interval": 1,
         "dueDate": "2026-05-17"
       },
-      "vi": "tương đối",
-      "en": "Relatively",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
+      "status": "learned"
+    },
+    {
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      },
+      "type": "Danh từ (n)",
       "category": "specialized",
-      "_origIdx": 3622,
-      "type": "Trạng từ (adv)",
+      "_origIdx": 733,
+      "vi": "điện di",
+      "tags": [
+        "#PHYSICAL DESIGN"
+      ],
+      "en": "EM (Electromigration)",
       "status": "learned"
     },
     {
       "status": "learned",
       "sm": {
+        "dueDate": "2026-05-17",
         "ef": 2.5,
         "repetition": 0,
-        "interval": 1,
-        "dueDate": "2026-05-17"
+        "interval": 1
       },
-      "vi": "tần số cao",
-      "en": "High frequency",
+      "vi": "điện áp đặt vào",
       "tags": [
         "#EXAM-IC DESIGN"
       ],
-      "category": "specialized",
+      "en": "Applied voltage",
       "type": "Khác",
-      "_origIdx": 3681
+      "category": "specialized",
+      "_origIdx": 3631
     },
     {
-      "en": "breakfast",
-      "vi": "bữa sáng",
-      "tags": [
-        "#TRAVEL & HOTEL"
-      ],
-      "category": "common",
-      "_origIdx": 3316,
-      "type": "Danh từ (n)",
       "sm": {
-        "repetition": 0,
-        "interval": 1,
         "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
         "dueDate": "2026-05-17"
       },
+      "type": "Khác",
+      "_origIdx": 3640,
+      "category": "specialized",
+      "en": "Charge carrier",
+      "vi": "hạt tải điện",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
       "status": "learned"
     },
     {
-      "vi": "chèn",
+      "sm": {
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0,
+        "dueDate": "2026-05-17"
+      },
+      "category": "specialized",
+      "type": "Động từ (v)",
+      "_origIdx": 750,
+      "vi": "kéo giãn",
+      "en": "Stretch",
       "tags": [
         "#PHYSICAL DESIGN"
       ],
-      "en": "Insert",
-      "_origIdx": 743,
-      "type": "Động từ (v)",
+      "status": "learned"
+    },
+    {
+      "status": "learned",
+      "en": "Superior",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "vi": "vượt trội",
+      "type": "Tính từ (adj)",
       "category": "specialized",
+      "_origIdx": 3608,
       "sm": {
         "ef": 2.5,
         "repetition": 0,
         "interval": 1,
         "dueDate": "2026-05-17"
+      }
+    },
+    {
+      "status": "learned",
+      "tags": [
+        "#BUSINESS"
+      ],
+      "vi": "chậm",
+      "en": "slow",
+      "category": "common",
+      "type": "Tính từ (adj)",
+      "_origIdx": 2268,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "status": "learned",
+      "type": "noun",
+      "category": "specialized",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "en": "Amplifier",
+      "vi": "bộ khuếch đại",
+      "family": "",
+      "example": "",
+      "_origIdx": 3519,
+      "ipa": "",
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "interval": 1,
+        "repetition": 0
+      }
+    },
+    {
+      "status": "learned",
+      "type": "Động từ (v)",
+      "_origIdx": 3472,
+      "category": "specialized",
+      "vi": "ảnh hưởng",
+      "en": "Affect",
+      "tags": [
+        "#EXAM-IC DESIGN"
+      ],
+      "sm": {
+        "dueDate": "2026-05-17",
+        "ef": 2.5,
+        "repetition": 0,
+        "interval": 1
+      }
+    },
+    {
+      "vi": "phức tạp",
+      "tags": [],
+      "en": "Complex",
+      "category": "specialized",
+      "type": "Tính từ (adj)",
+      "_origIdx": 63,
+      "sm": {
+        "dueDate": "2026-05-17",
+        "interval": 1,
+        "repetition": 0,
+        "ef": 2.5
       },
       "status": "learned"
     },
     {
-      "en": "Employ",
-      "tags": [
-        "#EXAM-IC DESIGN"
-      ],
-      "vi": "sử dụng",
+      "status": "learned",
       "type": "Động từ (v)",
-      "category": "specialized",
-      "_origIdx": 3488,
+      "_origIdx": 2221,
+      "category": "common",
+      "vi": "giám sát",
+      "en": "monitor",
+      "tags": [
+        "#BUSINESS"
+      ],
       "sm": {
-        "interval": 1,
+        "dueDate": "2026-05-17",
         "repetition": 0,
-        "ef": 2.5,
-        "dueDate": "2026-05-17"
-      },
-      "status": "learned"
+        "interval": 1,
+        "ef": 2.5
+      }
     }
   ],
+  "typingQueue": [],
   "todos": [
+    {
+      "id": 1779240018193,
+      "text": "Đặt câu hỏi trên Sheet",
+      "priority": "low",
+      "due": "2026-05-21",
+      "repeat": "every_2",
+      "done": false,
+      "createdAt": "2026-05-20"
+    },
+    {
+      "id": 1779239978131,
+      "text": "Trả lời câu hỏi trên Sheet",
+      "priority": "low",
+      "due": "2026-05-20",
+      "repeat": "every_2",
+      "done": false,
+      "createdAt": "2026-05-20"
+    },
+    {
+      "id": 1779201487932,
+      "text": "Soạn đề cương môn cô Thảo",
+      "priority": "high",
+      "due": "2026-05-23",
+      "repeat": "",
+      "done": false,
+      "createdAt": "2026-05-19"
+    },
+    {
+      "id": 1779201308374,
+      "text": "Ôn tập từ vựng hằng ngày ít nhất 10p/ngày",
+      "priority": "medium",
+      "due": "2026-05-20",
+      "repeat": "daily",
+      "done": false,
+      "createdAt": "2026-05-19"
+    },
     {
       "id": 1779121607815,
       "text": "Ôn tập từ vựng hằng ngày ít nhất 10p/ngày",
       "priority": "medium",
       "due": "2026-05-19",
       "repeat": "daily",
-      "done": false,
-      "createdAt": "2026-05-18"
+      "done": true,
+      "createdAt": "2026-05-18",
+      "note": "",
+      "doneAt": "2026-05-19"
     },
     {
       "id": 1779120491895,
@@ -67377,7 +67538,8 @@
       "due": "2026-05-19",
       "repeat": "daily",
       "done": false,
-      "createdAt": "2026-05-18"
+      "createdAt": "2026-05-18",
+      "note": ""
     },
     {
       "id": 1779120486827,
@@ -67386,7 +67548,8 @@
       "due": "2026-05-19",
       "repeat": "daily",
       "done": false,
-      "createdAt": "2026-05-18"
+      "createdAt": "2026-05-18",
+      "note": ""
     },
     {
       "id": 1779100992739,
@@ -67403,8 +67566,10 @@
       "priority": "medium",
       "due": "2026-05-19",
       "repeat": "",
-      "done": false,
-      "createdAt": "2026-05-18"
+      "done": true,
+      "createdAt": "2026-05-18",
+      "note": "",
+      "doneAt": "2026-05-19"
     },
     {
       "id": 1779100888661,
@@ -67466,15 +67631,6 @@
     },
     {
       "done": false,
-      "priority": "low",
-      "text": "Vào Firebase gia hạn Test mode",
-      "id": 1779030165458,
-      "due": "2026-06-15",
-      "repeat": "monthly",
-      "createdAt": "2026-05-17"
-    },
-    {
-      "done": false,
       "text": "Báo cáo tiến độ học tập PD cho lớp trưởng",
       "priority": "medium",
       "id": 1779017248299,
@@ -67501,15 +67657,6 @@
       "priority": "high",
       "done": true,
       "doneAt": "2026-05-17"
-    },
-    {
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "priority": "low",
-      "done": false,
-      "createdAt": "2026-05-17",
-      "due": "2026-05-18",
-      "id": 1778979680854,
-      "repeat": "daily"
     },
     {
       "createdAt": "2026-05-17",
@@ -67539,26 +67686,6 @@
       "due": "2026-05-18",
       "createdAt": "2026-05-17",
       "doneAt": "2026-05-18"
-    },
-    {
-      "done": true,
-      "doneAt": "2026-05-17",
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "priority": "low",
-      "due": "2026-05-17",
-      "repeat": "daily",
-      "id": 1778860604339,
-      "createdAt": "2026-05-15"
-    },
-    {
-      "done": true,
-      "doneAt": "2026-05-15",
-      "priority": "low",
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "due": "2026-05-16",
-      "id": 1778859805826,
-      "repeat": "daily",
-      "createdAt": "2026-05-15"
     },
     {
       "priority": "medium",
@@ -67654,22 +67781,25 @@
       "priority": "medium"
     },
     {
-      "text": "Làm báo cáo a Quang tuần 12",
+      "text": "Làm báo cáo a Quang tuần 13 (tiếp)",
       "priority": "medium",
-      "done": false,
+      "done": true,
       "createdAt": "2026-05-15",
       "repeat": "",
       "due": "2026-05-19",
-      "id": 1778809437464
+      "id": 1778809437464,
+      "note": "",
+      "doneAt": "2026-05-19"
     },
     {
       "repeat": "",
       "id": 1778809356709,
       "due": "2026-05-18",
       "createdAt": "2026-05-15",
-      "done": false,
+      "done": true,
       "text": "Làm slide báo cáo Kỹ năng mềm (tiếp)",
-      "priority": "medium"
+      "priority": "medium",
+      "doneAt": "2026-05-19"
     },
     {
       "createdAt": "2026-05-14",
@@ -67680,26 +67810,6 @@
       "text": "Ôn tập từ vựng hằng ngày ít nhất 10p/ngày",
       "done": true,
       "doneAt": "2026-05-15"
-    },
-    {
-      "createdAt": "2026-05-14",
-      "repeat": "daily",
-      "due": "2026-05-15",
-      "id": 1778758883730,
-      "priority": "low",
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "doneAt": "2026-05-15",
-      "done": true
-    },
-    {
-      "priority": "low",
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "done": true,
-      "doneAt": "2026-05-14",
-      "createdAt": "2026-05-13",
-      "repeat": "daily",
-      "due": "2026-05-14",
-      "id": 1778681538222
     },
     {
       "createdAt": "2026-05-13",
@@ -67783,21 +67893,12 @@
     {
       "priority": "high",
       "text": "Hoàn thành báo cáo thuyết trình về chủ đề: Lựa chọn công việc - Tiền bạc hay đam mê",
-      "done": false,
+      "done": true,
       "createdAt": "2026-05-13",
       "id": 1778657479488,
       "repeat": "",
-      "due": "2026-05-20"
-    },
-    {
-      "createdAt": "2026-05-13",
-      "id": 1778653725026,
-      "repeat": "daily",
-      "due": "2026-05-13",
-      "priority": "low",
-      "text": "Đặt câu hỏi / trả lời câu hỏi trên Sheet",
-      "doneAt": "2026-05-13",
-      "done": true
+      "due": "2026-05-20",
+      "doneAt": "2026-05-19"
     },
     {
       "priority": "medium",
@@ -67947,16 +68048,27 @@
       "text": "📖 Học từ vựng hôm nay (20 từ)",
       "priority": "high",
       "due": "2026-05-19",
+      "done": true,
+      "doneAt": "2026-05-19",
+      "createdAt": "2026-05-19",
+      "isDaily": true,
+      "note": ""
+    },
+    {
+      "id": 20260520,
+      "text": "📖 Học từ vựng hôm nay (20 từ)",
+      "priority": "high",
+      "due": "2026-05-20",
       "done": false,
       "doneAt": null,
-      "createdAt": "2026-05-19",
+      "createdAt": "2026-05-20",
       "isDaily": true
     }
   ],
   "statsData": {
     "demotes": {
       "instruction": 2,
-      "Cluster": 1,
+      "Cluster": 2,
       "Shield": 1,
       "rest": 1,
       "Aligned": 2,
@@ -68006,7 +68118,20 @@
       "safely": 1,
       "Contemporary": 2,
       "calm": 1,
-      "relaxation": 1
+      "relaxation": 1,
+      "Spread": 1,
+      "Relatively": 1,
+      "large": 1,
+      "Mastering": 1,
+      "Invaluable": 1,
+      "Predictable": 1,
+      "High precision": 1,
+      "Widely": 2,
+      "Sophisticated": 1,
+      "order": 1,
+      "desktop": 1,
+      "microphone": 1,
+      "user-friendly": 1
     },
     "timeByDay": {
       "2026-05-16": 8,
@@ -68016,7 +68141,9 @@
       "2026-05-14": 11,
       "2026-05-12": 45,
       "2026-05-17": 10,
-      "2026-05-18": 13
+      "2026-05-18": 13,
+      "2026-05-19": 10,
+      "2026-05-20": 3
     },
     "scores": [
       {
@@ -68386,6 +68513,86 @@
         "total": 10,
         "pct": 90,
         "ts": 1779121588381
+      },
+      {
+        "date": "2026-05-19",
+        "game": "quiz",
+        "correct": 17,
+        "total": 19,
+        "pct": 89,
+        "ts": 1779200604390
+      },
+      {
+        "date": "2026-05-19",
+        "game": "typing",
+        "correct": 14,
+        "total": 20,
+        "pct": 70,
+        "ts": 1779200788743
+      },
+      {
+        "date": "2026-05-19",
+        "game": "quiz",
+        "correct": 20,
+        "total": 20,
+        "pct": 100,
+        "ts": 1779200920930
+      },
+      {
+        "date": "2026-05-19",
+        "game": "listening",
+        "correct": 9,
+        "total": 10,
+        "pct": 90,
+        "ts": 1779200993478
+      },
+      {
+        "date": "2026-05-19",
+        "game": "listening",
+        "correct": 9,
+        "total": 10,
+        "pct": 90,
+        "ts": 1779201082029
+      },
+      {
+        "date": "2026-05-19",
+        "game": "listening",
+        "correct": 9,
+        "total": 10,
+        "pct": 90,
+        "ts": 1779201158546
+      },
+      {
+        "date": "2026-05-19",
+        "game": "quiz",
+        "correct": 20,
+        "total": 20,
+        "pct": 100,
+        "ts": 1779201232780
+      },
+      {
+        "date": "2026-05-19",
+        "game": "quiz",
+        "correct": 17,
+        "total": 19,
+        "pct": 89,
+        "ts": 1779201300533
+      },
+      {
+        "date": "2026-05-20",
+        "game": "typing",
+        "correct": 15,
+        "total": 16,
+        "pct": 94,
+        "ts": 1779239606200
+      },
+      {
+        "date": "2026-05-20",
+        "game": "listening",
+        "correct": 9,
+        "total": 10,
+        "pct": 90,
+        "ts": 1779239684436
       }
     ],
     "wordsByDay": {
@@ -68397,13 +68604,15 @@
       "2026-05-13": 71,
       "2026-05-18": 60,
       "2026-05-11": 55,
-      "2026-05-19": 1
+      "2026-05-19": 48,
+      "2026-05-20": 4
     }
   },
   "weeklySummaries": {
     "2026-05-17": "- Hoàn thành báo cáo thuyết trình Học máy trên FPGA (cô Thảo)\n- Hoàn thành báo cáo thuyết trình Lập trình vi điều khiển tuần 11 (anh Quang)\n- PD: đã học tới độ lái cell"
   },
   "weeklyGoals": {
-    "2026-05-17": "- Hoàn thành tiếp bài báo cáo thuyết trình Lập trình vi điều khiển tuần 13 (anh Quang)\n- Hoàn thành bài kiểm tra Anh văn chuyên ngành vào thứ 2 (thầy Linh) - pass\n- Hoàn thành báo cáo Kỹ năng mềm trước thứ 5 (thầy Hùng)\n- Chuẩn bị đề ôn tập môn Tối ưu hệ thống nhúng IoT (thầy Vũ)\n- PD: hoàn thành Lab 3"
+    "2026-05-17": "- Hoàn thành tiếp bài báo cáo thuyết trình Lập trình vi điều khiển tuần 13 (anh Quang)\n- Hoàn thành bài kiểm tra Anh văn chuyên ngành vào thứ 2 (thầy Linh) - pass\n- Hoàn thành báo cáo Kỹ năng mềm trước thứ 5 (thầy Hùng)\n- Chuẩn bị đề ôn tập môn Tối ưu hệ thống nhúng IoT (thầy Vũ)\n- PD: hoàn thành Lab 3",
+    "2026-05-24": "Học bài soạn đề cương thầy Vũ\nHọc bài soạn đề cương cô Thảo\nLàm bài a Quang"
   }
 }
