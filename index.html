@@ -3405,6 +3405,112 @@
             }
         }
 
+        function resetQuizArea() {
+            clearInterval(quizTimerId);
+            clearTimeout(quizTransitionTimeout);
+            const quizArea = document.getElementById('quiz-area');
+            if (!quizArea) return;
+            quizArea.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <p>Hệ thống sẽ xoay vòng kiểm tra các từ bạn đã đánh dấu "Đã thuộc" trong thời gian đã chọn.<br>
+                    <span style="color:#28a745; font-size: 14px;">💡 Các từ sẽ không bị lặp lại cho đến khi bạn ôn hết toàn bộ danh sách!</span><br>
+                    <span style="color:#dc3545; font-size: 14px;">⚠️ Lưu ý: Từ nào chọn sai sẽ bị giáng cấp về trạng thái "Quên chữ"!</span></p>
+                    <div style="display:inline-flex; align-items:center; gap:12px; margin: 10px 0; background:rgba(0,0,0,0.04); padding:10px 18px; border-radius:12px; border:1px solid var(--border-color);">
+                        <span style="font-size:14px; font-weight:bold;">⏱️ Thời gian:</span>
+                        <select id="quiz-time-select" onchange="updateQuizInfo()" style="width:auto; margin:0; padding:8px 12px; font-size:15px; font-weight:bold; color:var(--primary-btn); border-radius:8px;">
+                            <option value="1">1 phút — 20 từ</option>
+                            <option value="2">2 phút — 40 từ</option>
+                            <option value="3">3 phút — 60 từ</option>
+                        </select>
+                    </div>
+                    <div id="quiz-info-text" style="font-size:13px; color:#888; margin-bottom:4px;">Kiểm tra tối đa <b>20 từ</b> trong <b>60 giây</b></div>
+                    <div style="margin: 12px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ vựng:</label>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                            <button id="quiz-cat-all" onclick="setQuizCategory(null)"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--primary-btn); background:var(--primary-btn); color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                📚 Tất cả
+                            </button>
+                            <button id="quiz-cat-common" onclick="setQuizCategory('common')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                📖 Thường dùng
+                            </button>
+                            <button id="quiz-cat-specialized" onclick="setQuizCategory('specialized')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                🔬 Chuyên ngành
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin: 8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                        <select id="quiz-tag-filter" onchange="setQuizTag(this.value === '__all__' ? null : this.value)"
+                            style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:var(--primary-btn); border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                            <option value="__all__">📚 Tất cả "Đã thuộc"</option>
+                        </select>
+                    </div>
+                    <button onclick="initQuiz()" style="background: #28a745; padding: 15px 30px; font-size: 18px; margin-top: 15px;" id="quiz-start-btn">▶ Bắt đầu (1 Phút)</button>
+                </div>`;
+            renderQuizTagFilter();
+            if (typeof updateQuizInfo === 'function') updateQuizInfo();
+            // Restore active category button state
+            ['quiz-cat-all','quiz-cat-common','quiz-cat-specialized'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                const cat = id === 'quiz-cat-all' ? null : id === 'quiz-cat-common' ? 'common' : 'specialized';
+                const active = cat === activeQuizCategory;
+                btn.style.background = active ? 'var(--primary-btn)' : 'transparent';
+                btn.style.borderColor = active ? 'var(--primary-btn)' : 'var(--border-color)';
+                btn.style.color = active ? 'white' : 'var(--text-main)';
+            });
+        }
+
+        function resetTypingArea() {
+            const area = document.getElementById('typing-area');
+            if (!area) return;
+            area.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <p>Xem nghĩa <b>tiếng Việt</b> rồi gõ đúng <b>từ tiếng Anh</b> tương ứng.<br>
+                    <span style="color:#28a745; font-size: 14px;">💡 Từ được lấy từ danh sách "Đã thuộc" — không giới hạn thời gian!</span><br>
+                    <span style="color:#fd7e14; font-size: 14px;">💡 Bấm "Gợi ý" để lộ từng chữ cái. Từ sai sẽ bị giáng về "Quên chữ"!</span></p>
+                    <div style="margin: 14px 0 8px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <span style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ vựng:</span>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                            <button id="typing-cat-all" onclick="setTypingCategory(null)"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid #6f42c1; background:#6f42c1; color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                📚 Tất cả
+                            </button>
+                            <button id="typing-cat-common" onclick="setTypingCategory('common')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                📖 Thường dùng
+                            </button>
+                            <button id="typing-cat-specialized" onclick="setTypingCategory('specialized')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                🔬 Chuyên ngành
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin: 8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                        <select id="typing-tag-filter" onchange="setTypingTag(this.value === '__all__' ? null : this.value)"
+                            style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#6f42c1; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                            <option value="__all__">📚 Tất cả "Đã thuộc"</option>
+                        </select>
+                    </div>
+                    <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 6px;">Bắt đầu luyện gõ</button>
+                </div>`;
+            renderTypingTagFilter();
+            // Restore active category button state
+            ['typing-cat-all','typing-cat-common','typing-cat-specialized'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                const cat = id === 'typing-cat-all' ? null : id === 'typing-cat-common' ? 'common' : 'specialized';
+                const active = cat === activeTypingCategory;
+                btn.style.background = active ? '#6f42c1' : 'transparent';
+                btn.style.borderColor = active ? '#6f42c1' : 'var(--border-color)';
+                btn.style.color = active ? 'white' : 'var(--text-main)';
+            });
+        }
+
         function endQuiz() {
             clearInterval(quizTimerId);
             clearTimeout(quizTransitionTimeout);
@@ -3424,7 +3530,9 @@
                     : null,
                 extraNote: `📦 Số từ "Đã thuộc" còn chờ thi: <b>${quizQueue.length}</b> từ`,
                 restartLabel: '🔄 Thi tiếp',
-                restartFn: 'initQuiz()'
+                restartFn: 'initQuiz()',
+                backLabel: '🏠 Quay về',
+                backFn: 'resetQuizArea()'
             });
         }
 
@@ -5258,6 +5366,8 @@ If no family match found: {"family": null, "matched_words": []}`;
                 extraNote: `📦 Hàng chờ luyện gõ còn lại: <b>${typingQueue.length}</b> từ`,
                 restartLabel: '🔄 Luyện tiếp',
                 restartFn: 'initTypingGame()',
+                backLabel: '🏠 Quay về',
+                backFn: 'resetTypingArea()',
                 extraHTML: wrongHTML
             });
         }
@@ -6229,7 +6339,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         // ── Unified game result renderer ─────────────────────────────────────
-        function renderGameResult(container, { icon, title, correct, total, pct, wrongNote, extraNote, restartLabel, restartFn, extraHTML }) {
+        function renderGameResult(container, { icon, title, correct, total, pct, wrongNote, extraNote, restartLabel, restartFn, backLabel, backFn, extraHTML }) {
             const emoji = pct === 100 ? '🏆' : pct >= 80 ? '🌟' : pct >= 60 ? '💪' : '📖';
             const scoreColor = pct >= 80 ? '#28a745' : pct >= 60 ? '#fd7e14' : '#dc3545';
             const perfectMsg = pct === 100;
@@ -6262,7 +6372,10 @@ If no family match found: {"family": null, "matched_words": []}`;
                     ${feedbackBox}
                     ${extraNote ? `<div style="margin-top:10px;font-size:13px;color:#888;">${extraNote}</div>` : ''}
                     ${extraHTML || ''}
-                    <button onclick="${restartFn}" style="padding:12px 28px;font-size:16px;margin-top:16px;">${restartLabel}</button>
+                    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+                        <button onclick="${restartFn}" style="padding:12px 28px;font-size:16px;">${restartLabel}</button>
+                        ${backLabel && backFn ? `<button onclick="${backFn}" style="padding:12px 28px;font-size:16px;background:transparent;color:var(--text-main);border:2px solid var(--border-color);">${backLabel}</button>` : ''}
+                    </div>
                 </div>
             `;
             // Refresh stats panel
