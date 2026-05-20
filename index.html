@@ -919,6 +919,8 @@
         .dark-mode .repeat-badge.weekly { background: #2d1a5a; color: #c084fc; border-color: #4a2a8a; }
         .repeat-badge.monthly { background: #e8fdf0; color: #28a745; border-color: #b8f7d0; }
         .dark-mode .repeat-badge.monthly { background: #1a3a2a; color: #4ade80; border-color: #2a6a4a; }
+        .repeat-badge.custom { background: #fff0e0; color: #c96a00; border-color: #ffd6a5; }
+        .dark-mode .repeat-badge.custom { background: #3b1e00; color: #fb923c; border-color: #7c3900; }
         /* ===== RECURRING TASK LIST ===== */
         .recurring-section {
             margin-top: 20px;
@@ -952,6 +954,7 @@
         .recurring-series-dot.daily  { background: #1877f2; }
         .recurring-series-dot.weekly { background: #6f42c1; }
         .recurring-series-dot.monthly{ background: #28a745; }
+        .recurring-series-dot.custom { background: #fd7e14; }
         .recurring-series-body { flex: 1; min-width: 0; }
         .recurring-series-text {
             font-size: 14px; font-weight: 600; word-break: break-word;
@@ -1954,12 +1957,19 @@
                     <option value="low">🟢 Thấp</option>
                 </select>
                 <input type="date" id="todo-due">
-                <select id="todo-repeat">
+                <select id="todo-repeat" onchange="onRepeatChange(this.value)">
                     <option value="">🔁 Không lặp</option>
                     <option value="daily">📅 Hằng ngày</option>
                     <option value="weekly">📆 Hằng tuần</option>
                     <option value="monthly">🗓️ Hằng tháng</option>
+                    <option value="custom">🔢 Theo số ngày...</option>
                 </select>
+                <div id="todo-repeat-custom" style="display:none; align-items:center; gap:6px; flex-shrink:0;">
+                    <span style="font-size:13px; white-space:nowrap; color:var(--text-main);">Lặp sau</span>
+                    <input type="number" id="todo-repeat-days" min="2" max="365" value="2"
+                        style="width:64px; padding:8px 10px; margin-bottom:0; font-size:14px; font-weight:bold; color:var(--primary-btn); text-align:center;">
+                    <span style="font-size:13px; white-space:nowrap; color:var(--text-main);">ngày</span>
+                </div>
                 <button class="todo-add-btn" onclick="addTodo()">➕ Thêm</button>
             </div>
         </div>
@@ -2164,8 +2174,27 @@
                 </div>
                 <div id="quiz-info-text" style="font-size:13px; color:#888; margin-bottom:4px;">Kiểm tra tối đa <b>20 từ</b> trong <b>60 giây</b></div>
                 
+                <!-- QUIZ CATEGORY FILTER -->
+                <div style="margin: 12px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ vựng:</label>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                        <button id="quiz-cat-all" onclick="setQuizCategory(null)"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--primary-btn); background:var(--primary-btn); color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📚 Tất cả
+                        </button>
+                        <button id="quiz-cat-common" onclick="setQuizCategory('common')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📖 Thường dùng
+                        </button>
+                        <button id="quiz-cat-specialized" onclick="setQuizCategory('specialized')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            🔬 Chuyên ngành
+                        </button>
+                    </div>
+                </div>
+
                 <!-- QUIZ TAG FILTER -->
-                <div style="margin: 12px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                <div style="margin: 8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
                     <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">&#127991;&#65039; Ôn theo tag:</label>
                     <select id="quiz-tag-filter" onchange="setQuizTag(this.value === '__all__' ? null : this.value)"
                         style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:var(--primary-btn); border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
@@ -2186,7 +2215,36 @@
                 <p>Xem nghĩa <b>tiếng Việt</b> rồi gõ đúng <b>từ tiếng Anh</b> tương ứng.<br>
                 <span style="color:#28a745; font-size: 14px;">💡 Từ được lấy từ danh sách "Đã thuộc" — không giới hạn thời gian!</span><br>
                 <span style="color:#fd7e14; font-size: 14px;">💡 Bấm "Gợi ý" để lộ từng chữ cái. Từ sai sẽ bị giáng về "Quên chữ"!</span></p>
-                <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 15px;">Bắt đầu luyện gõ</button>
+
+                <!-- TYPING CATEGORY FILTER -->
+                <div style="margin: 14px 0 8px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <span style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ vựng:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                        <button id="typing-cat-all" onclick="setTypingCategory(null)"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid #6f42c1; background:#6f42c1; color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📚 Tất cả
+                        </button>
+                        <button id="typing-cat-common" onclick="setTypingCategory('common')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📖 Thường dùng
+                        </button>
+                        <button id="typing-cat-specialized" onclick="setTypingCategory('specialized')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            🔬 Chuyên ngành
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TYPING TAG FILTER -->
+                <div style="margin: 8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                    <select id="typing-tag-filter" onchange="setTypingTag(this.value === '__all__' ? null : this.value)"
+                        style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#6f42c1; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                        <option value="__all__">📚 Tất cả "Đã thuộc"</option>
+                    </select>
+                </div>
+
+                <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 6px;">Bắt đầu luyện gõ</button>
             </div>
         </div>
     </div>
@@ -2505,6 +2563,12 @@
         let activeFlashcardTag = null; // null = all
         let activeQuizTag = null;      // null = all
         // =====================
+
+        // ===== QUIZ CATEGORY STATE =====
+        let activeQuizCategory = null; // null = all, 'common', 'specialized'
+        let activeTypingCategory = null; // null = all, 'common', 'specialized'
+        let activeTypingTag = null; // null = all tags
+        // ================================
         
         let quizQueue = JSON.parse(localStorage.getItem('quizQueue_v4')) || [];
         let quizSessionWords = [];
@@ -2525,6 +2589,7 @@
             renderWordTable();
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
+            renderTypingTagFilter();
             renderStats();
         };
 
@@ -2705,14 +2770,69 @@
             renderQuizTagFilter();
         }
 
+        function setQuizCategory(cat) {
+            activeQuizCategory = cat;
+            // Update button styles
+            ['all', 'common', 'specialized'].forEach(id => {
+                const btn = document.getElementById('quiz-cat-' + id);
+                if (!btn) return;
+                const isActive = (id === 'all' && cat === null) || (id === cat);
+                btn.style.background = isActive ? 'var(--primary-btn)' : 'transparent';
+                btn.style.color = isActive ? 'white' : 'var(--text-main)';
+                btn.style.borderColor = isActive ? 'var(--primary-btn)' : 'var(--border-color)';
+            });
+            // Re-render tag filter with updated category context
+            renderQuizTagFilter();
+        }
+
+        function setTypingCategory(cat) {
+            activeTypingCategory = cat;
+            ['all', 'common', 'specialized'].forEach(id => {
+                const btn = document.getElementById('typing-cat-' + id);
+                if (!btn) return;
+                const isActive = (id === 'all' && cat === null) || (id === cat);
+                btn.style.background = isActive ? '#6f42c1' : 'transparent';
+                btn.style.color = isActive ? 'white' : 'var(--text-main)';
+                btn.style.borderColor = isActive ? '#6f42c1' : 'var(--border-color)';
+            });
+            activeTypingTag = null; // reset tag when category changes
+            renderTypingTagFilter();
+        }
+
+        function setTypingTag(tag) {
+            activeTypingTag = tag;
+            renderTypingTagFilter();
+        }
+
+        function renderTypingTagFilter() {
+            const sel = document.getElementById('typing-tag-filter');
+            if (!sel) return;
+            const allTags = activeTypingCategory
+                ? getAllTags(activeTypingCategory)
+                : [...new Set(cards.flatMap(c => c.tags || []))].sort();
+            let opts = `<option value="__all__"${activeTypingTag === null ? ' selected' : ''}>📚 Tất cả "Đã thuộc"</option>`;
+            allTags.forEach(t => {
+                const count = cards.filter(c => c.status === 'learned'
+                    && (activeTypingCategory ? c.category === activeTypingCategory : true)
+                    && (c.tags||[]).includes(t)).length;
+                if (count > 0) opts += `<option value="${t}"${activeTypingTag === t ? ' selected' : ''}>${t} (${count})</option>`;
+            });
+            sel.innerHTML = opts;
+        }
+
+
         function renderQuizTagFilter() {
             const sel = document.getElementById('quiz-tag-filter');
             if (!sel) return;
-            const allTags = getAllTags(currentStudyCategory);
+            // Use activeQuizCategory to scope available tags; null = all categories
+            const catForTags = activeQuizCategory || null;
+            const allTags = catForTags ? getAllTags(catForTags) : [...new Set(cards.flatMap(c => c.tags || []))].sort();
             let opts = `<option value="__all__"${activeQuizTag === null ? ' selected' : ''}>📚 Tất cả "Đã thuộc"</option>`;
             allTags.forEach(t => {
-                const count = cards.filter(c => c.status === 'learned' && c.category === currentStudyCategory && (c.tags||[]).includes(t)).length;
-                opts += `<option value="${t}"${activeQuizTag === t ? ' selected' : ''}>${t} (${count})</option>`;
+                const count = cards.filter(c => c.status === 'learned'
+                    && (activeQuizCategory ? c.category === activeQuizCategory : true)
+                    && (c.tags||[]).includes(t)).length;
+                if (count > 0) opts += `<option value="${t}"${activeQuizTag === t ? ' selected' : ''}>${t} (${count})</option>`;
             });
             sel.innerHTML = opts;
         }
@@ -2775,6 +2895,7 @@
             activeQuizTag = null;
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
+            renderTypingTagFilter();
 
             currentIndex = 0; 
             applyFilter();
@@ -2968,7 +3089,9 @@
                 cards[originalIndex].status = s; 
                 saveAll(); 
                 showToast("Đã cập nhật trạng thái!"); 
-                renderWordTable(); 
+                renderWordTable();
+                renderQuizTagFilter();
+                renderTypingTagFilter();
 
                 const statusFilter = document.getElementById('filter-select').value;
                 
@@ -3109,6 +3232,7 @@
             renderWordTable();
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
+            renderTypingTagFilter();
 
             let msg = `✅ Đã thêm ${addedCount} từ!`;
             if (skippedCount > 0) msg += ` (Bỏ qua ${skippedCount} từ trùng)`;
@@ -3142,7 +3266,8 @@
             const quizMaxWords = quizMins * 20;
             const quizTotalSecs = quizMins * 60;
 
-            const allLearnedCards = cards.filter(c => c.status === 'learned');
+            const allLearnedCards = cards.filter(c => c.status === 'learned'
+                && (activeQuizCategory ? c.category === activeQuizCategory : true));
             const learnedCards = activeQuizTag
                 ? allLearnedCards.filter(c => (c.tags||[]).includes(activeQuizTag))
                 : allLearnedCards;
@@ -3154,7 +3279,8 @@
             }
             if (learnedCards.length === 0) {
                 const tagNote = activeQuizTag ? ` có tag <b>${activeQuizTag}</b>` : '';
-                quizArea.innerHTML = `<div style="text-align:center; color:#fd7e14; padding: 20px;">Bạn chưa có từ nào đánh dấu <b>"Đã thuộc"</b>${tagNote}.<br>Hãy lên phần Flashcard học và bấm nút "Đã thuộc" trước nhé!</div>
+                const catNote = activeQuizCategory === 'common' ? ' trong nhóm <b>Thường dùng</b>' : activeQuizCategory === 'specialized' ? ' trong nhóm <b>Chuyên ngành</b>' : '';
+                quizArea.innerHTML = `<div style="text-align:center; color:#fd7e14; padding: 20px;">Bạn chưa có từ nào đánh dấu <b>"Đã thuộc"</b>${catNote}${tagNote}.<br>Hãy lên phần Flashcard học và bấm nút "Đã thuộc" trước nhé!</div>
                 <button onclick="location.reload()" style="margin-top:15px; background:var(--bg-card); color:var(--text-main); border:1px solid #ccc;">Quay lại</button>`;
                 return;
             }
@@ -3226,7 +3352,7 @@
             let html = `
                 <div style="display:flex; justify-content:space-between; margin-bottom: 20px; font-weight:bold; font-size:16px;">
                     <span style="color:#dc3545; background:#fff; padding:5px 15px; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">⏱️ <span id="quiz-time-display">${quizTimeLeft}</span>s</span>
-                    <span style="color:#28a745; background:#fff; padding:5px 15px; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">Câu: ${currentQuizIdx + 1}/${quizSessionWords.length}${activeQuizTag ? ' · ' + activeQuizTag : ''}</span>
+                    <span style="color:#28a745; background:#fff; padding:5px 15px; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">Câu: ${currentQuizIdx + 1}/${quizSessionWords.length}${activeQuizCategory === 'common' ? ' · 📖' : activeQuizCategory === 'specialized' ? ' · 🔬' : ''}${activeQuizTag ? ' · ' + activeQuizTag : ''}</span>
                 </div>
                 <div style="font-size: 36px; font-weight: bold; text-align: center; margin-bottom: 25px; color: var(--primary-btn);">
                     ${questionCard.en}
@@ -3425,6 +3551,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             renderWordTable();
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
+            renderTypingTagFilter();
             showToast("Đã thêm từ!");
 
             // Auto-detect word family in background (non-blocking)
@@ -3437,6 +3564,8 @@ If no family match found: {"family": null, "matched_words": []}`;
                 saveAll();
                 applyFilter();
                 renderWordTable();
+                renderQuizTagFilter();
+                renderTypingTagFilter();
             }
         }
 
@@ -3541,6 +3670,8 @@ If no family match found: {"family": null, "matched_words": []}`;
             }
 
             renderWordTable();
+            renderQuizTagFilter();
+            renderTypingTagFilter();
             closeEditCard();
             showToast('✅ Đã lưu thay đổi!');
         }
@@ -4913,11 +5044,17 @@ If no family match found: {"family": null, "matched_words": []}`;
         let typingCurrentDemoted = false;
 
         function initTypingGame() {
-            const learnedCards = cards.filter(c => c.status === 'learned');
+            const baseCards = cards.filter(c => c.status === 'learned'
+                && (activeTypingCategory ? c.category === activeTypingCategory : true));
+            const learnedCards = activeTypingTag
+                ? baseCards.filter(c => (c.tags||[]).includes(activeTypingTag))
+                : baseCards;
             const area = document.getElementById('typing-area');
 
             if (learnedCards.length === 0) {
-                area.innerHTML = `<div style="text-align:center; color:#fd7e14; padding: 20px;">Bạn chưa có từ nào đánh dấu <b>"Đã thuộc"</b>.<br>Hãy học Flashcard và bấm "Đã thuộc" trước nhé!</div>
+                const catNote = activeTypingCategory === 'common' ? ' trong nhóm <b>Thường dùng</b>' : activeTypingCategory === 'specialized' ? ' trong nhóm <b>Chuyên ngành</b>' : '';
+                const tagNote = activeTypingTag ? ` có tag <b>${activeTypingTag}</b>` : '';
+                area.innerHTML = `<div style="text-align:center; color:#fd7e14; padding: 20px;">Bạn chưa có từ nào đánh dấu <b>"Đã thuộc"</b>${catNote}${tagNote}.<br>Hãy học Flashcard và bấm "Đã thuộc" trước nhé!</div>
                 <button onclick="initTypingGame()" style="margin-top:10px; background:var(--bg-card); color:var(--text-main); border:1px solid #ccc;">Thử lại</button>`;
                 return;
             }
@@ -5143,6 +5280,11 @@ If no family match found: {"family": null, "matched_words": []}`;
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         }
 
+        function onRepeatChange(val) {
+            const customDiv = document.getElementById('todo-repeat-custom');
+            if (customDiv) customDiv.style.display = (val === 'custom') ? 'flex' : 'none';
+        }
+
         function addTodo() {
             const input = document.getElementById('todo-input');
             const text = input.value.trim();
@@ -5150,14 +5292,21 @@ If no family match found: {"family": null, "matched_words": []}`;
 
             const priority = document.getElementById('todo-priority').value;
             const due = document.getElementById('todo-due').value;
-            const repeat = document.getElementById('todo-repeat').value;
+            let repeat = document.getElementById('todo-repeat').value;
+
+            // Resolve custom N-day repeat
+            if (repeat === 'custom') {
+                const n = parseInt(document.getElementById('todo-repeat-days').value, 10);
+                if (!isNaN(n) && n >= 2) repeat = `every_${n}`;
+                else { showToast('⚠️ Số ngày lặp phải từ 2 trở lên!'); return; }
+            }
 
             todos.unshift({
                 id: Date.now(),
                 text,
                 priority,
                 due,
-                repeat: repeat || '',   // 'daily' | 'weekly' | 'monthly' | ''
+                repeat: repeat || '',
                 done: false,
                 createdAt: getTodayStr()
             });
@@ -5165,10 +5314,12 @@ If no family match found: {"family": null, "matched_words": []}`;
             input.value = '';
             document.getElementById('todo-due').value = '';
             document.getElementById('todo-repeat').value = '';
+            onRepeatChange(''); // hide custom input
             saveTodos();
             renderTodos();
             const repeatLabel = { daily: 'hằng ngày', weekly: 'hằng tuần', monthly: 'hằng tháng' };
-            showToast('✅ Đã thêm công việc!' + (repeat ? ` (lặp ${repeatLabel[repeat]})` : ''));
+            const repeatText = repeat ? (repeatLabel[repeat] || getRepeatLabel(repeat).replace(/^[^ ]+ /, '')) : '';
+            showToast('✅ Đã thêm công việc!' + (repeat ? ` (lặp ${repeatText})` : ''));
         }
 
         function toggleTodo(id) {
@@ -5208,9 +5359,36 @@ If no family match found: {"family": null, "matched_words": []}`;
         function calcNextDue(fromDate, repeat) {
             const d = new Date(fromDate + 'T00:00:00');
             if (repeat === 'daily')   d.setDate(d.getDate() + 1);
-            if (repeat === 'weekly')  d.setDate(d.getDate() + 7);
-            if (repeat === 'monthly') d.setMonth(d.getMonth() + 1);
+            else if (repeat === 'weekly')  d.setDate(d.getDate() + 7);
+            else if (repeat === 'monthly') d.setMonth(d.getMonth() + 1);
+            else if (repeat && repeat.startsWith('every_')) {
+                const n = parseInt(repeat.slice(6), 10);
+                if (!isNaN(n) && n >= 2) d.setDate(d.getDate() + n);
+            }
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        // Helper: get human-readable label for any repeat value
+        function getRepeatLabel(repeat) {
+            if (!repeat) return '';
+            if (repeat === 'daily')   return '📅 Hằng ngày';
+            if (repeat === 'weekly')  return '📆 Hằng tuần';
+            if (repeat === 'monthly') return '🗓️ Hằng tháng';
+            if (repeat.startsWith('every_')) {
+                const n = parseInt(repeat.slice(6), 10);
+                return `🔢 ${n} ngày/lần`;
+            }
+            return repeat;
+        }
+
+        // Helper: get CSS class suffix for repeat badge
+        function getRepeatClass(repeat) {
+            if (!repeat) return '';
+            if (repeat === 'daily')   return '';
+            if (repeat === 'weekly')  return 'weekly';
+            if (repeat === 'monthly') return 'monthly';
+            if (repeat.startsWith('every_')) return 'custom';
+            return '';
         }
 
         function deleteTodo(id) {
@@ -5316,16 +5494,17 @@ If no family match found: {"family": null, "matched_words": []}`;
             }
             section.style.display = 'block';
 
-            const repeatLabel   = { daily: '📅 Hằng ngày', weekly: '📆 Hằng tuần', monthly: '🗓️ Hằng tháng' };
             const priorityLabel = { high: '🔴 Cao', medium: '🟠 Trung bình', low: '🟢 Thấp' };
 
-            container.innerHTML = _recurringSeries.map((s, idx) => `
+            container.innerHTML = _recurringSeries.map((s, idx) => {
+                const dotClass = s.repeat.startsWith('every_') ? 'custom' : s.repeat;
+                return `
                 <div class="recurring-series-item">
-                    <div class="recurring-series-dot ${s.repeat}"></div>
+                    <div class="recurring-series-dot ${dotClass}"></div>
                     <div class="recurring-series-body">
                         <div class="recurring-series-text">${s.text.replace(/</g,'&lt;')}</div>
                         <div class="recurring-series-meta">
-                            <span>${repeatLabel[s.repeat] || s.repeat}</span>
+                            <span>${getRepeatLabel(s.repeat)}</span>
                             <span>·</span>
                             <span>${priorityLabel[s.priority] || ''}</span>
                             <span>·</span>
@@ -5342,7 +5521,8 @@ If no family match found: {"family": null, "matched_words": []}`;
                     <button class="recurring-del-btn"
                         onclick="document.querySelectorAll('[id^=rconfirm-]').forEach(e=>e.style.display='none'); document.getElementById('rconfirm-${idx}').style.display='block';"
                         title="Xóa toàn bộ task lặp này">🗑️</button>
-                </div>`).join('');
+                </div>`;
+            }).join('');
         }
 
         function confirmDeleteSeries(idx) {
@@ -5439,16 +5619,16 @@ If no family match found: {"family": null, "matched_words": []}`;
             }
 
             const priorityLabel = { high: '🔴 Cao', medium: '🟠 Trung bình', low: '🟢 Thấp' };
-            const repeatLabel   = { daily: '📅 Hằng ngày', weekly: '📆 Hằng tuần', monthly: '🗓️ Hằng tháng' };
-            const repeatClass   = { daily: '', weekly: 'weekly', monthly: 'monthly' };
 
             list.innerHTML = filtered.map(todo => {
                 const dueInfo = getDueLabel(todo.due, todo.createdAt, todo.done);
                 const dueHTML = dueInfo
                     ? `<span class="todo-due ${dueInfo.cls}">${dueInfo.text}</span>` : '';
                 const pBadge = `<span class="priority-badge ${todo.priority}">${priorityLabel[todo.priority] || ''}</span>`;
-                const repeatHTML = (todo.repeat && repeatLabel[todo.repeat])
-                    ? `<span class="repeat-badge ${repeatClass[todo.repeat]}">${repeatLabel[todo.repeat]}</span>` : '';
+                const rLabel = todo.repeat ? getRepeatLabel(todo.repeat) : '';
+                const rClass = todo.repeat ? getRepeatClass(todo.repeat) : '';
+                const repeatHTML = rLabel
+                    ? `<span class="repeat-badge ${rClass}">${rLabel}</span>` : '';
 
                 const noteId   = `note-${todo.id}`;
                 const hasNote  = todo.note && todo.note.trim();
