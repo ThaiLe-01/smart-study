@@ -1663,6 +1663,7 @@
             /* ── Body & Container ── */
             body {
                 padding: 12px 0 80px; /* bottom padding cho nav bar */
+                padding-top: 16px;
                 align-items: stretch;
             }
             .container {
@@ -1746,6 +1747,30 @@
 
             /* ── Toast ── */
             #toast { bottom: 90px; font-size: 13px; padding: 10px 16px; }
+
+            /* ── Voice dropdown: không để tràn màn ── */
+            .voice-dropdown {
+                min-width: unset;
+                width: calc(100vw - 32px);
+                max-width: 320px;
+                left: auto;
+                right: 0;
+            }
+
+            /* ── Filter box: wrap tốt hơn ── */
+            .filter-box { gap: 6px; }
+            .filter-box button, .filter-box select { font-size: 13px; }
+
+            /* ── Listening tabs ── */
+            .listen-game-tabs { gap: 4px; }
+            .lg-tab { font-size: 12px; padding: 7px 4px; min-width: 70px; }
+
+            /* ── Number display ── */
+            .number-display { font-size: 52px; }
+
+            /* ── Top tools: cách nhau ít hơn ── */
+            .top-tools { gap: 5px; top: 8px; right: 6px; }
+
 
             /* ── Bottom nav bar ── */
             .mobile-nav {
@@ -6896,18 +6921,30 @@ If no family match found: {"family": null, "matched_words": []}`;
         // ===== END TODO LIST LOGIC =====
 
         // ===== MOBILE NAV =====
+        // Mỗi section cần biết nó thuộc tab panel nào (tabIdx) để switch trước khi scroll
         const _mobileNavSections = [
-            { id: 'sec-calendar',  icon: '🗓️',  label: 'Lịch'    },
-            { id: 'sec-todo',      icon: '✅',   label: 'Việc cần làm'  },
-            { id: 'sec-flashcard', icon: '🧠',   label: 'Flashcard' },
-            { id: 'wordlist-container', icon: '📋', label: 'Từ vựng' },
+            { id: 'sec-calendar',       icon: '🗓️',  label: 'Lịch',        tabIdx: 0 },
+            { id: 'sec-todo',           icon: '✅',   label: 'Việc cần làm', tabIdx: 0 },
+            { id: 'sec-flashcard',      icon: '🧠',   label: 'Flashcard',    tabIdx: 1 },
+            { id: 'wordlist-container', icon: '📋',   label: 'Từ vựng',      tabIdx: 4 },
         ];
 
         function mobileNavTo(id) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // Update active state
+            // Tìm section tương ứng
+            const section = _mobileNavSections.find(s => s.id === id);
+            if (!section) return;
+
+            // Switch sang đúng tab panel trước
+            switchSideTab(section.tabIdx);
+
+            // Sau khi tab hiển thị xong thì scroll
+            setTimeout(() => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+
+            // Update active state cho mobile nav
             document.querySelectorAll('.mobile-nav-btn').forEach((btn, i) => {
                 btn.classList.toggle('active', _mobileNavSections[i]?.id === id);
             });
@@ -7045,6 +7082,13 @@ If no family match found: {"family": null, "matched_words": []}`;
             if (idx === 3) { try { renderStats(); } catch(e) {} }
             // Save last active tab
             localStorage.setItem('sideTab', idx);
+            // Sync mobile nav active: đặt active cho nút đầu tiên của tab đó
+            if (typeof _mobileNavSections !== 'undefined') {
+                const firstSection = _mobileNavSections.find(s => s.tabIdx === idx);
+                document.querySelectorAll('.mobile-nav-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', firstSection && _mobileNavSections[i]?.id === firstSection.id);
+                });
+            }
         }
 
         // Restore last active tab on load
