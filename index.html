@@ -1905,7 +1905,100 @@
         /* ================================================================
            ===== END SIDEBAR TAB NAVIGATION ===============================
            ================================================================ */
-        /* ===== MATCHING GAME ===== */
+        /* ===== PUSH NOTIFICATION MODAL ===== */
+        .push-notif-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+        .push-notif-card {
+            background: var(--bg-card); border-radius: 20px; padding: 28px 24px;
+            max-width: 400px; width: 92%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .push-notif-header {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+        }
+        .push-notif-icon { font-size: 44px; line-height: 1; }
+        .push-notif-title { font-size: 20px; font-weight: bold; }
+        .push-notif-sub   { font-size: 13px; color: #888; margin-top: 3px; }
+
+        .push-time-rows { margin: 16px 0; display: flex; flex-direction: column; gap: 10px; }
+        .push-time-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; border-radius: 12px;
+            border: 1.5px solid var(--border-color);
+            background: rgba(0,0,0,0.02);
+        }
+        .dark-mode .push-time-row { background: rgba(255,255,255,0.03); }
+        .push-time-left { display: flex; align-items: center; gap: 10px; }
+        .push-time-emoji { font-size: 24px; }
+        .push-time-label { font-weight: bold; font-size: 15px; }
+        .push-time-value { font-size: 13px; color: #888; margin-top: 2px; }
+        .push-toggle {
+            position: relative; width: 44px; height: 24px; cursor: pointer;
+        }
+        .push-toggle input { opacity: 0; width: 0; height: 0; }
+        .push-toggle-track {
+            position: absolute; inset: 0;
+            background: #ccc; border-radius: 24px;
+            transition: background 0.25s;
+        }
+        .push-toggle input:checked + .push-toggle-track { background: var(--primary-btn); }
+        .push-toggle-thumb {
+            position: absolute; top: 3px; left: 3px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: white; transition: transform 0.25s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        }
+        .push-toggle input:checked ~ .push-toggle-thumb { transform: translateX(20px); }
+
+        .push-status-box {
+            margin: 14px 0 4px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 40px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .push-status-box.granted  { background: #e6f9ed; color: #28a745; }
+        .push-status-box.denied   { background: #fde8ea; color: #dc3545; }
+        .push-status-box.default  { background: rgba(0,0,0,0.04); color: #888; }
+        .dark-mode .push-status-box.granted { background: #0f2e18; color: #4ade80; }
+        .dark-mode .push-status-box.denied  { background: #3b1218; color: #f87171; }
+        .dark-mode .push-status-box.default { background: rgba(255,255,255,0.05); color: #aaa; }
+
+        .push-action-row { display: flex; gap: 10px; margin-top: 18px; }
+        .push-action-row button { flex: 1; }
+        .push-enable-btn { background: var(--primary-btn); color: white; }
+        .push-test-btn {
+            background: transparent; color: #888;
+            border: 1.5px solid var(--border-color) !important;
+            font-size: 13px;
+        }
+        .push-close-btn {
+            background: transparent; color: #888;
+            border: 1.5px solid var(--border-color) !important;
+        }
+
+        .tool-btn.push-on {
+            background: #fff3e0; color: #e65100;
+            box-shadow: 0 0 0 2px #fb8c00;
+        }
+        .dark-mode .tool-btn.push-on {
+            background: #3e2000; color: #ffb74d;
+            box-shadow: 0 0 0 2px #fb8c00;
+        }
+
+        .push-note {
+            font-size: 12px; color: #aaa; line-height: 1.5;
+            margin-top: 12px; text-align: center;
+        }
+        /* ===== END PUSH NOTIFICATION MODAL ===== */
+    </style>
         .match-board {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -2038,6 +2131,7 @@
         <button class="tool-btn" onclick="exportData()" title="Lưu lên GitHub">📤</button>
         <button class="tool-btn" onclick="importFromGitHub()" title="Tải từ GitHub về">📥</button>
         <button class="tool-btn" id="health-reminder-btn" onclick="toggleHealthReminder()" title="Nhắc uống nước & đi bộ">💧</button>
+        <button class="tool-btn" id="push-notif-btn" onclick="showPushNotifModal()" title="Nhắc học hàng ngày">🔔</button>
         <input type="file" id="import-file" style="display:none" onchange="importData(event)">
     </div>
 
@@ -7574,6 +7668,243 @@ If no family match found: {"family": null, "matched_words": []}`;
         });
         // ===== END SIDEBAR TAB NAVIGATION JS =====
     </script>
+
+    <!-- ===== PUSH NOTIFICATION MODAL ===== -->
+    <div id="push-notif-modal" style="display:none;" class="push-notif-overlay" onclick="if(event.target===this)closePushModal()">
+        <div class="push-notif-card">
+            <div class="push-notif-header">
+                <div class="push-notif-icon">🔔</div>
+                <div>
+                    <div class="push-notif-title">Nhắc học hàng ngày</div>
+                    <div class="push-notif-sub">Thông báo cố định mỗi ngày — kể cả khi đóng tab</div>
+                </div>
+            </div>
+
+            <div class="push-time-rows">
+                <!-- Sáng -->
+                <div class="push-time-row">
+                    <div class="push-time-left">
+                        <span class="push-time-emoji">🌅</span>
+                        <div>
+                            <div class="push-time-label">7:00 sáng</div>
+                            <div class="push-time-value">Nhắc ôn từ buổi sáng</div>
+                        </div>
+                    </div>
+                    <label class="push-toggle">
+                        <input type="checkbox" id="push-toggle-morning" onchange="savePushSettings()">
+                        <span class="push-toggle-track"></span>
+                        <span class="push-toggle-thumb"></span>
+                    </label>
+                </div>
+                <!-- Tối -->
+                <div class="push-time-row">
+                    <div class="push-time-left">
+                        <span class="push-time-emoji">🌙</span>
+                        <div>
+                            <div class="push-time-label">8:00 tối</div>
+                            <div class="push-time-value">Nhắc ôn từ buổi tối</div>
+                        </div>
+                    </div>
+                    <label class="push-toggle">
+                        <input type="checkbox" id="push-toggle-evening" onchange="savePushSettings()">
+                        <span class="push-toggle-track"></span>
+                        <span class="push-toggle-thumb"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="push-status-box" class="push-status-box default">
+                Đang kiểm tra trạng thái thông báo…
+            </div>
+
+            <div class="push-action-row">
+                <button class="push-enable-btn" onclick="requestPushPermission()">🔔 Bật thông báo</button>
+                <button class="push-test-btn" onclick="testPushNotification()">🧪 Test ngay</button>
+            </div>
+            <div class="push-action-row" style="margin-top:8px;">
+                <button class="push-close-btn" onclick="closePushModal()">✕ Đóng</button>
+            </div>
+
+            <div class="push-note">
+                ⚠️ Thông báo hoạt động kể cả khi đóng tab, miễn là trình duyệt còn mở.<br>
+                Trên iOS Safari: cần thêm vào màn hình chính (PWA) để nhận thông báo.
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ===== PUSH NOTIFICATION LOGIC =====
+    const PUSH_STORAGE_KEY = 'pushNotifSettings';
+
+    function getPushSettings() {
+        try {
+            return JSON.parse(localStorage.getItem(PUSH_STORAGE_KEY)) || { morning: false, evening: false };
+        } catch { return { morning: false, evening: false }; }
+    }
+
+    function savePushSettings() {
+        const morning = document.getElementById('push-toggle-morning')?.checked ?? false;
+        const evening = document.getElementById('push-toggle-evening')?.checked ?? false;
+        localStorage.setItem(PUSH_STORAGE_KEY, JSON.stringify({ morning, evening }));
+        updatePushBellBtn();
+        // Gửi lệnh cho SW để lên/hủy lịch
+        sendSwMessage(morning || evening ? 'SCHEDULE_ALARMS' : 'CANCEL_ALARMS');
+        // Cập nhật SW với settings mới
+        sendSwMessage('UPDATE_SETTINGS', { morning, evening });
+    }
+
+    function updatePushBellBtn() {
+        const s   = getPushSettings();
+        const btn = document.getElementById('push-notif-btn');
+        if (!btn) return;
+        const on = s.morning || s.evening;
+        btn.classList.toggle('push-on', on);
+        btn.title = on ? 'Nhắc học đang bật' : 'Nhắc học hàng ngày';
+    }
+
+    function showPushNotifModal() {
+        const modal = document.getElementById('push-notif-modal');
+        if (!modal) return;
+        modal.style.display = 'flex';
+
+        // Khôi phục state toggle
+        const s = getPushSettings();
+        const mEl = document.getElementById('push-toggle-morning');
+        const eEl = document.getElementById('push-toggle-evening');
+        if (mEl) mEl.checked = s.morning;
+        if (eEl) eEl.checked = s.evening;
+
+        updatePushStatusBox();
+    }
+
+    function closePushModal() {
+        const modal = document.getElementById('push-notif-modal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    function updatePushStatusBox() {
+        const box = document.getElementById('push-status-box');
+        if (!box) return;
+
+        if (!('Notification' in window)) {
+            box.className = 'push-status-box denied';
+            box.innerHTML = '❌ Trình duyệt này không hỗ trợ thông báo';
+            return;
+        }
+        const perm = Notification.permission;
+        if (perm === 'granted') {
+            box.className = 'push-status-box granted';
+            box.innerHTML = '✅ Thông báo đã được cấp quyền — đang hoạt động';
+        } else if (perm === 'denied') {
+            box.className = 'push-status-box denied';
+            box.innerHTML = '🚫 Thông báo bị chặn — hãy vào cài đặt trình duyệt để cấp lại quyền';
+        } else {
+            box.className = 'push-status-box default';
+            box.innerHTML = '💡 Bấm "Bật thông báo" để cấp quyền nhận nhắc nhở';
+        }
+    }
+
+    async function requestPushPermission() {
+        if (!('Notification' in window)) {
+            showToast('❌ Trình duyệt không hỗ trợ thông báo');
+            return;
+        }
+        if (Notification.permission === 'denied') {
+            showToast('🚫 Thông báo bị chặn — vui lòng vào cài đặt trình duyệt để bật lại');
+            updatePushStatusBox();
+            return;
+        }
+        const result = await Notification.requestPermission();
+        updatePushStatusBox();
+        if (result === 'granted') {
+            showToast('✅ Đã cấp quyền thông báo!');
+            // Bật cả hai toggle nếu chưa bật gì
+            const s = getPushSettings();
+            if (!s.morning && !s.evening) {
+                const mEl = document.getElementById('push-toggle-morning');
+                const eEl = document.getElementById('push-toggle-evening');
+                if (mEl) mEl.checked = true;
+                if (eEl) eEl.checked = true;
+                savePushSettings();
+            }
+            // Đăng ký Periodic Background Sync nếu có
+            tryRegisterPeriodicSync();
+            // Gửi lệnh lên lịch cho SW
+            sendSwMessage('SCHEDULE_ALARMS');
+        } else {
+            showToast('❌ Quyền thông báo bị từ chối');
+        }
+    }
+
+    function testPushNotification() {
+        if (Notification.permission !== 'granted') {
+            showToast('⚠️ Cần cấp quyền thông báo trước!');
+            return;
+        }
+        sendSwMessage('TEST_NOTIFICATION');
+        // Fallback nếu SW không phản hồi
+        setTimeout(() => {
+            if (document.visibilityState === 'visible') {
+                new Notification('🔔 Test thành công!', {
+                    body: 'Push notification hoạt động bình thường ✅',
+                    icon: 'smart.png',
+                });
+            }
+        }, 800);
+        showToast('🔔 Đang gửi thông báo test…');
+    }
+
+    async function sendSwMessage(type, data = {}) {
+        if (!('serviceWorker' in navigator)) return;
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (reg && reg.active) {
+            reg.active.postMessage({ type, ...data });
+        }
+    }
+
+    async function tryRegisterPeriodicSync() {
+        if (!('serviceWorker' in navigator)) return;
+        try {
+            const reg = await navigator.serviceWorker.ready;
+            if ('periodicSync' in reg) {
+                const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
+                if (status.state === 'granted') {
+                    await reg.periodicSync.register('study-reminder', { minInterval: 6 * 60 * 60 * 1000 }); // 6h
+                }
+            }
+        } catch (e) {
+            // Không hỗ trợ — SW timeout vẫn hoạt động khi browser mở
+        }
+    }
+
+    // ─── Khởi động khi trang load ──────────────────────────────────────────
+    window.addEventListener('load', () => {
+        updatePushBellBtn();
+
+        // Đăng ký SW (ghi đè sw.js cũ nếu có)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                // Nếu permission đã granted + settings bật → báo SW lên lịch
+                const s = getPushSettings();
+                if (Notification.permission === 'granted' && (s.morning || s.evening)) {
+                    // Chờ SW sẵn sàng
+                    const sw = reg.installing || reg.waiting || reg.active;
+                    if (reg.active) {
+                        sendSwMessage('SCHEDULE_ALARMS');
+                        tryRegisterPeriodicSync();
+                    } else {
+                        navigator.serviceWorker.ready.then(() => {
+                            sendSwMessage('SCHEDULE_ALARMS');
+                            tryRegisterPeriodicSync();
+                        });
+                    }
+                }
+            }).catch(() => {});
+        }
+    });
+    // ===== END PUSH NOTIFICATION LOGIC =====
+    </script>
+    <!-- ===== END PUSH NOTIFICATION MODAL ===== -->
 
 </body>
 </html>
