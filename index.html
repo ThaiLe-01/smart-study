@@ -1905,8 +1905,122 @@
         /* ================================================================
            ===== END SIDEBAR TAB NAVIGATION ===============================
            ================================================================ */
+        /* ===== MATCHING GAME ===== */
+        .match-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 18px 0;
+        }
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .match-col-label {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+        .match-tile {
+            padding: 12px 10px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.18s;
+            user-select: none;
+            word-break: break-word;
+            line-height: 1.35;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .match-tile:hover:not(.matched):not(.wrong-flash-tile) {
+            border-color: #e83e8c;
+            background: rgba(232,62,140,0.06);
+        }
+        .match-tile.selected {
+            border-color: #e83e8c;
+            background: rgba(232,62,140,0.12);
+            box-shadow: 0 0 0 3px rgba(232,62,140,0.22);
+            transform: scale(1.02);
+        }
+        .match-tile.matched {
+            border-color: #28a745;
+            background: rgba(40,167,69,0.1);
+            color: #28a745;
+            cursor: default;
+            animation: matchPop 0.28s ease;
+        }
+        .dark-mode .match-tile.matched {
+            background: rgba(40,167,69,0.15);
+        }
+        @keyframes matchPop {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+        .match-tile.wrong-flash-tile {
+            border-color: #dc3545 !important;
+            background: rgba(220,53,69,0.12) !important;
+            animation: matchWrong 0.35s ease;
+        }
+        @keyframes matchWrong {
+            0%,100% { transform: translateX(0); }
+            25%     { transform: translateX(-5px); }
+            75%     { transform: translateX(5px); }
+        }
+        .match-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .match-timer {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e83e8c;
+            font-variant-numeric: tabular-nums;
+            min-width: 60px;
+            text-align: right;
+        }
+        .match-timer.urgent { color: #dc3545; animation: timerPulse 0.8s infinite; }
+        @keyframes timerPulse {
+            0%,100% { opacity: 1; }
+            50%     { opacity: 0.5; }
+        }
+        .match-progress-text {
+            font-size: 14px; font-weight: bold; color: #888;
+        }
+        .match-result-box {
+            text-align: center; padding: 16px 10px;
+        }
+        .match-result-box h3 { font-size: 24px; color: #e83e8c; margin-top: 0; }
+        .match-final-time { font-size: 52px; font-weight: bold; color: #28a745; margin: 8px 0; }
+        .match-result-stars { font-size: 40px; margin-bottom: 8px; }
+        .match-result-msg { font-size: 15px; color: #888; margin-bottom: 20px; }
+        .match-result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .match-result-actions button { min-width: 130px; }
+
+        @media (max-width: 600px) {
+            .match-board { gap: 7px; }
+            .match-tile { font-size: 13px; padding: 9px 7px; min-height: 42px; }
+            .match-timer { font-size: 18px; }
+            .match-final-time { font-size: 42px; }
+        }
+        /* ===== END MATCHING GAME ===== */
     </style>
-</head>
 <body>
 
     <!-- Nút cài đặt PWA (ẩn mặc định, hiện khi trình duyệt hỗ trợ) -->
@@ -2334,6 +2448,58 @@
     </div>
     <!-- ===== END LISTENING MINIGAMES ===== -->
 
+    <!-- ===== MATCHING GAME ===== -->
+    <div class="container" id="matching-container">
+        <h2>🔗 Nối Cặp: Từ & Nghĩa</h2>
+        <div id="matching-area">
+            <div style="text-align:center; margin-bottom:20px;">
+                <p>Bấm một từ tiếng Anh rồi bấm nghĩa tiếng Việt tương ứng để nối cặp.<br>
+                <span style="color:#28a745; font-size:14px;">💡 Mỗi lượt <span id="match-pair-label">8–10</span> cặp — nối đúng hết nhanh nhất có thể!</span><br>
+                <span style="color:#e83e8c; font-size:14px;">⏱️ Thời gian sẽ được tính khi bạn bắt đầu.</span></p>
+
+                <!-- Số cặp -->
+                <div style="display:inline-flex; align-items:center; gap:12px; margin:10px 0; background:rgba(0,0,0,0.04); padding:10px 18px; border-radius:12px; border:1px solid var(--border-color);">
+                    <span style="font-size:14px; font-weight:bold;">🃏 Số cặp:</span>
+                    <select id="match-pair-count" style="width:auto; margin:0; padding:8px 12px; font-size:15px; font-weight:bold; color:#e83e8c; border-radius:8px;">
+                        <option value="8">8 cặp</option>
+                        <option value="10" selected>10 cặp</option>
+                    </select>
+                </div>
+
+                <!-- Nhóm từ -->
+                <div style="margin:12px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <span style="font-size:14px; font-weight:bold; white-space:nowrap;">📂 Nhóm từ:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                        <button id="match-cat-all" onclick="setMatchCategory(null)"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid #e83e8c; background:#e83e8c; color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📚 Tất cả
+                        </button>
+                        <button id="match-cat-common" onclick="setMatchCategory('common')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            📖 Thường dùng
+                        </button>
+                        <button id="match-cat-specialized" onclick="setMatchCategory('specialized')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                            🔬 Chuyên ngành
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tag filter -->
+                <div style="margin:8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                    <select id="match-tag-filter" onchange="setMatchTag(this.value === '__all__' ? null : this.value)"
+                        style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#e83e8c; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                        <option value="__all__">📚 Tất cả "Đã thuộc"</option>
+                    </select>
+                </div>
+
+                <button onclick="initMatchingGame()" style="background:#e83e8c; padding:15px 30px; font-size:18px; margin-top:15px;">🔗 Bắt đầu Nối Cặp</button>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END MATCHING GAME ===== -->
+
     </div><!-- end tabpanel-2 -->
 
     <!-- ===== TAB 3: THỐNG KÊ ===== -->
@@ -2615,6 +2781,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
+            renderMatchTagFilter();
             renderStats();
         };
 
@@ -2822,11 +2989,13 @@
             });
             activeTypingTag = null; // reset tag when category changes
             renderTypingTagFilter();
+            renderMatchTagFilter();
         }
 
         function setTypingTag(tag) {
             activeTypingTag = tag;
             renderTypingTagFilter();
+            renderMatchTagFilter();
         }
 
         function renderTypingTagFilter() {
@@ -2921,6 +3090,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
+            renderMatchTagFilter();
 
             currentIndex = 0; 
             applyFilter();
@@ -3117,6 +3287,7 @@
                 renderWordTable();
                 renderQuizTagFilter();
                 renderTypingTagFilter();
+            renderMatchTagFilter();
 
                 const statusFilter = document.getElementById('filter-select').value;
                 
@@ -3258,6 +3429,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
+            renderMatchTagFilter();
 
             let msg = `✅ Đã thêm ${addedCount} từ!`;
             if (skippedCount > 0) msg += ` (Bỏ qua ${skippedCount} từ trùng)`;
@@ -3524,6 +3696,7 @@
                     <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 6px;">Bắt đầu luyện gõ</button>
                 </div>`;
             renderTypingTagFilter();
+            renderMatchTagFilter();
             // Restore active category button state
             ['typing-cat-all','typing-cat-common','typing-cat-specialized'].forEach(id => {
                 const btn = document.getElementById(id);
@@ -3685,6 +3858,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
+            renderMatchTagFilter();
             showToast("Đã thêm từ!");
 
             // Auto-detect word family in background (non-blocking)
@@ -3699,6 +3873,7 @@ If no family match found: {"family": null, "matched_words": []}`;
                 renderWordTable();
                 renderQuizTagFilter();
                 renderTypingTagFilter();
+            renderMatchTagFilter();
             }
         }
 
@@ -3805,6 +3980,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             renderWordTable();
             renderQuizTagFilter();
             renderTypingTagFilter();
+            renderMatchTagFilter();
             closeEditCard();
             showToast('✅ Đã lưu thay đổi!');
         }
@@ -6960,6 +7136,306 @@ If no family match found: {"family": null, "matched_words": []}`;
                 </button>`).join('');
         })();
         // ===== END MOBILE NAV =====
+
+        // ===================================================================
+        // ===== MATCHING GAME ===============================================
+        // ===================================================================
+        let matchCategory   = null;   // null | 'common' | 'specialized'
+        let matchTag        = null;   // null | string
+        let matchPairs      = [];     // [{en, vi}]
+        let matchSelected   = null;   // { side:'en'|'vi', idx }
+        let matchMatched    = new Set(); // idx đã ghép đúng (theo thứ tự pairs)
+        let matchTimerSec   = 0;
+        let matchTimerInt   = null;
+        let matchStarted    = false;
+        let matchEnOrder    = [];     // thứ tự hiển thị cột trái
+        let matchViOrder    = [];     // thứ tự hiển thị cột phải
+
+        function setMatchCategory(cat) {
+            matchCategory = cat;
+            matchTag = null; // reset tag khi đổi category
+            ['all','common','specialized'].forEach(k => {
+                const btn = document.getElementById('match-cat-' + k);
+                if (!btn) return;
+                const isActive = (k === 'all' && cat === null) || k === cat;
+                btn.style.background    = isActive ? '#e83e8c' : 'transparent';
+                btn.style.color         = isActive ? 'white' : 'var(--text-main)';
+                btn.style.borderColor   = isActive ? '#e83e8c' : 'var(--border-color)';
+            });
+            renderMatchTagFilter();
+        }
+
+        function setMatchTag(tag) {
+            matchTag = tag;
+            renderMatchTagFilter();
+        }
+
+        function renderMatchTagFilter() {
+            const sel = document.getElementById('match-tag-filter');
+            if (!sel) return;
+            const allTags = matchCategory
+                ? [...new Set(cards.filter(c => c.category === matchCategory).flatMap(c => c.tags || []))].sort()
+                : [...new Set(cards.flatMap(c => c.tags || []))].sort();
+            let opts = `<option value="__all__"${matchTag === null ? ' selected' : ''}>📚 Tất cả "Đã thuộc"</option>`;
+            allTags.forEach(t => {
+                const count = cards.filter(c =>
+                    c.status === 'learned' &&
+                    (matchCategory ? c.category === matchCategory : true) &&
+                    (c.tags || []).includes(t)
+                ).length;
+                if (count > 0) opts += `<option value="${t}"${matchTag === t ? ' selected' : ''}>${t} (${count})</option>`;
+            });
+            sel.innerHTML = opts;
+        }
+
+        function initMatchingGame() {
+            // Lấy danh sách từ đã thuộc
+            let pool = cards.filter(c => c.status === 'learned');
+            if (matchCategory) pool = pool.filter(c => c.category === matchCategory);
+            if (matchTag)      pool = pool.filter(c => (c.tags || []).includes(matchTag));
+            if (pool.length < 4) {
+                const tagNote = matchTag ? ` có tag "<b>${matchTag}</b>"` : '';
+                showToast(`⚠️ Cần ít nhất 4 từ "Đã thuộc"${tagNote} để chơi Nối Cặp!`);
+                return;
+            }
+
+            const n = Math.min(parseInt(document.getElementById('match-pair-count').value) || 10, pool.length);
+
+            // Chọn ngẫu nhiên n cặp
+            const shuffled = [...pool].sort(() => Math.random() - 0.5);
+            matchPairs   = shuffled.slice(0, n).map(c => ({ en: c.en, vi: c.vi }));
+            matchMatched = new Set();
+            matchSelected= null;
+            matchTimerSec= 0;
+            matchStarted = false;
+
+            // Tạo thứ tự ngẫu nhiên độc lập cho mỗi cột
+            matchEnOrder = [...Array(n).keys()].sort(() => Math.random() - 0.5);
+            matchViOrder = [...Array(n).keys()].sort(() => Math.random() - 0.5);
+
+            // Dừng timer cũ nếu có
+            if (matchTimerInt) clearInterval(matchTimerInt);
+
+            renderMatchBoard();
+            startPracticeTimer();
+        }
+
+        function renderMatchBoard() {
+            const area = document.getElementById('matching-area');
+            const n    = matchPairs.length;
+
+            area.innerHTML = `
+            <div class="match-header">
+                <div>
+                    <div class="match-progress-text">✅ <span id="match-done">0</span> / ${n} cặp</div>
+                </div>
+                <div class="match-timer" id="match-timer">0:00</div>
+            </div>
+            <div class="match-board">
+                <div class="match-col">
+                    <div class="match-col-label">🇬🇧 Tiếng Anh</div>
+                    ${matchEnOrder.map((pairIdx, dispIdx) => `
+                        <div class="match-tile" id="en-${dispIdx}"
+                             onclick="matchTileClick('en', ${dispIdx})">
+                            ${matchPairs[pairIdx].en}
+                        </div>`).join('')}
+                </div>
+                <div class="match-col">
+                    <div class="match-col-label">🇻🇳 Tiếng Việt</div>
+                    ${matchViOrder.map((pairIdx, dispIdx) => `
+                        <div class="match-tile" id="vi-${dispIdx}"
+                             onclick="matchTileClick('vi', ${dispIdx})">
+                            ${matchPairs[pairIdx].vi}
+                        </div>`).join('')}
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:6px;">
+                <button onclick="initMatchingGame()" style="background:transparent; color:#888; border:1.5px solid var(--border-color); font-size:13px; padding:7px 18px; border-radius:20px;">🔄 Làm lại</button>
+            </div>`;
+
+            // Khôi phục trạng thái đã matched (nếu re-render sau ghép)
+            matchMatched.forEach(key => {
+                const [eD, vD] = key.split(',').map(Number);
+                const eEl = document.getElementById(`en-${eD}`);
+                const vEl = document.getElementById(`vi-${vD}`);
+                if (eEl) eEl.classList.add('matched');
+                if (vEl) vEl.classList.add('matched');
+            });
+
+            // Khởi động timer khi bấm ô đầu tiên — sẽ start trong matchTileClick
+        }
+
+        function matchTileClick(side, dispIdx) {
+            // Nếu ô này đã matched → bỏ qua
+            const el = document.getElementById(`${side}-${dispIdx}`);
+            if (!el || el.classList.contains('matched')) return;
+
+            // Bắt đầu đếm giờ khi bấm lần đầu
+            if (!matchStarted) {
+                matchStarted = true;
+                matchTimerInt = setInterval(() => {
+                    matchTimerSec++;
+                    const m = Math.floor(matchTimerSec / 60);
+                    const s = matchTimerSec % 60;
+                    const timerEl = document.getElementById('match-timer');
+                    if (timerEl) {
+                        timerEl.textContent = `${m}:${String(s).padStart(2,'0')}`;
+                        timerEl.classList.toggle('urgent', matchTimerSec >= 90);
+                    }
+                }, 1000);
+            }
+
+            // Nếu bấm lại ô đang chọn → bỏ chọn
+            if (matchSelected && matchSelected.side === side && matchSelected.dispIdx === dispIdx) {
+                el.classList.remove('selected');
+                matchSelected = null;
+                return;
+            }
+
+            // Nếu bấm cùng phía → đổi selection
+            if (matchSelected && matchSelected.side === side) {
+                const prevEl = document.getElementById(`${matchSelected.side}-${matchSelected.dispIdx}`);
+                if (prevEl) prevEl.classList.remove('selected');
+                el.classList.add('selected');
+                matchSelected = { side, dispIdx };
+                return;
+            }
+
+            // Chưa có selection → chọn ô này
+            if (!matchSelected) {
+                el.classList.add('selected');
+                matchSelected = { side, dispIdx };
+                return;
+            }
+
+            // Có selection từ phía khác → thử ghép
+            const firstSide  = matchSelected.side;
+            const firstDisp  = matchSelected.dispIdx;
+            const firstEl    = document.getElementById(`${firstSide}-${firstDisp}`);
+
+            // Lấy pairIdx thực sự
+            const enDispIdx = firstSide === 'en' ? firstDisp : dispIdx;
+            const viDispIdx = firstSide === 'vi' ? firstDisp : dispIdx;
+            const enPairIdx = matchEnOrder[enDispIdx];
+            const viPairIdx = matchViOrder[viDispIdx];
+
+            if (firstEl) firstEl.classList.remove('selected');
+            el.classList.remove('selected');
+            matchSelected = null;
+
+            if (enPairIdx === viPairIdx) {
+                // ✅ Đúng
+                const enEl = document.getElementById(`en-${enDispIdx}`);
+                const viEl = document.getElementById(`vi-${viDispIdx}`);
+                if (enEl) enEl.classList.add('matched');
+                if (viEl) viEl.classList.add('matched');
+                matchMatched.add(`${enDispIdx},${viDispIdx}`);
+
+                const doneEl = document.getElementById('match-done');
+                if (doneEl) doneEl.textContent = matchMatched.size;
+
+                if (matchMatched.size === matchPairs.length) {
+                    // 🎉 Hoàn thành!
+                    clearInterval(matchTimerInt);
+                    matchTimerInt = null;
+                    const totalSec = matchTimerSec;
+                    recordGameScore('matching', matchPairs.length, matchPairs.length);
+                    setTimeout(() => renderMatchResult(totalSec, matchPairs.length), 400);
+                }
+            } else {
+                // ❌ Sai — flash đỏ rồi bỏ
+                const enEl = document.getElementById(`en-${enDispIdx}`);
+                const viEl = document.getElementById(`vi-${viDispIdx}`);
+                [enEl, viEl].forEach(e => {
+                    if (!e) return;
+                    e.classList.add('wrong-flash-tile');
+                    setTimeout(() => e && e.classList.remove('wrong-flash-tile'), 400);
+                });
+            }
+        }
+
+        function renderMatchResult(totalSec, total) {
+            const m   = Math.floor(totalSec / 60);
+            const s   = totalSec % 60;
+            const timeStr = `${m}:${String(s).padStart(2,'0')}`;
+
+            // Xếp loại theo tốc độ (theo số cặp)
+            const avg = total > 0 ? totalSec / total : 999;
+            let stars, msg;
+            if      (avg <= 3)  { stars = '⭐⭐⭐'; msg = '🏆 Xuất sắc! Bạn ghép siêu nhanh!'; }
+            else if (avg <= 6)  { stars = '⭐⭐'; msg = '👏 Tốt lắm! Tiếp tục luyện tập nhé!'; }
+            else                { stars = '⭐'; msg = '💪 Khá tốt! Cố gắng nhanh hơn lần sau!'; }
+
+            const area = document.getElementById('matching-area');
+            area.innerHTML = `
+            <div class="match-result-box">
+                <div class="match-result-stars">${stars}</div>
+                <h3>🎉 Hoàn thành!</h3>
+                <div class="match-final-time">${timeStr}</div>
+                <div style="font-size:15px; color:#888; margin-bottom:6px;">cho <b>${total}</b> cặp</div>
+                <div class="match-result-msg">${msg}</div>
+                <div class="match-result-actions">
+                    <button onclick="initMatchingGame()" style="background:#e83e8c;">🔄 Chơi lại</button>
+                    <button onclick="renderMatchSetup()" style="background:transparent; color:#888; border:1.5px solid var(--border-color);">⚙️ Cài đặt</button>
+                </div>
+            </div>`;
+        }
+
+        function renderMatchSetup() {
+            // Quay lại màn cài đặt ban đầu
+            if (matchTimerInt) clearInterval(matchTimerInt);
+            matchTimerInt = null;
+            matchStarted  = false;
+            const area = document.getElementById('matching-area');
+            area.innerHTML = `
+            <div style="text-align:center; margin-bottom:20px;">
+                <p>Bấm một từ tiếng Anh rồi bấm nghĩa tiếng Việt tương ứng để nối cặp.<br>
+                <span style="color:#28a745; font-size:14px;">💡 Mỗi lượt <span id="match-pair-label">8–10</span> cặp — nối đúng hết nhanh nhất có thể!</span><br>
+                <span style="color:#e83e8c; font-size:14px;">⏱️ Thời gian sẽ được tính khi bạn bắt đầu.</span></p>
+
+                <div style="display:inline-flex; align-items:center; gap:12px; margin:10px 0; background:rgba(0,0,0,0.04); padding:10px 18px; border-radius:12px; border:1px solid var(--border-color);">
+                    <span style="font-size:14px; font-weight:bold;">🃏 Số cặp:</span>
+                    <select id="match-pair-count" style="width:auto; margin:0; padding:8px 12px; font-size:15px; font-weight:bold; color:#e83e8c; border-radius:8px;">
+                        <option value="8">8 cặp</option>
+                        <option value="10" selected>10 cặp</option>
+                    </select>
+                </div>
+
+                <div style="margin:12px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <span style="font-size:14px; font-weight:bold; white-space:nowrap;">📂 Nhóm từ:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                        <button id="match-cat-all" onclick="setMatchCategory(null)"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid #e83e8c; background:#e83e8c; color:white; font-size:13px; font-weight:bold; cursor:pointer;">
+                            📚 Tất cả
+                        </button>
+                        <button id="match-cat-common" onclick="setMatchCategory('common')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer;">
+                            📖 Thường dùng
+                        </button>
+                        <button id="match-cat-specialized" onclick="setMatchCategory('specialized')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer;">
+                            🔬 Chuyên ngành
+                        </button>
+                    </div>
+                </div>
+
+                <div style="margin:8px 0 10px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                    <select id="match-tag-filter" onchange="setMatchTag(this.value === '__all__' ? null : this.value)"
+                        style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#e83e8c; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                        <option value="__all__">📚 Tất cả "Đã thuộc"</option>
+                    </select>
+                </div>
+
+                <button onclick="initMatchingGame()" style="background:#e83e8c; padding:15px 30px; font-size:18px; margin-top:15px;">🔗 Bắt đầu Nối Cặp</button>
+            </div>`;
+            // Khôi phục trạng thái category và tag
+            setMatchCategory(matchCategory);
+            renderMatchTagFilter();
+        }
+        // ===================================================================
+        // ===== END MATCHING GAME ===========================================
+        // ===================================================================
 
         // ===== PWA: Đăng ký Service Worker & nút "Thêm vào màn hình chính" =====
         let deferredPrompt = null;
