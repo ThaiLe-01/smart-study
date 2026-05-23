@@ -5586,7 +5586,12 @@ If no family match found: {"family": null, "matched_words": []}`;
             recognition.start();
         }
 
-        function clearAll() { if (confirm("Xóa toàn bộ?")) { localStorage.clear(); location.reload(); } }
+        function clearAll() {
+            if (confirm("Xóa toàn bộ từ vựng?\n\nChỉ dữ liệu từ vựng sẽ bị xóa (thẻ, lịch sử, hàng chờ ôn tập, thống kê). Các dữ liệu khác (công việc, mục tiêu, cài đặt...) sẽ không bị ảnh hưởng.")) {
+                ['cards_v4', 'history_v4', 'dailyData_v4', 'quizQueue_v4', 'typingQueue_v4', 'statsData_v1'].forEach(k => localStorage.removeItem(k));
+                location.reload();
+            }
+        }
         function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.className = "show"; setTimeout(() => t.className = "", 2500); }
         // ===== GITHUB SYNC CONFIG =====
         const GH_OWNER  = 'ThaiLe-01';
