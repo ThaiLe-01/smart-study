@@ -2197,6 +2197,7 @@
             <input type="text" id="vie-input" placeholder="Tiếng Việt">
         </div>
         <input type="text" id="example-input" placeholder='📝 Câu ví dụ (không bắt buộc) — vd: She runs every morning.'>
+        <input type="text" id="synonyms-input" placeholder='🔗 Từ gần nghĩa (không bắt buộc) — vd: happy, joyful, cheerful'>
         <select id="type-select">
             <option value="Danh từ (n)">Danh từ (n)</option>
             <option value="Động từ (v)">Động từ (v)</option>
@@ -2238,17 +2239,20 @@
             <!-- ===== TEXT INPUT PANEL ===== -->
             <div id="bulk-panel-text">
                 <div class="bulk-hint">
-                    📋 <b>Cách nhập:</b> Mỗi từ gồm <b>2–3 dòng</b>:<br>
-                    &nbsp;&nbsp;• Dòng 1: <b>từ tiếng Anh - nghĩa tiếng Việt</b><br>
+                    📋 <b>Cách nhập:</b> Mỗi từ gồm <b>2–4 dòng</b>:<br>
+                    &nbsp;&nbsp;• Dòng 1: <b>từ tiếng Anh - nghĩa tiếng Việt</b> (bắt buộc)<br>
                     &nbsp;&nbsp;• Dòng 2: <b>loại từ</b> (động từ / danh từ / tính từ / trạng từ / khác)<br>
-                    &nbsp;&nbsp;• Dòng 3: <b>câu ví dụ</b> (không bắt buộc)<br><br>
+                    &nbsp;&nbsp;• Dòng 3: <b>câu ví dụ</b> (không bắt buộc)<br>
+                    &nbsp;&nbsp;• Dòng ~: <b>~ từ gần nghĩa</b> — bắt đầu bằng <b>~</b> (không bắt buộc)<br><br>
                     Ví dụ:<br>
                     run - chạy<br>
                     động từ<br>
                     She runs every morning.<br>
+                    ~ sprint, jog, dash<br>
                     ───<br>
-                    apple - quả táo<br>
-                    danh từ
+                    happy - vui vẻ<br>
+                    tính từ<br>
+                    ~ glad, joyful, cheerful
                 </div>
 
                 <!-- BULK TAG INPUT -->
@@ -2260,7 +2264,7 @@
                 </div>
                 <div class="tag-chips" id="bulk-tag-chips"></div>
 
-                <textarea id="bulk-textarea" placeholder="run - chạy&#10;động từ&#10;She runs every morning.&#10;&#10;apple - quả táo&#10;danh từ&#10;&#10;beautiful - đẹp&#10;tính từ&#10;What a beautiful day!" oninput="previewBulk()"></textarea>
+                <textarea id="bulk-textarea" placeholder="run - chạy&#10;động từ&#10;She runs every morning.&#10;~ sprint, jog, dash&#10;&#10;apple - quả táo&#10;danh từ&#10;&#10;beautiful - đẹp&#10;tính từ&#10;What a beautiful day!&#10;~ pretty, gorgeous, lovely" oninput="previewBulk()"></textarea>
 
                 <div class="bulk-preview" id="bulk-preview"></div>
 
@@ -2278,7 +2282,8 @@
                     &nbsp;&nbsp;<b>Cột A:</b> Từ tiếng Anh &nbsp;|&nbsp;
                     <b>Cột B:</b> Nghĩa tiếng Việt &nbsp;|&nbsp;
                     <b>Cột C:</b> Loại từ (không bắt buộc) &nbsp;|&nbsp;
-                    <b>Cột D:</b> Câu ví dụ (không bắt buộc)<br><br>
+                    <b>Cột D:</b> Câu ví dụ (không bắt buộc) &nbsp;|&nbsp;
+                    <b>Cột E:</b> Từ gần nghĩa (không bắt buộc)<br><br>
                     Dòng đầu tiên có thể là tiêu đề (sẽ bỏ qua tự động).
                     <br><br>
                     <span style="color:#1877f2; cursor:pointer; font-weight:bold;" onclick="downloadExcelTemplate()">⬇️ Tải file mẫu Excel</span>
@@ -3428,8 +3433,11 @@
                 const ipaHtml = c.ipa
                     ? `<div style="font-size:13px;opacity:0.65;margin-top:3px;">${c.ipa}</div>`
                     : '';
+                const synonymsHtml = (c.synonyms && c.synonyms.trim())
+                    ? `<div style="font-size:13px;margin-top:8px;opacity:0.75;">🔗 <b>Từ gần nghĩa:</b> ${c.synonyms}</div>`
+                    : '';
                 flashcard.className = 'flashcard back';
-                flashcard.innerHTML = `<span>${c.vi}</span>${ipaHtml}${tagHtml}`;
+                flashcard.innerHTML = `<span>${c.vi}</span>${ipaHtml}${synonymsHtml}${tagHtml}`;
             } else {
                 // Example card: full sentence
                 const highlighted = c.example.replace(
@@ -3756,9 +3764,17 @@
                 return str.indexOf(' - ') !== -1;
             }
 
+            function isSynonymsLine(str) {
+                return str.trim().startsWith('~');
+            }
+
+            function extractSynonyms(str) {
+                return str.trim().replace(/^~\s*/, '').trim();
+            }
+
             // State machine: parse groups
             // Each group starts with a word line (en - vi),
-            // followed by optional type line, optional example line.
+            // followed by optional type line, optional example line, optional synonyms line (~).
             // Blank lines and separator lines (---) act as group separators.
 
             let i = 0;
@@ -3768,6 +3784,9 @@
 
                 // Skip blank lines and separator lines
                 if (!trimmed || /^[-─—=]{2,}$/.test(trimmed)) continue;
+
+                // Synonyms line at top level = garbage (no parent word)
+                if (isSynonymsLine(trimmed)) { invalid.push(i); continue; }
 
                 // Must be a word line
                 const dashIdx = trimmed.indexOf(' - ');
@@ -3785,41 +3804,36 @@
 
                 let type = 'Khác';
                 let example = '';
+                let synonyms = '';
 
-                // Peek at next line: could be type or example or blank
-                if (i < lines.length) {
+                // Peek up to 3 optional lines after the word line
+                // collecting type, example, synonyms in flexible order
+                for (let peek = 0; peek < 3 && i < lines.length; peek++) {
                     const next = lines[i].trim();
-                    if (!next || /^[-─—=]{2,}$/.test(next)) {
-                        // blank/separator → skip, no type/example
+                    // Stop at blank, separator, or next word line
+                    if (!next || /^[-─—=]{2,}$/.test(next) || isWordLine(next)) break;
+
+                    if (isSynonymsLine(next)) {
+                        synonyms = extractSynonyms(next);
+                        i++;
                     } else {
                         const detectedType = detectType(next);
-                        if (detectedType) {
+                        if (detectedType && type === 'Khác') {
                             type = detectedType;
-                            i++; // consume type line
-
-                            // Peek again for example
-                            if (i < lines.length) {
-                                const next2 = lines[i].trim();
-                                if (next2 && !/^[-─—=]{2,}$/.test(next2) && !isWordLine(next2) && !detectType(next2)) {
-                                    // Strip surrounding quotes if present
-                                    example = (next2.startsWith('"') && next2.endsWith('"') && next2.length > 2)
-                                        ? next2.slice(1, -1).trim()
-                                        : next2;
-                                    i++; // consume example line
-                                }
-                            }
-                        } else if (!isWordLine(next)) {
-                            // Not a type keyword and not a word line → treat as example
+                            i++;
+                        } else if (!detectedType && example === '') {
+                            // Treat as example
                             example = (next.startsWith('"') && next.endsWith('"') && next.length > 2)
                                 ? next.slice(1, -1).trim()
                                 : next;
-                            i++; // consume example line
+                            i++;
+                        } else {
+                            break; // unrecognized extra line, stop peeking
                         }
-                        // If next IS a word line, leave it for the next iteration
                     }
                 }
 
-                valid.push({ en, vi, type, example });
+                valid.push({ en, vi, type, example, synonyms });
             }
 
             return { valid, invalid };
@@ -3865,7 +3879,7 @@
             let addedCount = 0;
             let skippedCount = 0;
 
-            valid.forEach(({ en, vi, type, example }) => {
+            valid.forEach(({ en, vi, type, example, synonyms }) => {
                 // Trùng hoàn toàn = cùng từ, cùng nhóm VÀ cùng tags → mới bỏ qua
                 const exists = cards.some(c =>
                     c.en.toLowerCase() === en.toLowerCase() &&
@@ -3873,7 +3887,7 @@
                     tagsEqual(c.tags || [], tags)
                 );
                 if (!exists) {
-                    cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
+                    cards.push({ en, vi, type, category, tags, example: example || '', synonyms: synonyms || '', status: 'learning_spelling' });
                     addedCount++;
                 } else {
                     skippedCount++;
@@ -3988,7 +4002,8 @@
                         if (!en || !vi) { invalidRows.push(i + 1); continue; }
                         const type = normalizeType(row[2]);
                         const example = String(row[3] || '').trim();
-                        excelParsedRows.push({ en, vi, type, example });
+                        const synonyms = String(row[4] || '').trim();
+                        excelParsedRows.push({ en, vi, type, example, synonyms });
                     }
 
                     renderExcelPreview(file.name, invalidRows);
@@ -4056,14 +4071,14 @@
             const tags = getChipTags('excel-tag-chips');
 
             let addedCount = 0, skippedCount = 0;
-            excelParsedRows.forEach(({ en, vi, type, example }) => {
+            excelParsedRows.forEach(({ en, vi, type, example, synonyms }) => {
                 const exists = cards.some(c =>
                     c.en.toLowerCase() === en.toLowerCase() &&
                     c.category === category &&
                     tagsEqual(c.tags || [], tags)
                 );
                 if (!exists) {
-                    cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
+                    cards.push({ en, vi, type, category, tags, example: example || '', synonyms: synonyms || '', status: 'learning_spelling' });
                     addedCount++;
                 } else {
                     skippedCount++;
@@ -4102,14 +4117,14 @@
             }
             const wb = XLSX.utils.book_new();
             const data = [
-                ['Tiếng Anh', 'Tiếng Việt', 'Loại từ', 'Câu ví dụ'],
-                ['run', 'chạy', 'động từ', 'She runs every morning.'],
-                ['apple', 'quả táo', 'danh từ', 'I eat an apple every day.'],
-                ['beautiful', 'đẹp', 'tính từ', 'What a beautiful day!'],
-                ['quickly', 'nhanh chóng', 'trạng từ', 'He finished quickly.'],
+                ['Tiếng Anh', 'Tiếng Việt', 'Loại từ', 'Câu ví dụ', 'Từ gần nghĩa'],
+                ['run', 'chạy', 'động từ', 'She runs every morning.', 'sprint, jog, dash'],
+                ['apple', 'quả táo', 'danh từ', 'I eat an apple every day.', ''],
+                ['beautiful', 'đẹp', 'tính từ', 'What a beautiful day!', 'pretty, gorgeous, lovely'],
+                ['quickly', 'nhanh chóng', 'trạng từ', 'He finished quickly.', 'rapidly, swiftly, fast'],
             ];
             const ws = XLSX.utils.aoa_to_sheet(data);
-            ws['!cols'] = [{wch:20},{wch:20},{wch:16},{wch:36}];
+            ws['!cols'] = [{wch:20},{wch:20},{wch:16},{wch:36},{wch:30}];
             XLSX.utils.book_append_sheet(wb, ws, 'Từ vựng');
             XLSX.writeFile(wb, 'tu-vung-mau.xlsx');
         }
@@ -4734,11 +4749,14 @@ If no family match found: {"family": null, "matched_words": []}`;
             }
             
             const example = (document.getElementById('example-input')?.value || '').trim();
-            cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
+            const synonyms = (document.getElementById('synonyms-input')?.value || '').trim();
+            cards.push({ en, vi, type, category, tags, example: example || '', synonyms: synonyms || '', status: 'learning_spelling' });
             document.getElementById('eng-input').value = '';
             document.getElementById('vie-input').value = '';
             const exInp = document.getElementById('example-input');
             if (exInp) exInp.value = '';
+            const synInp = document.getElementById('synonyms-input');
+            if (synInp) synInp.value = '';
             // Clear tag chips
             document.getElementById('add-tag-chips').innerHTML = '';
             saveAll();
@@ -4833,6 +4851,10 @@ If no family match found: {"family": null, "matched_words": []}`;
                         <label>Câu ví dụ</label>
                         <textarea id="ec-example" placeholder="Ví dụ: She runs every morning.">${(c.example||'').replace(/</g,'&lt;')}</textarea>
                     </div>
+                    <div class="edit-card-field">
+                        <label>Từ gần nghĩa (Synonyms)</label>
+                        <input id="ec-synonyms" type="text" value="${(c.synonyms||'').replace(/"/g,'&quot;')}" placeholder="vd: happy, joyful, cheerful">
+                    </div>
                     <div class="edit-card-actions">
                         <button class="btn-cancel-edit" onclick="closeEditCard()">Hủy</button>
                         <button class="btn-save-card"   onclick="saveEditCard(${index})">💾 Lưu thay đổi</button>
@@ -4857,6 +4879,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             c.category = document.getElementById('ec-category').value;
             c.status   = document.getElementById('ec-status').value;
             c.example  = document.getElementById('ec-example').value.trim();
+            c.synonyms = document.getElementById('ec-synonyms').value.trim();
             c.family   = document.getElementById('ec-family').value.trim().toLowerCase();
             c.tags     = document.getElementById('ec-tags').value
                             .split(',').map(t => t.trim()).filter(Boolean);
