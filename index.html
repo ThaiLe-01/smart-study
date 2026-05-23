@@ -4383,8 +4383,6 @@
             });
         }
 
-        }
-
         // ===== 🎧 LISTEN & CHOOSE EXAMPLE GAME (LEX) =====
         let activeLexCategory = null;
         let activeLexTag = null;
@@ -4501,7 +4499,9 @@
                 <div style="display:flex; flex-direction:column; gap:12px;" id="lex-options">
                     ${options.map((opt, i) => {
                         const safeOpt = opt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                        return `<button class="lex-opt-btn" onclick="checkLexAnswer(this,'${safeOpt}','${card.example.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')"
+                        const safeCorrect = card.example.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        return `<button class="lex-opt-btn" onclick="checkLexAnswer(this,'${safeOpt}','${safeCorrect}')"
+                            data-value="${opt.replace(/"/g, '&quot;')}"
                             style="text-align:left; padding:14px 18px; border-radius:12px; font-size:15px; line-height:1.5; background:var(--bg-card); border:2px solid var(--border-color); color:var(--text-main); cursor:pointer; transition:0.15s; font-family:inherit;">
                             <span style="font-weight:bold; color:#0d6efd; margin-right:8px;">${String.fromCharCode(65+i)}.</span>${opt}
                         </button>`;
@@ -4535,7 +4535,7 @@
 
                 // Highlight correct
                 btns.forEach(b => {
-                    if (b.textContent.slice(2).trim() === correct) {
+                    if (b.dataset.value === correct) {
                         b.style.background = 'rgba(40,167,69,0.15)';
                         b.style.borderColor = '#28a745';
                         b.style.color = '#28a745';
