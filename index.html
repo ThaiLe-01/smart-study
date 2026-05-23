@@ -503,6 +503,39 @@
         .bulk-actions { display: flex; gap: 10px; }
         .bulk-actions button { flex: 1; }
 
+        .excel-dz-hover { border-color: var(--primary-btn) !important; background: rgba(24,119,242,0.05); }
+        .excel-preview-row-bad { background: rgba(220,53,69,0.07); }
+        .excel-preview-row-ok { }
+        #excel-preview-table th { padding:8px 12px; font-size:12px; font-weight:bold; color:#888; text-transform:uppercase; border-bottom:1px solid var(--border-color); }
+        #excel-preview-table td { padding:7px 12px; border-bottom:1px solid var(--border-color); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        #excel-preview-table tr:last-child td { border-bottom:none; }
+
+        /* ===== KEYBOARD SHORTCUT CHIPS ===== */
+        .kb-chip {
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 12px; color: #888; background: rgba(0,0,0,0.04);
+            border-radius: 20px; padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+        .dark-mode .kb-chip { background: rgba(255,255,255,0.05); }
+        .kb-chip kbd {
+            display: inline-block; font-size: 11px; font-weight: bold;
+            background: var(--bg-card); color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            border-radius: 4px; padding: 1px 5px;
+            font-family: inherit; line-height: 1.4;
+        }
+        /* flash animation for key press feedback */
+        @keyframes kb-flash {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(0.96); background: rgba(24,119,242,0.12); }
+            100% { transform: scale(1); }
+        }
+        .kb-active { animation: kb-flash 0.18s ease; }
+        /* ===== END KEYBOARD SHORTCUT CHIPS ===== */
+
         /* ===== TYPING GAME STYLES ===== */
         .typing-vi-display {
             font-size: 34px;
@@ -2189,41 +2222,106 @@
         </button>
 
         <div class="bulk-box" id="bulk-box">
-            <div class="bulk-hint">
-                📋 <b>Cách nhập:</b> Mỗi dòng một từ, dùng dấu <b> - </b> ngăn cách Anh/Việt. Dòng tiếp theo có thể thêm câu ví dụ trong dấu <b>"..."</b> (không bắt buộc).<br>
-                Ví dụ:<br>
-                hello - xin chào<br>
-                "Hello, how are you today?"<br>
-                apple - quả táo<br>
-                run - chạy<br>
-                "She runs every morning."
+
+            <!-- ===== BULK MODE TABS ===== -->
+            <div style="display:flex; gap:8px; margin-bottom:16px; background:var(--bg-body); padding:4px; border-radius:10px;">
+                <button id="bulk-tab-text" onclick="switchBulkTab('text')"
+                    style="flex:1; padding:9px; border-radius:8px; font-size:14px; font-weight:bold; background:var(--bg-card); color:var(--primary-btn); box-shadow:0 2px 5px rgba(0,0,0,0.1); border:none; cursor:pointer; transition:0.2s;">
+                    ✏️ Nhập tay
+                </button>
+                <button id="bulk-tab-excel" onclick="switchBulkTab('excel')"
+                    style="flex:1; padding:9px; border-radius:8px; font-size:14px; font-weight:bold; background:transparent; color:#65676b; border:none; cursor:pointer; transition:0.2s;">
+                    📊 File Excel
+                </button>
             </div>
 
-            <select id="bulk-type-select" style="margin-bottom: 10px;">
-                <option value="Danh từ (n)">Danh từ (n)</option>
-                <option value="Động từ (v)">Động từ (v)</option>
-                <option value="Tính từ (adj)">Tính từ (adj)</option>
-                <option value="Trạng từ (adv)">Trạng từ (adv)</option>
-                <option value="Khác">Khác</option>
-            </select>
+            <!-- ===== TEXT INPUT PANEL ===== -->
+            <div id="bulk-panel-text">
+                <div class="bulk-hint">
+                    📋 <b>Cách nhập:</b> Mỗi từ gồm <b>2–3 dòng</b>:<br>
+                    &nbsp;&nbsp;• Dòng 1: <b>từ tiếng Anh - nghĩa tiếng Việt</b><br>
+                    &nbsp;&nbsp;• Dòng 2: <b>loại từ</b> (động từ / danh từ / tính từ / trạng từ / khác)<br>
+                    &nbsp;&nbsp;• Dòng 3: <b>câu ví dụ</b> (không bắt buộc)<br><br>
+                    Ví dụ:<br>
+                    run - chạy<br>
+                    động từ<br>
+                    She runs every morning.<br>
+                    ───<br>
+                    apple - quả táo<br>
+                    danh từ
+                </div>
 
-            <!-- BULK TAG INPUT -->
-            <div class="tag-input-wrap">
-                <input type="text" id="bulk-tag-input" placeholder='🏷️ Thêm tag cho cả nhóm: #TOEIC, #IELTS... (Enter để thêm)' autocomplete="off"
-                    onkeydown="handleTagKeydown(event,'bulk-tag-chips','bulk-tag-input','bulk-tag-sug')"
-                    oninput="showTagSuggestions('bulk-tag-input','bulk-tag-sug')">
-                <div class="tag-suggestions" id="bulk-tag-sug"></div>
+                <!-- BULK TAG INPUT -->
+                <div class="tag-input-wrap">
+                    <input type="text" id="bulk-tag-input" placeholder='🏷️ Thêm tag cho cả nhóm: #TOEIC, #IELTS... (Enter để thêm)' autocomplete="off"
+                        onkeydown="handleTagKeydown(event,'bulk-tag-chips','bulk-tag-input','bulk-tag-sug')"
+                        oninput="showTagSuggestions('bulk-tag-input','bulk-tag-sug')">
+                    <div class="tag-suggestions" id="bulk-tag-sug"></div>
+                </div>
+                <div class="tag-chips" id="bulk-tag-chips"></div>
+
+                <textarea id="bulk-textarea" placeholder="run - chạy&#10;động từ&#10;She runs every morning.&#10;&#10;apple - quả táo&#10;danh từ&#10;&#10;beautiful - đẹp&#10;tính từ&#10;What a beautiful day!" oninput="previewBulk()"></textarea>
+
+                <div class="bulk-preview" id="bulk-preview"></div>
+
+                <div class="bulk-actions">
+                    <button onclick="addBulkCards()" style="background: #28a745;">✅ Thêm tất cả</button>
+                    <button onclick="clearBulkBox()" style="background: #6c757d;">🗑️ Xóa nội dung</button>
+                </div>
             </div>
-            <div class="tag-chips" id="bulk-tag-chips"></div>
 
-            <textarea id="bulk-textarea" placeholder="hello - xin chào&#10;&quot;Hello, how are you?&quot;&#10;apple - quả táo&#10;run - chạy&#10;&quot;She runs every morning.&quot;" oninput="previewBulk()"></textarea>
+            <!-- ===== EXCEL IMPORT PANEL ===== -->
+            <div id="bulk-panel-excel" style="display:none;">
+                <div class="bulk-hint">
+                    📊 <b>Định dạng file Excel (.xlsx / .xls / .csv):</b><br>
+                    File cần có các cột theo thứ tự:<br>
+                    &nbsp;&nbsp;<b>Cột A:</b> Từ tiếng Anh &nbsp;|&nbsp;
+                    <b>Cột B:</b> Nghĩa tiếng Việt &nbsp;|&nbsp;
+                    <b>Cột C:</b> Loại từ (không bắt buộc) &nbsp;|&nbsp;
+                    <b>Cột D:</b> Câu ví dụ (không bắt buộc)<br><br>
+                    Dòng đầu tiên có thể là tiêu đề (sẽ bỏ qua tự động).
+                    <br><br>
+                    <span style="color:#1877f2; cursor:pointer; font-weight:bold;" onclick="downloadExcelTemplate()">⬇️ Tải file mẫu Excel</span>
+                </div>
 
-            <div class="bulk-preview" id="bulk-preview"></div>
+                <!-- EXCEL TAG INPUT -->
+                <div class="tag-input-wrap">
+                    <input type="text" id="excel-tag-input" placeholder='🏷️ Thêm tag cho cả file: #TOEIC, #IELTS... (Enter để thêm)' autocomplete="off"
+                        onkeydown="handleTagKeydown(event,'excel-tag-chips','excel-tag-input','excel-tag-sug')"
+                        oninput="showTagSuggestions('excel-tag-input','excel-tag-sug')">
+                    <div class="tag-suggestions" id="excel-tag-sug"></div>
+                </div>
+                <div class="tag-chips" id="excel-tag-chips"></div>
 
-            <div class="bulk-actions">
-                <button onclick="addBulkCards()" style="background: #28a745;">✅ Thêm tất cả</button>
-                <button onclick="clearBulkBox()" style="background: #6c757d;">🗑️ Xóa nội dung</button>
+                <!-- DROP ZONE -->
+                <div id="excel-dropzone"
+                    onclick="document.getElementById('excel-file-input').click()"
+                    ondragover="event.preventDefault(); this.classList.add('excel-dz-hover')"
+                    ondragleave="this.classList.remove('excel-dz-hover')"
+                    ondrop="handleExcelDrop(event)"
+                    style="border:2px dashed var(--border-color); border-radius:12px; padding:32px 20px; text-align:center; cursor:pointer; transition:0.2s; margin-bottom:14px;">
+                    <div style="font-size:40px; margin-bottom:8px;">📂</div>
+                    <div style="font-weight:bold; font-size:15px; color:var(--text-main);">Kéo thả file vào đây hoặc bấm để chọn</div>
+                    <div style="font-size:13px; color:#888; margin-top:4px;">.xlsx · .xls · .csv</div>
+                </div>
+                <input type="file" id="excel-file-input" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleExcelFile(this.files[0])">
+
+                <!-- PREVIEW TABLE -->
+                <div id="excel-preview-wrap" style="display:none;">
+                    <div id="excel-preview-msg" style="font-size:13px; font-weight:bold; color:#28a745; margin-bottom:10px;"></div>
+                    <div style="overflow-x:auto; max-height:260px; border:1px solid var(--border-color); border-radius:10px; margin-bottom:12px;">
+                        <table id="excel-preview-table" style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead id="excel-preview-head" style="position:sticky; top:0; background:var(--bg-card); z-index:2;"></thead>
+                            <tbody id="excel-preview-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="bulk-actions">
+                        <button onclick="addExcelCards()" style="background:#28a745;">✅ Thêm tất cả</button>
+                        <button onclick="clearExcelPanel()" style="background:#6c757d;">🗑️ Xóa file</button>
+                    </div>
+                </div>
             </div>
+
         </div>
         <!-- ===== END BULK ADD ===== -->
     </div>
@@ -2287,6 +2385,15 @@
             <button onclick="prevCard()" style="background:#6c757d;">⬅️ Trước</button>
             <button onclick="nextCard()" style="background:#6c757d;">Tiếp ➡️</button>
         </div>
+
+        <!-- Keyboard shortcut hint -->
+        <div id="flashcard-kb-hint" style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+            <span class="kb-chip"><kbd>◀ ▶</kbd> Chuyển thẻ</span>
+            <span class="kb-chip"><kbd>▲ ▼</kbd> Lật thẻ</span>
+            <span class="kb-chip"><kbd>Ctrl</kbd> Phát âm</span>
+            <span class="kb-chip"><kbd>Enter</kbd> Đã thuộc</span>
+            <span class="kb-chip"><kbd>⇧ Enter</kbd> Quên chữ</span>
+        </div>
     </div><!-- end sec-flashcard -->
 
     </div><!-- end tabpanel-1 -->
@@ -2342,6 +2449,10 @@
                 </div>
 
                 <button onclick="initQuiz()" style="background: #28a745; padding: 15px 30px; font-size: 18px; margin-top: 15px;" id="quiz-start-btn">▶ Bắt đầu (1 Phút)</button>
+                <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                    <span class="kb-chip"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> Chọn đáp án</span>
+                    <span class="kb-chip"><kbd>Space</kbd> Phát âm lại</span>
+                </div>
             </div>
         </div>
     </div>
@@ -2384,6 +2495,10 @@
                 </div>
 
                 <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 6px;">Bắt đầu luyện gõ</button>
+                <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                    <span class="kb-chip"><kbd>Enter</kbd> Kiểm tra</span>
+                    <span class="kb-chip"><kbd>Tab</kbd> Gợi ý</span>
+                </div>
             </div>
         </div>
     </div>
@@ -2409,6 +2524,10 @@
                     <p>Nghe và chọn đúng giờ được đọc. Mỗi vòng <b>10 câu</b>.<br>
                     <span style="color:#28a745;font-size:14px;">💡 Bao gồm o'clock, half past, quarter to/past và các giờ lẻ!</span></p>
                     <button onclick="initTimeGame()" style="background:#e83e8c; padding:14px 28px; font-size:17px;">🎮 Bắt đầu</button>
+                    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                        <span class="kb-chip"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> Chọn đáp án</span>
+                        <span class="kb-chip"><kbd>Space</kbd> Nghe lại</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2420,6 +2539,10 @@
                     <p>Nghe và chọn đúng ngày tháng được đọc. Mỗi vòng <b>10 câu</b>.<br>
                     <span style="color:#28a745;font-size:14px;">💡 Ngày dùng ordinal (1st, 2nd…), tháng dùng tên đầy đủ!</span></p>
                     <button onclick="initDateGame()" style="background:#fd7e14; padding:14px 28px; font-size:17px;">🎮 Bắt đầu</button>
+                    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                        <span class="kb-chip"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> Chọn đáp án</span>
+                        <span class="kb-chip"><kbd>Space</kbd> Nghe lại</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2431,6 +2554,10 @@
                     <p>Nghe số điện thoại và điền vào ô trống. Mỗi vòng <b>10 câu</b>.<br>
                     <span style="color:#28a745;font-size:14px;">💡 Số được đọc từng chữ số, có thể nghe lại nhiều lần!</span></p>
                     <button onclick="initPhoneGame()" style="background:#20c997; padding:14px 28px; font-size:17px;">🎮 Bắt đầu</button>
+                    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                        <span class="kb-chip"><kbd>Enter</kbd> Kiểm tra</span>
+                        <span class="kb-chip"><kbd>Space</kbd> Nghe lại</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2442,6 +2569,10 @@
                     <p>Nghe một số từ <b>0 đến 100</b> rồi <b>gõ số bạn nghe được</b>. Mỗi vòng <b>10 câu</b>.<br>
                     <span style="color:#28a745;font-size:14px;">💡 Có 2 lần thử mỗi câu — nghe lại nếu chưa chắc!</span></p>
                     <button onclick="initNumGame()" style="background:#6f42c1; padding:14px 28px; font-size:17px;">🎮 Bắt đầu</button>
+                    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                        <span class="kb-chip"><kbd>Enter</kbd> Kiểm tra</span>
+                        <span class="kb-chip"><kbd>Space</kbd> Nghe lại</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2499,6 +2630,48 @@
         </div>
     </div>
     <!-- ===== END MATCHING GAME ===== -->
+
+    <!-- ===== LISTEN & CHOOSE EXAMPLE GAME ===== -->
+    <div class="container" id="listen-example-container">
+        <h2>🎧 Nghe & Chọn Câu Ví Dụ</h2>
+        <div id="listen-ex-area">
+            <div style="text-align:center; margin-bottom:20px;">
+                <p>Nghe từ được phát âm rồi chọn <b>câu ví dụ đúng</b> chứa từ đó.<br>
+                <span style="color:#28a745; font-size:14px;">💡 Chỉ dùng các từ có câu ví dụ — có thể nghe lại bao nhiêu lần tùy thích!</span><br>
+                <span style="color:#dc3545; font-size:14px;">⚠️ Chọn sai sẽ bị giáng cấp về "Quên chữ"!</span></p>
+
+                <!-- Category filter -->
+                <div style="margin:14px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <span style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ:</span>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                        <button id="lex-cat-all" onclick="setLexCategory(null)"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid #0d6efd; background:#0d6efd; color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">📚 Tất cả</button>
+                        <button id="lex-cat-common" onclick="setLexCategory('common')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">📖 Thường dùng</button>
+                        <button id="lex-cat-specialized" onclick="setLexCategory('specialized')"
+                            style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">🔬 Chuyên ngành</button>
+                    </div>
+                </div>
+
+                <!-- Tag filter -->
+                <div style="margin:8px 0 14px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                    <select id="lex-tag-filter" onchange="setLexTag(this.value === '__all__' ? null : this.value)"
+                        style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#0d6efd; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                        <option value="__all__">📚 Tất cả từ có ví dụ</option>
+                    </select>
+                </div>
+
+                <div id="lex-pool-info" style="font-size:13px; color:#888; margin-bottom:10px;"></div>
+                <button onclick="initLexGame()" style="background:#0d6efd; padding:15px 30px; font-size:18px; margin-top:6px;" id="lex-start-btn">🎧 Bắt đầu</button>
+                <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+                    <span class="kb-chip"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> Chọn đáp án</span>
+                    <span class="kb-chip"><kbd>Space</kbd> Nghe lại</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END LISTEN & CHOOSE EXAMPLE GAME ===== -->
 
     </div><!-- end tabpanel-2 -->
 
@@ -2665,6 +2838,9 @@
     <nav class="mobile-nav"></nav>
     <!-- ===== END MOBILE BOTTOM NAV ===== -->
 
+    <!-- SheetJS for Excel import -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <script>
         let rawCards = JSON.parse(localStorage.getItem('cards_v4')) || [];
         let cards = rawCards.map(c => ({ ...c, category: c.category || 'common', tags: c.tags || [] }));
@@ -2781,7 +2957,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             renderStats();
         };
 
@@ -2989,13 +3165,13 @@
             });
             activeTypingTag = null; // reset tag when category changes
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
         }
 
         function setTypingTag(tag) {
             activeTypingTag = tag;
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
         }
 
         function renderTypingTagFilter() {
@@ -3090,7 +3266,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
 
             currentIndex = 0; 
             applyFilter();
@@ -3287,7 +3463,7 @@
                 renderWordTable();
                 renderQuizTagFilter();
                 renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
 
                 const statusFilter = document.getElementById('filter-select').value;
                 
@@ -3312,6 +3488,219 @@
         function nextCard() { if (displayCards.length > 0) { currentIndex = (currentIndex + 1) % displayCards.length; updateCard(); } }
         function prevCard() { if (displayCards.length > 0) { currentIndex = (currentIndex - 1 + displayCards.length) % displayCards.length; updateCard(); } }
 
+        // ===== FLASHCARD KEYBOARD SHORTCUTS =====
+        function isFlashcardTabActive() {
+            const panel = document.getElementById('tabpanel-1');
+            return panel && panel.classList.contains('active');
+        }
+
+        function flashcardKbFlash(chipIndex) {
+            const chips = document.querySelectorAll('#flashcard-kb-hint .kb-chip');
+            if (chips[chipIndex]) {
+                chips[chipIndex].classList.remove('kb-active');
+                void chips[chipIndex].offsetWidth; // reflow
+                chips[chipIndex].classList.add('kb-active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            // Only when flashcard tab is active
+            if (!isFlashcardTabActive()) return;
+
+            // Skip if user is typing in an input/textarea
+            const tag = document.activeElement && document.activeElement.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+            // ◀ ▶ Arrow Left/Right → prev/next card
+            if (e.key === 'ArrowRight' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                flashcardKbFlash(0);
+                nextCard();
+                return;
+            }
+            if (e.key === 'ArrowLeft' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                flashcardKbFlash(0);
+                prevCard();
+                return;
+            }
+
+            // ▲ ▼ Arrow Up/Down → flip card (cycle through en / nghĩa / ví dụ)
+            if ((e.key === 'ArrowUp' || e.key === 'ArrowDown') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                flashcardKbFlash(1);
+                flipCard();
+                return;
+            }
+
+            // Ctrl (alone, no other modifier) → speak pronunciation
+            if (e.key === 'Control' && !e.shiftKey && !e.altKey && !e.metaKey) {
+                e.preventDefault();
+                flashcardKbFlash(2);
+                if (displayCards.length > 0) speakWord(displayCards[currentIndex].en);
+                return;
+            }
+
+            // Enter → đã thuộc
+            if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                flashcardKbFlash(3);
+                markStatus('learned');
+                return;
+            }
+
+            // Shift + Enter → quên chữ
+            if (e.key === 'Enter' && e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                flashcardKbFlash(4);
+                markStatus('learning_spelling');
+                return;
+            }
+        });
+        // ===== END FLASHCARD KEYBOARD SHORTCUTS =====
+
+        // ===== ÔN TẬP TAB KEYBOARD SHORTCUTS =====
+        function isReviewTabActive() {
+            const panel = document.getElementById('tabpanel-2');
+            return panel && panel.classList.contains('active');
+        }
+
+        // Detect which sub-game is currently active
+        function getActiveReviewGame() {
+            // Quiz: quiz-btn visible
+            if (document.querySelector('.quiz-btn:not([disabled])')) return 'quiz';
+            // Lex: lex-opt-btn visible
+            if (document.querySelector('.lex-opt-btn:not([disabled])')) return 'lex';
+            // Typing: typing-input visible
+            if (document.getElementById('typing-input')) return 'typing';
+            // Time game: time-opts visible
+            if (document.querySelector('#time-opts .lg-opt-btn')) return 'time';
+            // Date game: date-opts visible
+            if (document.querySelector('#date-opts .lg-opt-btn')) return 'date';
+            // Phone: phone-input
+            if (document.querySelector('.phone-input-wrap input')) return 'phone';
+            // Num: num-input
+            if (document.getElementById('num-input')) return 'num';
+            return null;
+        }
+
+        function clickNthOption(selector, n) {
+            const btns = [...document.querySelectorAll(selector)].filter(b => !b.disabled);
+            if (btns[n]) btns[n].click();
+        }
+
+        function flashReviewHint(text) {
+            let hint = document.getElementById('review-kb-toast');
+            if (!hint) {
+                hint = document.createElement('div');
+                hint.id = 'review-kb-toast';
+                hint.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.72);color:#fff;font-size:13px;padding:7px 18px;border-radius:20px;z-index:9999;pointer-events:none;transition:opacity 0.3s;';
+                document.body.appendChild(hint);
+            }
+            hint.textContent = text;
+            hint.style.opacity = '1';
+            clearTimeout(hint._t);
+            hint._t = setTimeout(() => hint.style.opacity = '0', 900);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (!isReviewTabActive()) return;
+
+            // If user is typing in phone/num/typing inputs, only handle Space (replay) and Enter (submit)
+            const tag = document.activeElement && document.activeElement.tagName;
+            const inInput = tag === 'INPUT' || tag === 'TEXTAREA';
+
+            const game = getActiveReviewGame();
+            if (!game) return;
+
+            // ── QUIZ & LEX: 1/2/3/4 → choose option, Space → replay audio ──
+            if (game === 'quiz' || game === 'lex') {
+                if (inInput) return;
+                const sel = game === 'quiz' ? '.quiz-btn' : '.lex-opt-btn';
+                if (e.key === '1') { e.preventDefault(); flashReviewHint('1'); clickNthOption(sel, 0); return; }
+                if (e.key === '2') { e.preventDefault(); flashReviewHint('2'); clickNthOption(sel, 1); return; }
+                if (e.key === '3') { e.preventDefault(); flashReviewHint('3'); clickNthOption(sel, 2); return; }
+                if (e.key === '4') { e.preventDefault(); flashReviewHint('4'); clickNthOption(sel, 3); return; }
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    // Lex: click the speak button; Quiz: auto-speak current word
+                    if (game === 'lex') {
+                        const speakBtn = document.querySelector('#listen-ex-area button[onclick^="speakWord"]');
+                        if (speakBtn) speakBtn.click();
+                    } else {
+                        // quiz – speak current question word
+                        if (typeof quizSessionWords !== 'undefined' && quizSessionWords[currentQuizIdx]) {
+                            speakWord(quizSessionWords[currentQuizIdx].en);
+                        }
+                    }
+                    flashReviewHint('🔊 Nghe lại');
+                    return;
+                }
+            }
+
+            // ── TYPING: Enter → check, Tab → hint ──
+            if (game === 'typing') {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    if (typeof revealHintChar === 'function') { revealHintChar(); flashReviewHint('💡 Gợi ý'); }
+                    return;
+                }
+                // Enter is already handled by the input's onkeydown; no need to duplicate
+                return;
+            }
+
+            // ── TIME / DATE LISTENING: 1/2/3/4 → choose, Space → replay ──
+            if (game === 'time' || game === 'date') {
+                if (inInput) return;
+                const optsId = game === 'time' ? '#time-opts .lg-opt-btn' : '#date-opts .lg-opt-btn';
+                const speakId = game === 'time' ? 'lg-time-btn' : 'lg-date-btn';
+                if (e.key === '1') { e.preventDefault(); flashReviewHint('1'); clickNthOption(optsId, 0); return; }
+                if (e.key === '2') { e.preventDefault(); flashReviewHint('2'); clickNthOption(optsId, 1); return; }
+                if (e.key === '3') { e.preventDefault(); flashReviewHint('3'); clickNthOption(optsId, 2); return; }
+                if (e.key === '4') { e.preventDefault(); flashReviewHint('4'); clickNthOption(optsId, 3); return; }
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    const btn = document.getElementById(speakId);
+                    if (btn) btn.click();
+                    flashReviewHint('🔊 Nghe lại');
+                    return;
+                }
+            }
+
+            // ── PHONE: Space → replay, Enter → submit ──
+            if (game === 'phone') {
+                if (e.key === ' ' && !inInput) {
+                    e.preventDefault();
+                    const btn = document.getElementById('lg-phone-btn');
+                    if (btn) btn.click();
+                    flashReviewHint('🔊 Nghe lại');
+                    return;
+                }
+                if (e.key === 'Enter' && inInput) {
+                    e.preventDefault();
+                    if (typeof checkPhoneAns === 'function') { checkPhoneAns(); flashReviewHint('✅ Kiểm tra'); }
+                    return;
+                }
+            }
+
+            // ── NUM: Space → replay, Enter → submit ──
+            if (game === 'num') {
+                if (e.key === ' ' && !inInput) {
+                    e.preventDefault();
+                    const btn = document.getElementById('lg-num-btn');
+                    if (btn) btn.click();
+                    flashReviewHint('🔊 Nghe lại');
+                    return;
+                }
+                if (e.key === 'Enter' && inInput) {
+                    e.preventDefault();
+                    if (typeof checkNumTyped === 'function') { checkNumTyped(); flashReviewHint('✅ Kiểm tra'); }
+                    return;
+                }
+            }
+        });
+        // ===== END ÔN TẬP KEYBOARD SHORTCUTS =====
+
         // ===== BULK ADD FUNCTIONS =====
         function toggleBulkBox() {
             const box = document.getElementById('bulk-box');
@@ -3327,42 +3716,91 @@
             const valid = [];
             const invalid = [];
 
-            let pendingWord = null; // last parsed word, waiting for possible example line
+            // Keyword maps for type detection
+            const typeMap = {
+                'động từ': 'Động từ (v)', 'dong tu': 'Động từ (v)', 'verb': 'Động từ (v)', 'v': 'Động từ (v)',
+                'danh từ': 'Danh từ (n)', 'danh tu': 'Danh từ (n)', 'noun': 'Danh từ (n)', 'n': 'Danh từ (n)',
+                'tính từ': 'Tính từ (adj)', 'tinh tu': 'Tính từ (adj)', 'adj': 'Tính từ (adj)', 'adjective': 'Tính từ (adj)',
+                'trạng từ': 'Trạng từ (adv)', 'trang tu': 'Trạng từ (adv)', 'adv': 'Trạng từ (adv)', 'adverb': 'Trạng từ (adv)',
+                'giới từ': 'Khác', 'prep': 'Khác', 'preposition': 'Khác',
+                'liên từ': 'Khác', 'conj': 'Khác',
+                'khác': 'Khác', 'other': 'Khác',
+            };
 
-            lines.forEach((line, idx) => {
-                const trimmed = line.trim();
-                if (!trimmed) return;
+            function detectType(str) {
+                const lower = str.trim().toLowerCase();
+                return typeMap[lower] || null;
+            }
 
-                // Check if this line is an example sentence: starts and ends with "
-                const isExample = trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length > 2;
+            function isWordLine(str) {
+                return str.indexOf(' - ') !== -1;
+            }
 
-                if (isExample) {
-                    const example = trimmed.slice(1, -1).trim(); // strip surrounding quotes
-                    if (pendingWord) {
-                        // Attach example to the last word
-                        pendingWord.example = example;
-                    }
-                    // Example lines are never "invalid" on their own
-                    return;
-                }
+            // State machine: parse groups
+            // Each group starts with a word line (en - vi),
+            // followed by optional type line, optional example line.
+            // Blank lines and separator lines (---) act as group separators.
 
-                // Otherwise treat as a word line
+            let i = 0;
+            while (i < lines.length) {
+                const trimmed = lines[i].trim();
+                i++;
+
+                // Skip blank lines and separator lines
+                if (!trimmed || /^[-─—=]{2,}$/.test(trimmed)) continue;
+
+                // Must be a word line
                 const dashIdx = trimmed.indexOf(' - ');
-                if (dashIdx !== -1) {
-                    const en = trimmed.substring(0, dashIdx).trim();
-                    const vi = trimmed.substring(dashIdx + 3).trim();
-                    if (en && vi) {
-                        pendingWord = { en, vi, example: '' };
-                        valid.push(pendingWord);
-                    } else {
-                        pendingWord = null;
-                        invalid.push(idx + 1);
-                    }
-                } else {
-                    pendingWord = null;
-                    invalid.push(idx + 1);
+                if (dashIdx === -1) {
+                    invalid.push(i); // this line is garbage
+                    continue;
                 }
-            });
+
+                const en = trimmed.substring(0, dashIdx).trim();
+                const vi = trimmed.substring(dashIdx + 3).trim();
+                if (!en || !vi) {
+                    invalid.push(i);
+                    continue;
+                }
+
+                let type = 'Khác';
+                let example = '';
+
+                // Peek at next line: could be type or example or blank
+                if (i < lines.length) {
+                    const next = lines[i].trim();
+                    if (!next || /^[-─—=]{2,}$/.test(next)) {
+                        // blank/separator → skip, no type/example
+                    } else {
+                        const detectedType = detectType(next);
+                        if (detectedType) {
+                            type = detectedType;
+                            i++; // consume type line
+
+                            // Peek again for example
+                            if (i < lines.length) {
+                                const next2 = lines[i].trim();
+                                if (next2 && !/^[-─—=]{2,}$/.test(next2) && !isWordLine(next2) && !detectType(next2)) {
+                                    // Strip surrounding quotes if present
+                                    example = (next2.startsWith('"') && next2.endsWith('"') && next2.length > 2)
+                                        ? next2.slice(1, -1).trim()
+                                        : next2;
+                                    i++; // consume example line
+                                }
+                            }
+                        } else if (!isWordLine(next)) {
+                            // Not a type keyword and not a word line → treat as example
+                            example = (next.startsWith('"') && next.endsWith('"') && next.length > 2)
+                                ? next.slice(1, -1).trim()
+                                : next;
+                            i++; // consume example line
+                        }
+                        // If next IS a word line, leave it for the next iteration
+                    }
+                }
+
+                valid.push({ en, vi, type, example });
+            }
 
             return { valid, invalid };
         }
@@ -3399,7 +3837,6 @@
             }
 
             const category = document.getElementById('category-select').value;
-            const type = document.getElementById('bulk-type-select').value;
             // Collect bulk tags
             const bulkTagInp = document.getElementById('bulk-tag-input');
             if (bulkTagInp.value.trim()) addTagToChips(bulkTagInp.value.trim(), 'bulk-tag-chips');
@@ -3408,7 +3845,7 @@
             let addedCount = 0;
             let skippedCount = 0;
 
-            valid.forEach(({ en, vi, example }) => {
+            valid.forEach(({ en, vi, type, example }) => {
                 // Trùng hoàn toàn = cùng từ, cùng nhóm VÀ cùng tags → mới bỏ qua
                 const exists = cards.some(c =>
                     c.en.toLowerCase() === en.toLowerCase() &&
@@ -3429,7 +3866,7 @@
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
 
             let msg = `✅ Đã thêm ${addedCount} từ!`;
             if (skippedCount > 0) msg += ` (Bỏ qua ${skippedCount} từ trùng)`;
@@ -3446,6 +3883,218 @@
             document.getElementById('bulk-preview').innerText = '';
             document.getElementById('bulk-preview').className = 'bulk-preview';
         }
+
+        // ===== BULK TAB SWITCHING =====
+        function switchBulkTab(tab) {
+            const isText = tab === 'text';
+            document.getElementById('bulk-panel-text').style.display = isText ? '' : 'none';
+            document.getElementById('bulk-panel-excel').style.display = isText ? 'none' : '';
+
+            const tbText = document.getElementById('bulk-tab-text');
+            const tbExcel = document.getElementById('bulk-tab-excel');
+
+            tbText.style.background = isText ? 'var(--bg-card)' : 'transparent';
+            tbText.style.color = isText ? 'var(--primary-btn)' : '#65676b';
+            tbText.style.boxShadow = isText ? '0 2px 5px rgba(0,0,0,0.1)' : 'none';
+
+            tbExcel.style.background = isText ? 'transparent' : 'var(--bg-card)';
+            tbExcel.style.color = isText ? '#65676b' : 'var(--primary-btn)';
+            tbExcel.style.boxShadow = isText ? 'none' : '0 2px 5px rgba(0,0,0,0.1)';
+        }
+
+        // ===== EXCEL IMPORT =====
+        let excelParsedRows = []; // [{en, vi, type, example}]
+
+        const typeMapExcel = {
+            'động từ':'Động từ (v)', 'dong tu':'Động từ (v)', 'verb':'Động từ (v)', 'v':'Động từ (v)',
+            'danh từ':'Danh từ (n)', 'danh tu':'Danh từ (n)', 'noun':'Danh từ (n)', 'n':'Danh từ (n)',
+            'tính từ':'Tính từ (adj)', 'tinh tu':'Tính từ (adj)', 'adj':'Tính từ (adj)', 'adjective':'Tính từ (adj)',
+            'trạng từ':'Trạng từ (adv)', 'trang tu':'Trạng từ (adv)', 'adv':'Trạng từ (adv)', 'adverb':'Trạng từ (adv)',
+            'khác':'Khác', 'other':'Khác', 'prep':'Khác', 'conj':'Khác',
+        };
+
+        function normalizeType(raw) {
+            if (!raw) return 'Khác';
+            const lower = String(raw).trim().toLowerCase();
+            return typeMapExcel[lower] || raw.trim() || 'Khác';
+        }
+
+        function handleExcelDrop(e) {
+            e.preventDefault();
+            document.getElementById('excel-dropzone').classList.remove('excel-dz-hover');
+            const file = e.dataTransfer.files[0];
+            if (file) handleExcelFile(file);
+        }
+
+        function handleExcelFile(file) {
+            if (!file) return;
+            const allowed = ['.xlsx', '.xls', '.csv'];
+            const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+            if (!allowed.includes(ext)) {
+                showToast('⚠️ Chỉ hỗ trợ file .xlsx, .xls, .csv');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const wb = XLSX.read(data, { type: 'array' });
+                    const ws = wb.Sheets[wb.SheetNames[0]];
+                    const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+
+                    if (!rows || rows.length === 0) {
+                        showToast('⚠️ File trống!');
+                        return;
+                    }
+
+                    // Auto-detect header row: skip if first cell looks like a header (no ' - ' and not a word)
+                    let startIdx = 0;
+                    const firstRow = rows[0];
+                    const firstCellStr = String(firstRow[0] || '').trim().toLowerCase();
+                    const headerKeywords = ['english','word','từ','tiếng anh','anh','en','từ vựng','vocabulary'];
+                    if (headerKeywords.some(k => firstCellStr.includes(k)) || (firstRow[1] && headerKeywords.some(k => String(firstRow[1]).toLowerCase().includes(k)))) {
+                        startIdx = 1;
+                    }
+
+                    excelParsedRows = [];
+                    const invalidRows = [];
+
+                    for (let i = startIdx; i < rows.length; i++) {
+                        const row = rows[i];
+                        const en = String(row[0] || '').trim();
+                        const vi = String(row[1] || '').trim();
+                        if (!en && !vi) continue; // blank row
+                        if (!en || !vi) { invalidRows.push(i + 1); continue; }
+                        const type = normalizeType(row[2]);
+                        const example = String(row[3] || '').trim();
+                        excelParsedRows.push({ en, vi, type, example });
+                    }
+
+                    renderExcelPreview(file.name, invalidRows);
+                } catch(err) {
+                    showToast('❌ Lỗi đọc file: ' + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function renderExcelPreview(filename, invalidRows) {
+            const wrap = document.getElementById('excel-preview-wrap');
+            const msg = document.getElementById('excel-preview-msg');
+            const thead = document.getElementById('excel-preview-head');
+            const tbody = document.getElementById('excel-preview-body');
+
+            if (excelParsedRows.length === 0) {
+                msg.textContent = '⚠️ Không tìm thấy từ hợp lệ trong file.';
+                msg.style.color = '#dc3545';
+                tbody.innerHTML = '';
+                thead.innerHTML = '';
+                wrap.style.display = '';
+                return;
+            }
+
+            msg.style.color = invalidRows.length > 0 ? '#fd7e14' : '#28a745';
+            msg.innerHTML = `📄 <b>${filename}</b> — Nhận diện <b>${excelParsedRows.length}</b> từ hợp lệ`
+                + (invalidRows.length ? ` · ⚠️ Bỏ qua ${invalidRows.length} dòng lỗi` : '');
+
+            thead.innerHTML = `<tr>
+                <th>#</th>
+                <th>Tiếng Anh</th>
+                <th>Tiếng Việt</th>
+                <th>Loại từ</th>
+                <th>Câu ví dụ</th>
+            </tr>`;
+
+            tbody.innerHTML = excelParsedRows.slice(0, 100).map((r, i) => `
+                <tr>
+                    <td style="color:#888; font-size:12px;">${i + 1}</td>
+                    <td><b>${r.en}</b></td>
+                    <td>${r.vi}</td>
+                    <td><span style="background:rgba(24,119,242,0.1); color:var(--primary-btn); border-radius:6px; padding:2px 7px; font-size:12px; font-weight:bold;">${r.type}</span></td>
+                    <td style="color:#888;">${r.example || '—'}</td>
+                </tr>
+            `).join('');
+
+            if (excelParsedRows.length > 100) {
+                tbody.innerHTML += `<tr><td colspan="5" style="text-align:center; color:#888; padding:10px; font-size:13px;">... và ${excelParsedRows.length - 100} từ nữa</td></tr>`;
+            }
+
+            wrap.style.display = '';
+        }
+
+        function addExcelCards() {
+            if (excelParsedRows.length === 0) {
+                showToast('Không có từ nào để thêm!');
+                return;
+            }
+
+            const category = document.getElementById('category-select').value;
+            const excelTagInp = document.getElementById('excel-tag-input');
+            if (excelTagInp.value.trim()) addTagToChips(excelTagInp.value.trim(), 'excel-tag-chips');
+            excelTagInp.value = '';
+            const tags = getChipTags('excel-tag-chips');
+
+            let addedCount = 0, skippedCount = 0;
+            excelParsedRows.forEach(({ en, vi, type, example }) => {
+                const exists = cards.some(c =>
+                    c.en.toLowerCase() === en.toLowerCase() &&
+                    c.category === category &&
+                    tagsEqual(c.tags || [], tags)
+                );
+                if (!exists) {
+                    cards.push({ en, vi, type, category, tags, example: example || '', status: 'learning_spelling' });
+                    addedCount++;
+                } else {
+                    skippedCount++;
+                }
+            });
+
+            saveAll();
+            applyFilter();
+            renderWordTable();
+            renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
+            renderQuizTagFilter();
+            renderTypingTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
+
+            let msg = `✅ Đã thêm ${addedCount} từ từ Excel!`;
+            if (skippedCount > 0) msg += ` (Bỏ qua ${skippedCount} từ trùng)`;
+            if (tags.length > 0) msg += ` Tag: ${tags.join(', ')}`;
+            showToast(msg);
+
+            clearExcelPanel();
+        }
+
+        function clearExcelPanel() {
+            excelParsedRows = [];
+            document.getElementById('excel-preview-wrap').style.display = 'none';
+            document.getElementById('excel-preview-body').innerHTML = '';
+            document.getElementById('excel-preview-head').innerHTML = '';
+            document.getElementById('excel-file-input').value = '';
+            document.getElementById('excel-tag-chips').innerHTML = '';
+        }
+
+        function downloadExcelTemplate() {
+            if (typeof XLSX === 'undefined') {
+                showToast('⚠️ Thư viện chưa tải xong, thử lại sau!');
+                return;
+            }
+            const wb = XLSX.utils.book_new();
+            const data = [
+                ['Tiếng Anh', 'Tiếng Việt', 'Loại từ', 'Câu ví dụ'],
+                ['run', 'chạy', 'động từ', 'She runs every morning.'],
+                ['apple', 'quả táo', 'danh từ', 'I eat an apple every day.'],
+                ['beautiful', 'đẹp', 'tính từ', 'What a beautiful day!'],
+                ['quickly', 'nhanh chóng', 'trạng từ', 'He finished quickly.'],
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            ws['!cols'] = [{wch:20},{wch:20},{wch:16},{wch:36}];
+            XLSX.utils.book_append_sheet(wb, ws, 'Từ vựng');
+            XLSX.writeFile(wb, 'tu-vung-mau.xlsx');
+        }
+        // ===== END EXCEL IMPORT =====
+
         // ===== END BULK ADD =====
 
         function updateQuizInfo() {
@@ -3696,7 +4345,7 @@
                     <button onclick="initTypingGame()" style="background: #6f42c1; padding: 15px 30px; font-size: 18px; margin-top: 6px;">Bắt đầu luyện gõ</button>
                 </div>`;
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             // Restore active category button state
             ['typing-cat-all','typing-cat-common','typing-cat-specialized'].forEach(id => {
                 const btn = document.getElementById(id);
@@ -3733,6 +4382,231 @@
                 backFn: 'resetQuizArea()'
             });
         }
+
+        }
+
+        // ===== 🎧 LISTEN & CHOOSE EXAMPLE GAME (LEX) =====
+        let activeLexCategory = null;
+        let activeLexTag = null;
+        let lexSessionWords = [];
+        let lexCurrentIdx = 0;
+        let lexCorrect = 0;
+        let lexWrong = [];
+
+        function getLexPool() {
+            return cards.filter(c => {
+                const hasEx = c.example && c.example.trim().length > 0;
+                const catOk = !activeLexCategory || c.category === activeLexCategory;
+                const tagOk = !activeLexTag || (c.tags || []).includes(activeLexTag);
+                return hasEx && catOk && tagOk;
+            });
+        }
+
+        function setLexCategory(cat) {
+            activeLexCategory = cat;
+            ['lex-cat-all','lex-cat-common','lex-cat-specialized'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                const c = id === 'lex-cat-all' ? null : id === 'lex-cat-common' ? 'common' : 'specialized';
+                const active = c === cat;
+                btn.style.background = active ? '#0d6efd' : 'transparent';
+                btn.style.borderColor = active ? '#0d6efd' : 'var(--border-color)';
+                btn.style.color = active ? 'white' : 'var(--text-main)';
+            });
+            updateLexPoolInfo();
+        }
+
+        function setLexTag(tag) {
+            activeLexTag = tag;
+            updateLexPoolInfo();
+        }
+
+        function updateLexPoolInfo() {
+            const el = document.getElementById('lex-pool-info');
+            if (!el) return;
+            const n = getLexPool().length;
+            el.innerHTML = n > 0
+                ? `📚 Có <b>${n} từ</b> có câu ví dụ sẵn sàng`
+                : `<span style="color:#dc3545;">⚠️ Không có từ nào có câu ví dụ trong nhóm này!</span>`;
+        }
+
+        function renderLexTagFilter() {
+            const sel = document.getElementById('lex-tag-filter');
+            if (!sel) return;
+            const allTags = [...new Set(cards.filter(c => c.example && c.example.trim()).flatMap(c => c.tags || []))].sort();
+            sel.innerHTML = '<option value="__all__">📚 Tất cả từ có ví dụ</option>'
+                + allTags.map(t => `<option value="${t}" ${activeLexTag === t ? 'selected' : ''}>${t}</option>`).join('');
+        }
+
+        function initLexGame() {
+            const pool = getLexPool();
+            if (pool.length < 4) {
+                showToast('⚠️ Cần ít nhất 4 từ có câu ví dụ để chơi!');
+                return;
+            }
+            lexSessionWords = [...pool].sort(() => Math.random() - 0.5);
+            lexCurrentIdx = 0;
+            lexCorrect = 0;
+            lexWrong = [];
+            renderLexQuestion();
+        }
+
+        function renderLexQuestion() {
+            const area = document.getElementById('listen-ex-area');
+            if (lexCurrentIdx >= lexSessionWords.length) {
+                endLexGame();
+                return;
+            }
+
+            const card = lexSessionWords[lexCurrentIdx];
+
+            // Build 3 wrong example distractors from other cards that have examples
+            const pool = getLexPool().filter(c => c.en !== card.en);
+            const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+            const wrongExamples = [];
+            for (const c of shuffledPool) {
+                if (wrongExamples.length >= 3) break;
+                if (!wrongExamples.includes(c.example)) wrongExamples.push(c.example);
+            }
+
+            // Pad if not enough
+            while (wrongExamples.length < 3) wrongExamples.push('(Không có câu ví dụ)');
+
+            const options = [card.example, ...wrongExamples].sort(() => Math.random() - 0.5);
+
+            area.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:18px; font-weight:bold; font-size:15px;">
+                    <span style="color:#0d6efd; background:var(--bg-card); padding:5px 15px; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,.1);">
+                        Câu: ${lexCurrentIdx + 1}/${lexSessionWords.length}
+                    </span>
+                    <span style="color:#28a745; background:var(--bg-card); padding:5px 15px; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,.1);">
+                        ✅ ${lexCorrect} đúng
+                    </span>
+                </div>
+
+                <!-- Big listen button -->
+                <div style="text-align:center; margin-bottom:28px;">
+                    <button onclick="speakWord('${card.en.replace(/'/g, "\\'")}')"
+                        style="background:#0d6efd; border:none; border-radius:50%; width:90px; height:90px; font-size:38px; cursor:pointer; box-shadow:0 4px 14px rgba(13,110,253,0.35); transition:0.15s;"
+                        title="Nghe lại">
+                        🔊
+                    </button>
+                    <div style="margin-top:10px; font-size:13px; color:#888;">Bấm để nghe lại</div>
+                </div>
+
+                <p style="text-align:center; font-size:15px; font-weight:bold; color:var(--text-main); margin-bottom:16px;">
+                    Câu nào chứa từ vừa nghe?
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:12px;" id="lex-options">
+                    ${options.map((opt, i) => {
+                        const safeOpt = opt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        return `<button class="lex-opt-btn" onclick="checkLexAnswer(this,'${safeOpt}','${card.example.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')"
+                            style="text-align:left; padding:14px 18px; border-radius:12px; font-size:15px; line-height:1.5; background:var(--bg-card); border:2px solid var(--border-color); color:var(--text-main); cursor:pointer; transition:0.15s; font-family:inherit;">
+                            <span style="font-weight:bold; color:#0d6efd; margin-right:8px;">${String.fromCharCode(65+i)}.</span>${opt}
+                        </button>`;
+                    }).join('')}
+                </div>
+            `;
+
+            // Auto-speak
+            setTimeout(() => speakWord(card.en), 300);
+        }
+
+        function checkLexAnswer(btn, selected, correct) {
+            const btns = document.querySelectorAll('.lex-opt-btn');
+            btns.forEach(b => b.disabled = true);
+
+            const card = lexSessionWords[lexCurrentIdx];
+
+            if (selected === correct) {
+                btn.style.background = 'rgba(40,167,69,0.15)';
+                btn.style.borderColor = '#28a745';
+                btn.style.color = '#28a745';
+                lexCorrect++;
+                setTimeout(() => {
+                    lexCurrentIdx++;
+                    renderLexQuestion();
+                }, 700);
+            } else {
+                btn.style.background = 'rgba(220,53,69,0.12)';
+                btn.style.borderColor = '#dc3545';
+                btn.style.color = '#dc3545';
+
+                // Highlight correct
+                btns.forEach(b => {
+                    if (b.textContent.slice(2).trim() === correct) {
+                        b.style.background = 'rgba(40,167,69,0.15)';
+                        b.style.borderColor = '#28a745';
+                        b.style.color = '#28a745';
+                    }
+                });
+
+                lexWrong.push(card);
+                demoteCards([card]);
+
+                setTimeout(() => {
+                    lexCurrentIdx++;
+                    renderLexQuestion();
+                }, 1800);
+            }
+        }
+
+        function endLexGame() {
+            const area = document.getElementById('listen-ex-area');
+            const total = lexCurrentIdx;
+            const pct = total > 0 ? Math.round(lexCorrect / total * 100) : 0;
+            recordGameScore('listen_example', lexCorrect, total);
+            renderGameResult(area, {
+                icon: '🎧',
+                title: 'Kết Quả Nghe & Chọn Ví Dụ',
+                correct: lexCorrect,
+                total,
+                pct,
+                wrongNote: lexWrong.length > 0
+                    ? `⚠️ Có <b>${lexWrong.length} từ</b> sai → đã chuyển về <b>"🔤 Quên chữ"</b>.`
+                    : null,
+                extraNote: null,
+                restartLabel: '🔄 Chơi lại',
+                restartFn: 'initLexGame()',
+                backLabel: '🏠 Quay về',
+                backFn: 'resetLexArea()'
+            });
+        }
+
+        function resetLexArea() {
+            const area = document.getElementById('listen-ex-area');
+            area.innerHTML = `
+                <div style="text-align:center; margin-bottom:20px;">
+                    <p>Nghe từ được phát âm rồi chọn <b>câu ví dụ đúng</b> chứa từ đó.<br>
+                    <span style="color:#28a745; font-size:14px;">💡 Chỉ dùng các từ có câu ví dụ — có thể nghe lại bao nhiêu lần tùy thích!</span><br>
+                    <span style="color:#dc3545; font-size:14px;">⚠️ Chọn sai sẽ bị giáng cấp về "Quên chữ"!</span></p>
+                    <div style="margin:14px 0 6px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <span style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">📂 Nhóm từ:</span>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                            <button id="lex-cat-all" onclick="setLexCategory(null)"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid #0d6efd; background:#0d6efd; color:white; font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">📚 Tất cả</button>
+                            <button id="lex-cat-common" onclick="setLexCategory('common')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">📖 Thường dùng</button>
+                            <button id="lex-cat-specialized" onclick="setLexCategory('specialized')"
+                                style="padding:7px 16px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:13px; font-weight:bold; cursor:pointer; transition:0.2s;">🔬 Chuyên ngành</button>
+                        </div>
+                    </div>
+                    <div style="margin:8px 0 14px; display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <label style="font-size:14px; font-weight:bold; color:var(--text-main); white-space:nowrap;">🏷️ Ôn theo tag:</label>
+                        <select id="lex-tag-filter" onchange="setLexTag(this.value === '__all__' ? null : this.value)"
+                            style="margin:0; padding:7px 14px; font-size:14px; font-weight:bold; color:#0d6efd; border-radius:20px; border:2px solid var(--border-color); background:var(--bg-card); cursor:pointer; width:auto; max-width:260px;">
+                            <option value="__all__">📚 Tất cả từ có ví dụ</option>
+                        </select>
+                    </div>
+                    <div id="lex-pool-info" style="font-size:13px; color:#888; margin-bottom:10px;"></div>
+                    <button onclick="initLexGame()" style="background:#0d6efd; padding:15px 30px; font-size:18px; margin-top:6px;">🎧 Bắt đầu</button>
+                </div>`;
+            renderLexTagFilter();
+            updateLexPoolInfo();
+            setLexCategory(activeLexCategory);
+        }
+        // ===== END LEX GAME =====
 
         function tagsEqual(a, b) {
             if (a.length !== b.length) return false;
@@ -3858,7 +4732,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
             renderQuizTagFilter();
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             showToast("Đã thêm từ!");
 
             // Auto-detect word family in background (non-blocking)
@@ -3873,7 +4747,7 @@ If no family match found: {"family": null, "matched_words": []}`;
                 renderWordTable();
                 renderQuizTagFilter();
                 renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             }
         }
 
@@ -3980,7 +4854,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             renderWordTable();
             renderQuizTagFilter();
             renderTypingTagFilter();
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             closeEditCard();
             showToast('✅ Đã lưu thay đổi!');
         }
@@ -5145,7 +6019,12 @@ If no family match found: {"family": null, "matched_words": []}`;
             recognition.start();
         }
 
-        function clearAll() { if (confirm("Xóa toàn bộ?")) { localStorage.clear(); location.reload(); } }
+        function clearAll() {
+            if (confirm("Xóa toàn bộ từ vựng?\n\nChỉ dữ liệu từ vựng sẽ bị xóa (thẻ, hàng chờ ôn tập, thống kê).\nChuỗi điểm danh, công việc, mục tiêu và cài đặt sẽ KHÔNG bị ảnh hưởng.")) {
+                ['cards_v4', 'dailyData_v4', 'quizQueue_v4', 'typingQueue_v4', 'statsData_v1'].forEach(k => localStorage.removeItem(k));
+                location.reload();
+            }
+        }
         function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.className = "show"; setTimeout(() => t.className = "", 2500); }
         // ===== GITHUB SYNC CONFIG =====
         const GH_OWNER  = 'ThaiLe-01';
@@ -7162,12 +8041,12 @@ If no family match found: {"family": null, "matched_words": []}`;
                 btn.style.color         = isActive ? 'white' : 'var(--text-main)';
                 btn.style.borderColor   = isActive ? '#e83e8c' : 'var(--border-color)';
             });
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
         }
 
         function setMatchTag(tag) {
             matchTag = tag;
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
         }
 
         function renderMatchTagFilter() {
@@ -7442,7 +8321,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             </div>`;
             // Khôi phục trạng thái category và tag
             setMatchCategory(matchCategory);
-            renderMatchTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
         }
         // ===================================================================
         // ===== END MATCHING GAME ===========================================
