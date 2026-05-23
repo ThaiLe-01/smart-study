@@ -1501,6 +1501,87 @@
             text-align: center; padding: 40px 20px;
             color: #aaa; font-style: italic; font-size: 14px;
         }
+
+        /* ── Checkbox column ── */
+        .xl-th-check, .xl-td-check {
+            width: 36px; min-width: 36px; text-align: center; padding: 0 6px !important;
+            border-right: 1px solid var(--border-color);
+        }
+        .xl-th-check input[type="checkbox"],
+        .xl-td-check input[type="checkbox"] {
+            width: 16px; height: 16px; cursor: pointer;
+            accent-color: var(--primary-btn); margin: 0;
+        }
+        .xl-table tbody tr.xl-row-selected { background: rgba(24,119,242,0.09) !important; }
+
+        /* ── Bulk action floating bar ── */
+        .xl-bulk-bar {
+            display: none;
+            position: sticky; bottom: 16px;
+            background: #1c1e21; color: white;
+            border-radius: 14px; padding: 10px 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+            align-items: center; gap: 12px;
+            z-index: 200; margin-top: 12px;
+            animation: slideUp 0.2s ease;
+        }
+        .xl-bulk-bar.open { display: flex; }
+        .dark-mode .xl-bulk-bar { background: #3a3b3c; border: 1px solid #555; }
+        .xl-bulk-count {
+            font-size: 14px; font-weight: bold; flex: 1;
+        }
+        .xl-bulk-btn {
+            padding: 8px 16px; border-radius: 8px; border: none;
+            cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.18s;
+        }
+        .xl-bulk-del { background: #dc3545; color: white; }
+        .xl-bulk-del:hover { background: #b02a37; opacity: 1; }
+        .xl-bulk-cancel { background: rgba(255,255,255,0.12); color: white; }
+        .xl-bulk-cancel:hover { background: rgba(255,255,255,0.22); opacity: 1; }
+
+        /* ── Delete by tag panel ── */
+        .xl-tag-del-panel {
+            display: none; border: 1.5px solid #dc3545;
+            border-radius: 12px; padding: 16px 18px; margin-top: 16px;
+            background: rgba(220,53,69,0.04); animation: fadeIn 0.15s ease;
+        }
+        .xl-tag-del-panel.open { display: block; }
+        .dark-mode .xl-tag-del-panel { background: rgba(220,53,69,0.08); }
+        .xl-tag-del-title {
+            font-size: 15px; font-weight: bold; color: #dc3545; margin-bottom: 12px;
+        }
+        .xl-tag-del-grid {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+        }
+        .xl-tag-del-chip {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 12px; border-radius: 20px; cursor: pointer;
+            border: 2px solid var(--border-color); font-size: 13px; font-weight: bold;
+            background: var(--bg-card); color: var(--text-main);
+            transition: 0.15s; user-select: none;
+        }
+        .xl-tag-del-chip:hover { border-color: #dc3545; color: #dc3545; }
+        .xl-tag-del-chip.selected {
+            border-color: #dc3545; background: #dc3545; color: white;
+        }
+        .xl-tag-del-info {
+            font-size: 13px; color: #888; margin-bottom: 12px; min-height: 18px;
+        }
+        .xl-tag-del-info b { color: #dc3545; }
+        .xl-tag-del-actions { display: flex; gap: 10px; }
+        .xl-tag-del-confirm {
+            background: #dc3545; color: white; padding: 9px 20px;
+            border-radius: 8px; font-size: 14px; font-weight: bold;
+            border: none; cursor: pointer; transition: 0.15s;
+        }
+        .xl-tag-del-confirm:hover { background: #b02a37; opacity: 1; }
+        .xl-tag-del-confirm:disabled { background: #aaa; cursor: not-allowed; }
+        .xl-tag-del-close {
+            background: transparent; color: #888; border: 1.5px solid var(--border-color);
+            padding: 9px 16px; border-radius: 8px; font-size: 14px;
+            cursor: pointer; transition: 0.15s;
+        }
+        .xl-tag-del-close:hover { background: var(--border-color); opacity: 1; }
         /* ===== END EXCEL-STYLE WORD LIST ===== */
 
         /* ===== EDIT CARD MODAL ===== */
@@ -2772,6 +2853,9 @@
             <table class="xl-table" id="xl-table">
                 <thead>
                     <tr>
+                        <th class="xl-th xl-th-check">
+                            <input type="checkbox" id="xl-check-all" title="Chọn tất cả" onchange="xlToggleAll(this.checked)">
+                        </th>
                         <th class="xl-th" data-col="en">
                             <div class="xl-th-inner">
                                 <span class="xl-th-label">Từ vựng</span>
@@ -2823,7 +2907,7 @@
                                 </div>
                             </div>
                         </th>
-                        <th class="xl-th xl-th-action">Xóa</th>
+                        <th class="xl-th xl-th-action">Sửa/Xóa</th>
                     </tr>
                 </thead>
                 <tbody id="xl-tbody"></tbody>
@@ -2836,8 +2920,34 @@
             <button onclick="xlClearAllFilters()" class="xl-clear-btn">✖ Xóa tất cả bộ lọc</button>
         </div>
 
-        <!-- ── Filter dropdown (shared, moved by JS) ── -->
-        <div class="xl-dropdown" id="xl-dropdown" style="display:none;">
+        <!-- ── Bulk action floating bar ── -->
+        <div class="xl-bulk-bar" id="xl-bulk-bar">
+            <span class="xl-bulk-count" id="xl-bulk-count">0 từ được chọn</span>
+            <button class="xl-bulk-btn xl-bulk-del" onclick="xlDeleteSelected()">🗑️ Xóa các từ đã chọn</button>
+            <button class="xl-bulk-btn xl-bulk-cancel" onclick="xlClearSelection()">✖ Bỏ chọn</button>
+        </div>
+
+        <!-- ── Delete by tag panel ── -->
+        <div class="xl-tag-del-panel" id="xl-tag-del-panel">
+            <div class="xl-tag-del-title">🏷️ Xóa từ theo Tag</div>
+            <div class="xl-tag-del-grid" id="xl-tag-del-grid"></div>
+            <div class="xl-tag-del-info" id="xl-tag-del-info">Chọn tag để xem số từ sẽ bị xóa.</div>
+            <div class="xl-tag-del-actions">
+                <button class="xl-tag-del-confirm" id="xl-tag-del-confirm" onclick="xlConfirmDeleteByTag()" disabled>🗑️ Xóa</button>
+                <button class="xl-tag-del-close" onclick="xlCloseTagDelPanel()">Đóng</button>
+            </div>
+        </div>
+
+        <!-- ── Bottom buttons ── -->
+        <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
+            <button onclick="xlToggleTagDelPanel()" id="xl-tag-del-btn"
+                style="flex:1; background:transparent; color:#dc3545; border:2px dashed #dc3545; font-size:14px; padding:11px;">
+                🏷️ Xóa từ theo Tag
+            </button>
+            <button onclick="clearAll()" style="flex:1; background:#dc3545; font-size:14px; padding:11px;">
+                🗑️ Xóa sạch tất cả dữ liệu
+            </button>
+        </div>
             <div class="xl-dd-search-wrap">
                 <input type="text" class="xl-dd-search" id="xl-dd-search" placeholder="Tìm..." oninput="xlDdSearch()">
             </div>
@@ -2851,9 +2961,6 @@
                 <button class="xl-dd-cancel" onclick="xlCloseDropdown()">✖ Đóng</button>
             </div>
         </div>
-
-        <button onclick="clearAll()" style="background:#dc3545; width: 100%; margin-top: 20px;">🗑️ Xóa sạch dữ liệu</button>
-    </div>
 
     </div><!-- end tabpanel-4 -->
 
@@ -4780,12 +4887,17 @@ If no family match found: {"family": null, "matched_words": []}`;
         function deleteCard(index) {
             if (confirm("Xóa từ này?")) {
                 cards.splice(index, 1);
+                xlSelectedIdx.delete(index);
+                // Shift down all selected indices > deleted index
+                const shifted = new Set();
+                xlSelectedIdx.forEach(idx => shifted.add(idx > index ? idx - 1 : idx));
+                xlSelectedIdx = shifted;
                 saveAll();
                 applyFilter();
                 renderWordTable();
                 renderQuizTagFilter();
                 renderTypingTagFilter();
-            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
+                renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             }
         }
 
@@ -4986,10 +5098,11 @@ If no family match found: {"family": null, "matched_words": []}`;
             footerText.textContent = `Hiển thị ${rows.length} / ${cards.length} từ`;
 
             if (rows.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="xl-empty">😕 Không tìm thấy từ nào phù hợp bộ lọc.<br><br>
+                tbody.innerHTML = `<tr><td colspan="8" class="xl-empty">😕 Không tìm thấy từ nào phù hợp bộ lọc.<br><br>
                     <button onclick="xlClearAllFilters()" style="background:var(--primary-btn);color:white;padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-size:14px;">
                         ✖ Xóa tất cả bộ lọc
                     </button></td></tr>`;
+                xlUpdateBulkBar();
                 return;
             }
 
@@ -4998,7 +5111,11 @@ If no family match found: {"family": null, "matched_words": []}`;
                     ? c.tags.map(t => `<span class="tag-badge">${t}</span>`).join(' ')
                     : '<span style="color:#aaa;">—</span>';
                 const statusColor = c.status === 'learned' ? '#28a745' : '#fd7e14';
-                return `<tr>
+                const isSelected = xlSelectedIdx.has(c._origIdx);
+                return `<tr class="${isSelected ? 'xl-row-selected' : ''}">
+                    <td class="xl-td-check">
+                        <input type="checkbox" ${isSelected ? 'checked' : ''} onchange="xlToggleRow(${c._origIdx}, this.checked)">
+                    </td>
                     <td class="xl-td-en">${c.en}</td>
                     <td>${c.vi}</td>
                     <td><span style="font-size:12px;">${c.type || '—'}</span></td>
@@ -5011,6 +5128,18 @@ If no family match found: {"family": null, "matched_words": []}`;
                     </td>
                 </tr>`;
             }).join('');
+
+            // Sync select-all checkbox
+            const allCb = document.getElementById('xl-check-all');
+            if (allCb) {
+                const visibleIdxs = rows.map(c => c._origIdx);
+                const allChecked = visibleIdxs.length > 0 && visibleIdxs.every(idx => xlSelectedIdx.has(idx));
+                const someChecked = visibleIdxs.some(idx => xlSelectedIdx.has(idx));
+                allCb.checked = allChecked;
+                allCb.indeterminate = !allChecked && someChecked;
+            }
+
+            xlUpdateBulkBar();
 
             // Update sort button indicators
             ['en','vi','type','category','status'].forEach(col => {
@@ -5028,7 +5157,6 @@ If no family match found: {"family": null, "matched_words": []}`;
                 if (!allowed) return;
                 const all = xlUniqueVals(col);
                 if (allowed.size < all.length) {
-                    // Find the th with data-col
                     const th = document.querySelector(`.xl-th[data-col="${col}"] .xl-filter-btn`);
                     if (th) th.classList.add('active');
                 }
@@ -5166,6 +5294,172 @@ If no family match found: {"family": null, "matched_words": []}`;
         // Keep old renderWordTable as alias so existing call-sites still work
         function renderWordTable() { xlRender(); }
         // ===== END EXCEL-STYLE WORD LIST =====
+
+        // ===== MULTI-SELECT & BULK DELETE =====
+        let xlSelectedIdx = new Set(); // stores original card indices
+
+        function xlToggleRow(origIdx, checked) {
+            if (checked) xlSelectedIdx.add(origIdx);
+            else xlSelectedIdx.delete(origIdx);
+            xlUpdateBulkBar();
+            // sync select-all state
+            const allCb = document.getElementById('xl-check-all');
+            if (!allCb) return;
+            const visibleRows = xlFilteredCards();
+            const visibleIdxs = visibleRows.map(c => c._origIdx);
+            const allChecked = visibleIdxs.length > 0 && visibleIdxs.every(idx => xlSelectedIdx.has(idx));
+            const someChecked = visibleIdxs.some(idx => xlSelectedIdx.has(idx));
+            allCb.checked = allChecked;
+            allCb.indeterminate = !allChecked && someChecked;
+            // highlight row
+            const rows = document.querySelectorAll('#xl-tbody tr');
+            rows.forEach(tr => {
+                const cb = tr.querySelector('input[type="checkbox"]');
+                if (cb) {
+                    const idx = parseInt(cb.getAttribute('onchange').match(/\d+/)[0]);
+                    tr.classList.toggle('xl-row-selected', xlSelectedIdx.has(idx));
+                }
+            });
+        }
+
+        function xlToggleAll(checked) {
+            const visibleRows = xlFilteredCards();
+            visibleRows.forEach(c => {
+                if (checked) xlSelectedIdx.add(c._origIdx);
+                else xlSelectedIdx.delete(c._origIdx);
+            });
+            xlRender();
+        }
+
+        function xlUpdateBulkBar() {
+            const bar = document.getElementById('xl-bulk-bar');
+            const countEl = document.getElementById('xl-bulk-count');
+            if (!bar) return;
+            if (xlSelectedIdx.size > 0) {
+                bar.classList.add('open');
+                countEl.textContent = `☑ ${xlSelectedIdx.size} từ được chọn`;
+            } else {
+                bar.classList.remove('open');
+            }
+        }
+
+        function xlClearSelection() {
+            xlSelectedIdx.clear();
+            xlRender();
+        }
+
+        function xlDeleteSelected() {
+            if (xlSelectedIdx.size === 0) return;
+            if (!confirm(`Xóa ${xlSelectedIdx.size} từ đã chọn? Thao tác không thể hoàn tác.`)) return;
+            // Delete by descending index to avoid shifting
+            const sortedIdxs = [...xlSelectedIdx].sort((a, b) => b - a);
+            sortedIdxs.forEach(idx => cards.splice(idx, 1));
+            xlSelectedIdx.clear();
+            saveAll();
+            applyFilter();
+            renderWordTable();
+            renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
+            renderQuizTagFilter(); renderTypingTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
+            xlRenderTagDelGrid(); // refresh tag panel if open
+            showToast(`🗑️ Đã xóa ${sortedIdxs.length} từ!`);
+        }
+        // ===== END MULTI-SELECT =====
+
+        // ===== DELETE BY TAG =====
+        let xlTagDelSelected = new Set();
+
+        function xlToggleTagDelPanel() {
+            const panel = document.getElementById('xl-tag-del-panel');
+            const btn   = document.getElementById('xl-tag-del-btn');
+            const isOpen = panel.classList.contains('open');
+            if (isOpen) {
+                xlCloseTagDelPanel();
+            } else {
+                panel.classList.add('open');
+                btn.style.background = 'rgba(220,53,69,0.08)';
+                xlTagDelSelected.clear();
+                xlRenderTagDelGrid();
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function xlCloseTagDelPanel() {
+            document.getElementById('xl-tag-del-panel').classList.remove('open');
+            const btn = document.getElementById('xl-tag-del-btn');
+            if (btn) btn.style.background = '';
+            xlTagDelSelected.clear();
+        }
+
+        function xlRenderTagDelGrid() {
+            const grid = document.getElementById('xl-tag-del-grid');
+            if (!grid) return;
+            const allTags = [...new Set(cards.flatMap(c => c.tags || []))].sort();
+            if (allTags.length === 0) {
+                grid.innerHTML = '<span style="color:#aaa;font-size:13px;font-style:italic;">Không có tag nào trong danh sách.</span>';
+                xlUpdateTagDelInfo();
+                return;
+            }
+            grid.innerHTML = allTags.map(tag => {
+                const count = cards.filter(c => (c.tags || []).includes(tag)).length;
+                const sel = xlTagDelSelected.has(tag);
+                return `<div class="xl-tag-del-chip${sel ? ' selected' : ''}" onclick="xlToggleTagDel('${tag.replace(/'/g,"\\'")}')">
+                    ${tag} <span style="opacity:0.7;font-size:11px;">(${count})</span>
+                </div>`;
+            }).join('');
+            xlUpdateTagDelInfo();
+        }
+
+        function xlToggleTagDel(tag) {
+            if (xlTagDelSelected.has(tag)) xlTagDelSelected.delete(tag);
+            else xlTagDelSelected.add(tag);
+            xlRenderTagDelGrid();
+        }
+
+        function xlUpdateTagDelInfo() {
+            const info = document.getElementById('xl-tag-del-info');
+            const btn  = document.getElementById('xl-tag-del-confirm');
+            if (!info || !btn) return;
+            if (xlTagDelSelected.size === 0) {
+                info.innerHTML = 'Chọn tag để xem số từ sẽ bị xóa.';
+                btn.disabled = true;
+                btn.textContent = '🗑️ Xóa';
+                return;
+            }
+            // Count cards that have ANY of the selected tags
+            const toDelete = cards.filter(c => (c.tags || []).some(t => xlTagDelSelected.has(t)));
+            const tagList = [...xlTagDelSelected].join(', ');
+            info.innerHTML = `Sẽ xóa <b>${toDelete.length} từ</b> có tag: <b>${tagList}</b>`;
+            btn.disabled = toDelete.length === 0;
+            btn.textContent = `🗑️ Xóa ${toDelete.length} từ`;
+        }
+
+        function xlConfirmDeleteByTag() {
+            if (xlTagDelSelected.size === 0) return;
+            const toDelete = cards.filter(c => (c.tags || []).some(t => xlTagDelSelected.has(t)));
+            if (toDelete.length === 0) return;
+            const tagList = [...xlTagDelSelected].join(', ');
+            if (!confirm(`Xóa ${toDelete.length} từ có tag ${tagList}?\nThao tác không thể hoàn tác.`)) return;
+
+            // Remove cards (filter in place)
+            const toDeleteEns = new Set(toDelete.map(c => c.en + '|' + c.category));
+            for (let i = cards.length - 1; i >= 0; i--) {
+                if ((cards[i].tags || []).some(t => xlTagDelSelected.has(t))) {
+                    cards.splice(i, 1);
+                }
+            }
+            xlTagDelSelected.clear();
+            xlSelectedIdx.clear();
+            saveAll();
+            applyFilter();
+            renderWordTable();
+            renderTagFilterBar('flashcard-tag-filter', () => activeFlashcardTag, 'setFlashcardTag', currentStudyCategory);
+            renderQuizTagFilter(); renderTypingTagFilter();
+            renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
+            xlCloseTagDelPanel();
+            showToast(`🗑️ Đã xóa ${toDelete.length} từ theo tag!`);
+        }
+        // ===== END DELETE BY TAG =====
 
         let selectedCalDay = null;
 
