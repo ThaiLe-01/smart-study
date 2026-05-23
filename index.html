@@ -6194,7 +6194,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         function renderTimeQuestion() {
-            if (timeGame.current >= timeGame.total) { endListenGame('time-area', timeGame, initTimeGame, '🕐'); return; }
+            if (timeGame.current >= timeGame.total) { endListenGame('time-area', timeGame, 'initTimeGame', '🕐'); return; }
             const q = makeTimeQuestion();
             timeGame.current_q = q;
 
@@ -6259,7 +6259,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         function renderDateQuestion() {
-            if (dateGame.current >= dateGame.total) { endListenGame('date-area', dateGame, initDateGame, '📅'); return; }
+            if (dateGame.current >= dateGame.total) { endListenGame('date-area', dateGame, 'initDateGame', '📅'); return; }
             const q = makeDateQuestion();
             dateGame.current_q = q;
 
@@ -6323,7 +6323,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         function renderPhoneQuestion() {
-            if (phoneGame.current >= phoneGame.total) { endListenGame('phone-area', phoneGame, initPhoneGame, '📞'); return; }
+            if (phoneGame.current >= phoneGame.total) { endListenGame('phone-area', phoneGame, 'initPhoneGame', '📞'); return; }
             const q = genPhone();
             phoneGame.current_q = q;
             phoneGame.attempts = 0;
@@ -6436,7 +6436,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         function renderNumQuestion() {
-            if (numGame.current >= numGame.total) { endListenGame('num-area', numGame, initNumGame, '🔢'); return; }
+            if (numGame.current >= numGame.total) { endListenGame('num-area', numGame, 'initNumGame', '🔢'); return; }
 
             const q = makeNumQuestion();
             numGame.current_q = q;
@@ -6525,7 +6525,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         }
 
         // ── Shared result screen ─────────────────────────────────────────────
-        function endListenGame(areaId, game, restartFn, icon) {
+        function endListenGame(areaId, game, restartFnName, icon) {
             recordGameScore('listening', game.correct, game.total);
             renderGameResult(document.getElementById(areaId), {
                 icon,
@@ -6535,7 +6535,7 @@ If no family match found: {"family": null, "matched_words": []}`;
                 pct: Math.round(game.correct / game.total * 100),
                 wrongNote: null,
                 restartLabel: '🔄 Chơi lại',
-                restartFn: `${restartFn.name}()`
+                restartFn: `${restartFnName}()`
             });
         }
 
@@ -7375,10 +7375,21 @@ If no family match found: {"family": null, "matched_words": []}`;
                 <div style="font-size:15px; color:#888; margin-bottom:6px;">cho <b>${total}</b> cặp</div>
                 <div class="match-result-msg">${msg}</div>
                 <div class="match-result-actions">
-                    <button onclick="initMatchingGame()" style="background:#e83e8c;">🔄 Chơi lại</button>
+                    <button onclick="restartMatchingGame()" style="background:#e83e8c;">🔄 Chơi lại</button>
                     <button onclick="renderMatchSetup()" style="background:transparent; color:#888; border:1.5px solid var(--border-color);">⚙️ Cài đặt</button>
                 </div>
             </div>`;
+        }
+
+        function restartMatchingGame() {
+            // Reset toàn bộ state timer trước khi chơi lại với cùng cài đặt
+            if (matchTimerInt) clearInterval(matchTimerInt);
+            matchTimerInt = null;
+            matchTimerSec = 0;
+            matchStarted  = false;
+            matchSelected = null;
+            matchMatched  = new Set();
+            initMatchingGame();
         }
 
         function renderMatchSetup() {
