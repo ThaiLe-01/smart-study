@@ -2566,8 +2566,28 @@
         <div class="lg-panel" id="lgp-num">
             <div id="num-area">
                 <div style="text-align:center; padding: 10px 0 20px;">
-                    <p>Nghe một số từ <b>0 đến 100</b> rồi <b>gõ số bạn nghe được</b>. Mỗi vòng <b>10 câu</b>.<br>
+                    <p>Nghe một số rồi <b>gõ số bạn nghe được</b>. Mỗi vòng <b>10 câu</b>.<br>
                     <span style="color:#28a745;font-size:14px;">💡 Có 2 lần thử mỗi câu — nghe lại nếu chưa chắc!</span></p>
+
+                    <!-- Level selector -->
+                    <div style="margin:14px 0 18px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <span style="font-size:14px; font-weight:bold; color:var(--text-main);">🎚️ Chọn cấp độ:</span>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                            <button id="num-lvl-0" onclick="setNumLevel(0)"
+                                style="padding:10px 20px; border-radius:20px; border:2px solid #6f42c1; background:#6f42c1; color:white; font-size:14px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                🟢 0 – 99
+                            </button>
+                            <button id="num-lvl-1" onclick="setNumLevel(1)"
+                                style="padding:10px 20px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:14px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                🟡 100 – 999
+                            </button>
+                            <button id="num-lvl-2" onclick="setNumLevel(2)"
+                                style="padding:10px 20px; border-radius:20px; border:2px solid var(--border-color); background:transparent; color:var(--text-main); font-size:14px; font-weight:bold; cursor:pointer; transition:0.2s;">
+                                🔴 0 – 999
+                            </button>
+                        </div>
+                    </div>
+
                     <button onclick="initNumGame()" style="background:#6f42c1; padding:14px 28px; font-size:17px;">🎮 Bắt đầu</button>
                     <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
                         <span class="kb-chip"><kbd>Enter</kbd> Kiểm tra</span>
@@ -7295,24 +7315,58 @@ If no family match found: {"family": null, "matched_words": []}`;
         //  GAME 4 — NHẬN DẠNG SỐ 0–100 (nhập đáp án)
         // ════════════════════════════════════════════════════════════════════
         let numGame = {};
+        let numLevel = 0; // 0 = 0-99, 1 = 100-999, 2 = 0-999
+
+        function setNumLevel(lvl) {
+            numLevel = lvl;
+            const labels = ['🟢 0 – 99', '🟡 100 – 999', '🔴 0 – 999'];
+            [0, 1, 2].forEach(i => {
+                const btn = document.getElementById('num-lvl-' + i);
+                if (!btn) return;
+                const active = i === lvl;
+                btn.style.background = active ? '#6f42c1' : 'transparent';
+                btn.style.borderColor = active ? '#6f42c1' : 'var(--border-color)';
+                btn.style.color = active ? 'white' : 'var(--text-main)';
+            });
+        }
 
         function initNumGame() {
-            numGame = { total: 10, current: 0, correct: 0, attempts: 0 };
+            numGame = { total: 10, current: 0, correct: 0, attempts: 0, level: numLevel };
             startPracticeTimer();
             renderNumQuestion();
         }
 
         function makeNumQuestion() {
             let n;
-            if (Math.random() < 0.5) {
-                // Bias toward confusable teen/ten pairs
-                const teen = rndInt(13, 19);
-                n = Math.random() < 0.5 ? teen : (teen - 10) * 10;
+            const lvl = numGame.level;
+            if (lvl === 0) {
+                // 0–99: bias toward teen/ten confusable pairs
+                if (Math.random() < 0.5) {
+                    const teen = rndInt(13, 19);
+                    n = Math.random() < 0.5 ? teen : (teen - 10) * 10;
+                } else {
+                    n = rndInt(0, 99);
+                }
+            } else if (lvl === 1) {
+                // 100–999
+                n = rndInt(100, 999);
             } else {
-                n = rndInt(0, 100);
+                // 0–999: mix all ranges with even distribution
+                const roll = Math.random();
+                if (roll < 0.33) {
+                    n = rndInt(0, 99);
+                } else if (roll < 0.66) {
+                    n = rndInt(100, 999);
+                } else {
+                    // teen/ten confusables from 0-99 range
+                    const teen = rndInt(13, 19);
+                    n = Math.random() < 0.5 ? teen : (teen - 10) * 10;
+                }
             }
             return { n, spoken: numToWords(n) };
         }
+
+        const NUM_LEVEL_LABELS = ['0 – 99', '100 – 999', '0 – 999'];
 
         function renderNumQuestion() {
             if (numGame.current >= numGame.total) { endListenGame('num-area', numGame, 'initNumGame', '🔢'); return; }
@@ -7321,19 +7375,23 @@ If no family match found: {"family": null, "matched_words": []}`;
             numGame.current_q = q;
             numGame.attempts = 0;
 
+            const lvlLabel = NUM_LEVEL_LABELS[numGame.level] || '0 – 99';
+            const maxVal = numGame.level === 0 ? 99 : 999;
+
             document.getElementById('num-area').innerHTML = `
                 <div class="lg-stats">
                     <span>❓ Câu: <b>${numGame.current+1}/${numGame.total}</b></span>
                     <span style="color:#28a745">✅ Đúng: <b>${numGame.correct}</b></span>
                     <span style="color:#dc3545">❌ Sai: <b>${numGame.current - numGame.correct}</b></span>
+                    <span style="color:#6f42c1;font-size:12px;">${lvlLabel}</span>
                 </div>
                 <button class="lg-speak-btn" id="lg-num-btn" onclick="lgSpeakBtn('${q.spoken}','lg-num-btn')" style="background:linear-gradient(135deg,#6f42c1,#e83e8c);">
                     <span class="speak-icon">🔊</span> Nghe lại số
                 </button>
                 <div class="lg-feedback" id="num-fb"></div>
                 <div style="display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:12px;">
-                    <input id="num-input" type="number" min="0" max="100"
-                        style="width:140px;font-size:32px;font-weight:bold;text-align:center;padding:10px;border:2px solid var(--border-color);border-radius:10px;background:var(--bg-card);color:var(--text-main);"
+                    <input id="num-input" type="number" min="0" max="${maxVal}"
+                        style="width:160px;font-size:32px;font-weight:bold;text-align:center;padding:10px;border:2px solid var(--border-color);border-radius:10px;background:var(--bg-card);color:var(--text-main);"
                         placeholder="?"
                         onkeydown="if(event.key==='Enter') checkNumTyped()"
                         oninput="this.style.borderColor='var(--border-color)'">
