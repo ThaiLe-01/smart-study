@@ -2739,11 +2739,11 @@
 
     <!-- ===== LISTEN & CHOOSE EXAMPLE GAME ===== -->
     <div class="container" id="listen-example-container">
-        <h2>🎧 Nghe & Chọn Câu Ví Dụ</h2>
+        <h2>🎧 Nghe & Chọn Định nghĩa</h2>
         <div id="listen-ex-area">
             <div style="text-align:center; margin-bottom:20px;">
-                <p>Nghe từ được phát âm rồi chọn <b>câu ví dụ đúng</b> chứa từ đó.<br>
-                <span style="color:#28a745; font-size:14px;">💡 Chỉ dùng các từ có câu ví dụ — có thể nghe lại bao nhiêu lần tùy thích!</span><br>
+                <p>Nghe từ được phát âm rồi chọn <b>Định nghĩa đúng</b> chứa từ đó.<br>
+                <span style="color:#28a745; font-size:14px;">💡 Chỉ dùng các từ có Định nghĩa — có thể nghe lại bao nhiêu lần tùy thích!</span><br>
                 <span style="color:#dc3545; font-size:14px;">⚠️ Chọn sai sẽ bị giáng cấp về "Quên chữ"!</span></p>
 
                 <!-- Category filter -->
@@ -3553,7 +3553,7 @@
                 );
                 flashcard.className = 'flashcard example-card';
                 flashcard.innerHTML = `
-                    <div class="flashcard-example-label">📝 Câu ví dụ</div>
+                    <div class="flashcard-example-label">📝 Định nghĩa</div>
                     <div class="flashcard-example-sentence">"${highlighted}"</div>
                     <div class="flashcard-example-word-hint">${c.en} — ${c.vi}</div>
                     ${tagHtml}`;
@@ -3576,10 +3576,10 @@
             const hasEx = !!(c.example && c.example.trim());
             if (flipState === 0) {
                 hint.innerHTML = hasEx
-                    ? '👆 Nhấn để xem nghĩa &nbsp;·&nbsp; <span style="color:#1877f2">📝 có câu ví dụ</span>'
+                    ? '👆 Nhấn để xem nghĩa &nbsp;·&nbsp; <span style="color:#1877f2">📝 có Định nghĩa</span>'
                     : '👆 Nhấn để xem nghĩa';
             } else if (flipState === 1) {
-                hint.innerHTML = hasEx ? '👆 Nhấn tiếp để xem câu ví dụ' : '👆 Nhấn để quay lại';
+                hint.innerHTML = hasEx ? '👆 Nhấn tiếp để xem Định nghĩa' : '👆 Nhấn để quay lại';
             } else {
                 hint.innerHTML = '👆 Nhấn để quay lại mặt trước';
             }
