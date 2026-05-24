@@ -3079,7 +3079,7 @@
         let quizWrongWords = [];
         let currentQuizAnswer = "";
 
-        window.onload = () => {
+        window.addEventListener('load', function() {
             if (isDarkMode) document.body.classList.add('dark-mode');
             updateAutoSpeakUI();
             renderCalendar();
@@ -3091,7 +3091,7 @@
             renderTypingTagFilter();
             renderMatchTagFilter(); renderLexTagFilter(); updateLexPoolInfo();
             renderStats();
-        };
+        });
 
         function toggleDarkMode() {
             isDarkMode = !isDarkMode;
@@ -3455,6 +3455,11 @@
                 displayCards = displayCards.filter(c => c.status === statusFilter);
             }
 
+            // Apply active tag filter (same as applyFilter)
+            if (activeFlashcardTag !== null) {
+                displayCards = displayCards.filter(c => (c.tags || []).includes(activeFlashcardTag));
+            }
+
             // Tách các từ bị giáng cấp ra, đặt lên đầu
             const demoted = displayCards.filter(c => demotedEns.has(c.en + '|' + c.category));
             const rest = displayCards.filter(c => !demotedEns.has(c.en + '|' + c.category));
@@ -3548,7 +3553,7 @@
             } else {
                 // Example card: full sentence
                 const highlighted = c.example.replace(
-                    new RegExp('\b(' + c.en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\b', 'gi'),
+                    new RegExp('\\b(' + c.en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\b', 'gi'),
                     '<u><b>$1</b></u>'
                 );
                 flashcard.className = 'flashcard example-card';
@@ -4350,7 +4355,7 @@
             
             options.forEach(opt => {
                 const safeOpt = opt.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-                html += `<button class="quiz-btn" onclick="checkQuizAnswer(this, '${safeOpt}')">${opt}</button>`;
+                html += `<button class="quiz-btn" data-value="${opt.replace(/"/g,'&quot;')}" onclick="checkQuizAnswer(this, '${safeOpt}')">${opt}</button>`;
             });
             html += `</div>`;
             
@@ -4378,7 +4383,7 @@
             } else {
                 btn.classList.add('wrong');
                 btns.forEach(b => {
-                    if(b.innerText === currentQuizAnswer) b.classList.add('correct');
+                    if(b.dataset.value === currentQuizAnswer) b.classList.add('correct');
                 });
                 
                 quizWrongWords.push(questionCard);
@@ -7292,9 +7297,7 @@ If no family match found: {"family": null, "matched_words": []}`;
         // ===== END DAILY STUDY TODO =====
 
         // Init todo on page load
-        const _origOnload = window.onload;
-        window.onload = () => {
-            if (_origOnload) _origOnload();
+        window.addEventListener('load', function() {
             processRecurringTodos();
             ensureDailyStudyTodo();
             renderTodos();
@@ -7304,7 +7307,7 @@ If no family match found: {"family": null, "matched_words": []}`;
             // Auto-open today's calendar panel
             selectedCalDay = getTodayStr();
             renderCalendar();
-        };
+        });
 
         // ===== LISTENING MINIGAMES =====
 
@@ -7382,7 +7385,10 @@ If no family match found: {"family": null, "matched_words": []}`;
 
         function makeTimeQuestion() {
             const h = rndInt(1, 12);
-            const mChoices = [0, 15, 30, 45, rndInt(1,59)];
+            // Generate a random minute that is NOT one of the special values (0,15,30,45)
+            let randomM;
+            do { randomM = rndInt(1, 59); } while (randomM === 15 || randomM === 30 || randomM === 45);
+            const mChoices = [0, 15, 30, 45, randomM];
             const m = mChoices[rndInt(0, mChoices.length - 1)];
             const ampm = Math.random() < 0.5 ? 'AM' : 'PM';
 
@@ -7469,7 +7475,12 @@ If no family match found: {"family": null, "matched_words": []}`;
             const day   = rndInt(1, 28);
             const month = rndInt(0, 11);
             const year  = rndInt(2000, 2030);
-            const spoken = `${ordinal(day)} of ${MONTHS[month]}, ${numToWords(Math.floor(year/100))} ${numToWords(year%100)}`;
+            const yearHundreds = Math.floor(year / 100);
+            const yearRemainder = year % 100;
+            const spokenYear = yearRemainder === 0
+                ? numToWords(yearHundreds) + ' hundred'
+                : numToWords(yearHundreds) + ' ' + numToWords(yearRemainder);
+            const spoken = `${ordinal(day)} of ${MONTHS[month]}, ${spokenYear}`;
             const display = `${ordinal(day)} ${MONTHS[month]} ${year}`;
             return { day, month, year, spoken, display };
         }
